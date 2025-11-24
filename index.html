@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebBuilder Pro - Professional Web Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Variabile CSS pentru culori */
+        :root {
+            --albastru: #3b82f6;
+            --violet: #8b5cf6;
+            --portocaliu: #f59e0b;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            --gradient-secondary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Reset și stiluri de bază */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.7;
+            background-color: var(--bg-light);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.75rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 3rem;
+            letter-spacing: -1px;
+            color: var(--text-dark);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: -0.2px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .btn-primary:active {
+            transform: translateY(-2px) scale(1);
+        }
+
+        .btn-whatsapp {
+            background-color: #25D366;
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #20ba5a;
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .btn-large {
+            padding: 16px 44px;
+            font-size: 1.1rem;
+        }
+
+        /* Header */
+        header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 120px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header-content h1 {
+            margin-bottom: 1.5rem;
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .header-content p {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            font-weight: 400;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        /* Navigare */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        nav.scrolled {
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 20px;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 32px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 15px;
+            position: relative;
+            transition: color 0.3s ease;
+            padding: 6px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-links a:hover {
+            color: var(--albastru);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--albastru);
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            background: var(--bg-light);
+        }
+
+        /* Secțiune Servicii */
+        .services {
+            background-color: var(--white);
+            padding: 100px 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+        }
+
+        .service-card {
+            background-color: var(--white);
+            border-radius: 16px;
+            padding: 40px 32px;
+            box-shadow: var(--shadow);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 0;
+        }
+
+        .service-card:hover::before {
+            opacity: 0.03;
+        }
+
+        .service-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+            border-color: rgba(59, 130, 246, 0.2);
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Secțiune Pachete */
+        .packages {
+            background: linear-gradient(to bottom, var(--bg-light) 0%, #ffffff 100%);
+            padding: 100px 0;
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .package-card {
+            background-color: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border: 1px solid transparent;
+        }
+
+        .package-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 2;
+        }
+
+        .package-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .package-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+            border-color: rgba(59, 130, 246, 0.2);
+        }
+
+        .package-header {
+            padding: 36px 32px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .package-header::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .basic .package-header {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        }
+
+        .standard .package-header {
+            background: var(--gradient-primary);
+        }
+
+        .premium .package-header {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+        }
+
+        .package-price-container {
+            margin: 16px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .package-price {
+            font-size: 2.75rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .package-old-price {
+            font-size: 1.3rem;
+            text-decoration: line-through;
+            opacity: 0.7;
+            margin-right: 12px;
+            font-weight: 500;
+        }
+
+        .discount-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-top: 8px;
+            box-shadow: var(--shadow-md);
+            letter-spacing: 0.5px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        .package-features {
+            padding: 36px 32px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 1;
+        }
+
+        .package-features ul {
+            list-style: none;
+            margin-bottom: 32px;
+            flex-grow: 1;
+        }
+
+        .package-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .package-features li:hover {
+            padding-left: 8px;
+            color: var(--albastru);
+        }
+
+        .package-features li:last-child {
+            border-bottom: none;
+        }
+
+        .package-features li i {
+            color: #10b981;
+            margin-right: 12px;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .package-features li:hover i {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .package-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        /* Butoane pentru schimbarea pachetelor pe mobile */
+        .package-tabs-mobile {
+            display: none;
+            justify-content: center;
+            margin-bottom: 30px;
+            gap: 10px;
+        }
+
+        .package-tab {
+            padding: 14px 28px;
+            background-color: var(--white);
+            border: 2px solid var(--albastru);
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .package-tab::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+            z-index: 0;
+        }
+
+        .package-tab span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .package-tab:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .package-tab.active {
+            background: var(--gradient-primary);
+            color: white;
+            border-color: transparent;
+            box-shadow: var(--shadow-md);
+        }
+
+        .package-tab.active::before {
+            width: 200px;
+            height: 200px;
+        }
+
+        /* Pachete pentru mobile (afișate unul câte unul) */
+        .packages-mobile {
+            display: none;
+        }
+
+        .packages-mobile .package-card {
+            display: none;
+        }
+
+        .packages-mobile .package-card.active {
+            display: flex;
+        }
+
+        /* Secțiune Proces */
+        .process {
+            background-color: var(--white);
+            padding: 100px 0;
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 60px;
+        }
+
+        .process-step {
+            flex: 1;
+            min-width: 220px;
+            text-align: center;
+            padding: 0 24px;
+            margin-bottom: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .process-step:hover {
+            transform: translateY(-8px);
+        }
+
+        .step-number {
+            width: 72px;
+            height: 72px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin: 0 auto 24px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .step-number::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.5s ease;
+            filter: blur(8px);
+        }
+
+        .process-step:hover .step-number {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .process-step:hover .step-number::before {
+            opacity: 0.5;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            padding: 80px 0 32px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 24px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .footer-column ul li:hover {
+            transform: translateX(4px);
+        }
+
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-column a:hover {
+            color: white;
+            transform: translateX(4px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        .social-links a:hover {
+            background: var(--gradient-primary);
+            transform: translateY(-4px) scale(1.1);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Buton WhatsApp flotant */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 64px;
+            height: 64px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.9rem;
+            box-shadow: var(--shadow-xl);
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: pulse 2s infinite, floatButton 3s ease-in-out infinite;
+        }
+
+        @keyframes floatButton {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.15) translateY(-5px);
+            background-color: #20ba5a;
+            box-shadow: 0 25px 50px -12px rgba(37, 211, 102, 0.4);
+        }
+
+        /* Buton limbi flotant */
+        .language-float {
+            position: fixed;
+            bottom: 108px;
+            right: 32px;
+            width: 64px;
+            height: 64px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            box-shadow: var(--shadow-xl);
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .language-float:hover {
+            transform: scale(1.15) translateY(-5px);
+            box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.4);
+        }
+
+        .language-selector {
+            position: fixed;
+            bottom: 184px;
+            right: 32px;
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow-xl);
+            padding: 12px;
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            opacity: 0;
+            transform: translateY(10px) scale(0.95);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .language-selector.active {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .language-option {
+            padding: 12px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+        }
+
+        .language-option:hover {
+            background-color: var(--bg-light);
+            transform: translateX(4px);
+        }
+
+        .language-option.active {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .flag-icon {
+            width: 24px;
+            height: 18px;
+            border-radius: 4px;
+            object-fit: cover;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 20px rgba(37, 211, 102, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+
+        /* Animații fade-in */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px) scale(0.95);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Staggered animation for service cards */
+        .service-card:nth-child(1) { transition-delay: 0.1s; }
+        .service-card:nth-child(2) { transition-delay: 0.2s; }
+        .service-card:nth-child(3) { transition-delay: 0.3s; }
+
+        /* Staggered animation for package cards */
+        .package-card:nth-child(1) { transition-delay: 0.1s; }
+        .package-card:nth-child(2) { transition-delay: 0.2s; }
+        .package-card:nth-child(3) { transition-delay: 0.3s; }
+
+        /* Staggered animation for process steps */
+        .process-step:nth-child(1) { transition-delay: 0.1s; }
+        .process-step:nth-child(2) { transition-delay: 0.2s; }
+        .process-step:nth-child(3) { transition-delay: 0.3s; }
+        .process-step:nth-child(4) { transition-delay: 0.4s; }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .packages-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .process-steps {
+                flex-direction: column;
+            }
+            
+            .process-step {
+                margin-bottom: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: var(--shadow);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .header-content {
+                padding: 0 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .packages-grid {
+                display: none;
+            }
+            
+            .package-tabs-mobile {
+                display: flex;
+            }
+            
+            .packages-mobile {
+                display: block;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .package-card, .service-card {
+                margin-bottom: 20px;
+            }
+            
+            .btn-large {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+            
+            .package-tabs-mobile {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .language-float {
+                bottom: 90px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+            }
+            
+            .language-selector {
+                bottom: 155px;
+                right: 20px;
+            }
+            
+            .whatsapp-float {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigare -->
+    <nav>
+        <div class="nav-container container">
+            <div class="logo">WebBuilder Pro</div>
+            <ul class="nav-links">
+                <li><a href="#home" data-i18n="nav.home">Acasă</a></li>
+                <li><a href="#services" data-i18n="nav.services">Servicii</a></li>
+                <li><a href="#packages" data-i18n="nav.packages">Pachete</a></li>
+                <li><a href="#process" data-i18n="nav.process">Proces</a></li>
+                <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header id="home">
+        <div class="header-content container">
+            <h1 data-i18n="header.title">Site-ul Tău Profesional În Doar Câteva Zile</h1>
+            <p data-i18n="header.subtitle">Dezvoltăm site-uri web moderne, rapide și optimizate pentru conversii. Transformă-vizita în clienți cu soluțiile noastre personalizate.</p>
+            <div class="header-buttons">
+                <a href="https://wa.me/40729552767" class="btn btn-primary btn-large" target="_blank" data-i18n="header.whatsapp">
+                    <i class="fab fa-whatsapp"></i> Discută pe WhatsApp
+                </a>
+                <a href="tel:+40729552767" class="btn btn-whatsapp btn-large" data-i18n="header.call">
+                    <i class="fas fa-phone"></i> Sună acum
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Secțiune Servicii -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 data-i18n="services.title">Serviciile Noastre</h2>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 data-i18n="services.webdev.title">Dezvoltare Web</h3>
+                    <p data-i18n="services.webdev.description">Site-uri moderne și responsive, optimizate pentru toate dispozitivele și browserele.</p>
+                    <p><strong data-i18n="services.perfectFor">Perfect pentru:</strong> <span data-i18n="services.webdev.for">Afaceri locale, freelanceri, portofolii profesionale.</span></p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3 data-i18n="services.design.title">Design Personalizat</h3>
+                    <p data-i18n="services.design.description">Design unic care reflectă identitatea brandului tău și atrage clienții potriviți.</p>
+                    <p><strong data-i18n="services.perfectFor">Perfect pentru:</strong> <span data-i18n="services.design.for">Branduri personale, startup-uri, afaceri creative.</span></p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 data-i18n="services.seo.title">Optimizare SEO</h3>
+                    <p data-i18n="services.seo.description">Îmbunătățim vizibilitatea site-ului tău în motoarele de căutare pentru mai multe conversii.</p>
+                    <p><strong data-i18n="services.perfectFor">Perfect pentru:</strong> <span data-i18n="services.seo.for">Toate afacerile care vor să crească online.</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Secțiune Pachete -->
+    <section id="packages" class="packages">
+        <div class="container">
+            <h2 data-i18n="packages.title">Pachete și Prețuri</h2>
+            
+            <!-- Pachete pentru desktop -->
+            <div class="packages-grid">
+                <!-- Pachet Basic -->
+                <div class="package-card basic fade-in">
+                    <div class="package-header">
+                        <h3 data-i18n="packages.basic.title">Basic</h3>
+                        <div class="package-price-container">
+                            <span class="package-old-price">€158</span>
+                            <span class="package-price">€79</span>
+                            <div class="discount-badge" data-i18n="packages.discount50">REDUCERE 50%</div>
+                        </div>
+                        <p data-i18n="packages.basic.subtitle">Perfect pentru afaceri mici</p>
+                    </div>
+                    <div class="package-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature1">Design responsive</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature2">Până la 5 pagini</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature3">Integrare social media</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature4">Optimizare de bază SEO</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature5">Asistență la configurare</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature6">Livrare în 7 zile lucrătoare</span></li>
+                        </ul>
+                        <a href="https://wa.me/40729552767?text=Vreau%20pachetul%20BASIC%20de%20€79" class="btn btn-primary package-btn" target="_blank" data-i18n="packages.order">
+                            Comandă
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Pachet Standard -->
+                <div class="package-card standard fade-in">
+                    <div class="package-header">
+                        <h3 data-i18n="packages.standard.title">Standard</h3>
+                        <div class="package-price-container">
+                            <span class="package-old-price">€213</span>
+                            <span class="package-price">€149</span>
+                            <div class="discount-badge" data-i18n="packages.discount30">REDUCERE 30%</div>
+                        </div>
+                        <p data-i18n="packages.standard.subtitle">Ideal pentru afaceri în creștere</p>
+                    </div>
+                    <div class="package-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature1">Toate caracteristicile Basic</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature2">Până la 10 pagini</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature3">Design personalizat</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature4">Galerie foto/video</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature5">Blog integrat</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature6">Optimizare SEO avansată</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature7">Livrare în 10 zile lucrătoare</span></li>
+                        </ul>
+                        <a href="https://wa.me/40729552767?text=Vreau%20pachetul%20STANDARD%20de%20€149" class="btn btn-primary package-btn" target="_blank" data-i18n="packages.order">
+                            Comandă
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Pachet Premium -->
+                <div class="package-card premium fade-in">
+                    <div class="package-header">
+                        <h3 data-i18n="packages.premium.title">Premium</h3>
+                        <div class="package-price-container">
+                            <span class="package-old-price">€311</span>
+                            <span class="package-price">€249</span>
+                            <div class="discount-badge" data-i18n="packages.discount20">REDUCERE 20%</div>
+                        </div>
+                        <p data-i18n="packages.premium.subtitle">Soluție completă pentru afaceri</p>
+                    </div>
+                    <div class="package-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature1">Toate caracteristicile Standard</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature2">Număr nelimitat de pagini</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature3">Design premium personalizat</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature4">Sistem de rezervări online</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature5">Integrare platformă de plăți</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature6">Suport prioritar prima lună</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature7">Consultanță post-lansare</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature8">Livrare în 14 zile lucrătoare</span></li>
+                        </ul>
+                        <a href="https://wa.me/40729552767?text=Vreau%20pachetul%20PREMIUM%20de%20€249" class="btn btn-primary package-btn" target="_blank" data-i18n="packages.order">
+                            Comandă
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Butoane pentru schimbarea pachetelor pe mobile -->
+            <div class="package-tabs-mobile">
+                <div class="package-tab" data-package="basic" data-i18n="packages.basic.title"><span>Basic</span></div>
+                <div class="package-tab active" data-package="standard" data-i18n="packages.standard.title"><span>Standard</span></div>
+                <div class="package-tab" data-package="premium" data-i18n="packages.premium.title"><span>Premium</span></div>
+            </div>
+            
+            <!-- Pachete pentru mobile (afișate unul câte unul) -->
+            <div class="packages-mobile">
+                <!-- Pachet Basic pentru mobile -->
+                <div class="package-card basic">
+                    <div class="package-header">
+                        <h3 data-i18n="packages.basic.title">Basic</h3>
+                        <div class="package-price-container">
+                            <span class="package-old-price">€158</span>
+                            <span class="package-price">€79</span>
+                            <div class="discount-badge" data-i18n="packages.discount50">REDUCERE 50%</div>
+                        </div>
+                        <p data-i18n="packages.basic.subtitle">Perfect pentru afaceri mici</p>
+                    </div>
+                    <div class="package-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature1">Design responsive</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature2">Până la 5 pagini</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature3">Integrare social media</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature4">Optimizare de bază SEO</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature5">Asistență la configurare</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature6">Livrare în 7 zile lucrătoare</span></li>
+                        </ul>
+                        <a href="https://wa.me/40729552767?text=Vreau%20pachetul%20BASIC%20de%20€79" class="btn btn-primary package-btn" target="_blank" data-i18n="packages.order">
+                            Comandă
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Pachet Standard pentru mobile -->
+                <div class="package-card standard active">
+                    <div class="package-header">
+                        <h3 data-i18n="packages.standard.title">Standard</h3>
+                        <div class="package-price-container">
+                            <span class="package-old-price">€213</span>
+                            <span class="package-price">€149</span>
+                            <div class="discount-badge" data-i18n="packages.discount30">REDUCERE 30%</div>
+                        </div>
+                        <p data-i18n="packages.standard.subtitle">Ideal pentru afaceri în creștere</p>
+                    </div>
+                    <div class="package-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature1">Toate caracteristicile Basic</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature2">Până la 10 pagini</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature3">Design personalizat</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature4">Galerie foto/video</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature5">Blog integrat</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature6">Optimizare SEO avansată</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature7">Livrare în 10 zile lucrătoare</span></li>
+                        </ul>
+                        <a href="https://wa.me/40729552767?text=Vreau%20pachetul%20STANDARD%20de%20€149" class="btn btn-primary package-btn" target="_blank" data-i18n="packages.order">
+                            Comandă
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Pachet Premium pentru mobile -->
+                <div class="package-card premium">
+                    <div class="package-header">
+                        <h3 data-i18n="packages.premium.title">Premium</h3>
+                        <div class="package-price-container">
+                            <span class="package-old-price">€311</span>
+                            <span class="package-price">€249</span>
+                            <div class="discount-badge" data-i18n="packages.discount20">REDUCERE 20%</div>
+                        </div>
+                        <p data-i18n="packages.premium.subtitle">Soluție completă pentru afaceri</p>
+                    </div>
+                    <div class="package-features">
+                        <ul>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature1">Toate caracteristicile Standard</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature2">Număr nelimitat de pagini</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature3">Design premium personalizat</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature4">Sistem de rezervări online</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature5">Integrare platformă de plăți</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature6">Suport prioritar prima lună</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature7">Consultanță post-lansare</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature8">Livrare în 14 zile lucrătoare</span></li>
+                        </ul>
+                        <a href="https://wa.me/40729552767?text=Vreau%20pachetul%20PREMIUM%20de%20€249" class="btn btn-primary package-btn" target="_blank" data-i18n="packages.order">
+                            Comandă
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Secțiune Proces -->
+    <section id="process" class="process">
+        <div class="container">
+            <h2 data-i18n="process.title">Cum Funcționează</h2>
+            <div class="process-steps">
+                <div class="process-step fade-in">
+                    <div class="step-number">1</div>
+                    <h3 data-i18n="process.step1.title">Consultare</h3>
+                    <p data-i18n="process.step1.description">Discutăm nevoile și obiectivele afacerii tale pentru a crea soluția perfectă.</p>
+                </div>
+                <div class="process-step fade-in">
+                    <div class="step-number">2</div>
+                    <h3 data-i18n="process.step2.title">Design</h3>
+                    <p data-i18n="process.step2.description">Creăm un design modern și personalizat care reflectă identitatea brandului tău.</p>
+                </div>
+                <div class="process-step fade-in">
+                    <div class="step-number">3</div>
+                    <h3 data-i18n="process.step3.title">Dezvoltare</h3>
+                    <p data-i18n="process.step3.description">Transformăm designul într-un site web funcțional, rapid și optimizat.</p>
+                </div>
+                <div class="process-step fade-in">
+                    <div class="step-number">4</div>
+                    <h3 data-i18n="process.step4.title">Lansare</h3>
+                    <p data-i18n="process.step4.description">Lansăm site-ul și oferim suport pentru orice ajustări necesare.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>WebBuilder Pro</h3>
+                    <p data-i18n="footer.description">Oferim soluții web complete pentru afaceri mici și mijlocii, cu accent pe calitate și rezultate.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3 data-i18n="footer.quickLinks">Link-uri Rapide</h3>
+                    <ul>
+                        <li><a href="#home" data-i18n="nav.home">Acasă</a></li>
+                        <li><a href="#services" data-i18n="nav.services">Servicii</a></li>
+                        <li><a href="#packages" data-i18n="nav.packages">Pachete</a></li>
+                        <li><a href="#process" data-i18n="nav.process">Proces</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3 data-i18n="footer.contact">Contact</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +40 729 552 767</li>
+                        <li><i class="fas fa-envelope"></i> contact@webbuilderpro.ro</li>
+                        <li><i class="fas fa-map-marker-alt"></i> <span data-i18n="footer.location">București, România</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 WebBuilder Pro. <span data-i18n="footer.rights">Toate drepturile rezervate.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Buton WhatsApp flotant -->
+    <a href="https://wa.me/40729552767" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Buton limbi flotant -->
+    <div class="language-float">
+        <i class="fas fa-globe"></i>
+    </div>
+
+    <!-- Selector de limbi -->
+    <div class="language-selector">
+        <div class="language-option active" data-lang="ro">
+            <img src="https://images.unsplash.com/photo-1676286155294-4bba34d8ca78?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="flag-icon" alt="RO">
+            <span>Română</span>
+        </div>
+        <div class="language-option" data-lang="en">
+            <img src="https://plus.unsplash.com/premium_photo-1675865395884-a55553783995?q=80&w=1025&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="flag-icon" alt="EN">
+            <span>English</span>
+        </div>
+        <div class="language-option" data-lang="ru">
+            <img src="https://images.unsplash.com/photo-1676286155904-b0800262ed00?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="flag-icon" alt="RU">
+            <span>Русский</span>
+        </div>
+    </div>
+
+    <script>
+        // Traduceri pentru toate limbile
+        const translations = {
+            ro: {
+                // Navigare
+                "nav.home": "Acasă",
+                "nav.services": "Servicii",
+                "nav.packages": "Pachete",
+                "nav.process": "Proces",
+                "nav.contact": "Contact",
+                
+                // Header
+                "header.title": "Site-ul Tău Profesional În Doar Câteva Zile",
+                "header.subtitle": "Dezvoltăm site-uri web moderne, rapide și optimizate pentru conversii. Transformă-vizita în clienți cu soluțiile noastre personalizate.",
+                "header.whatsapp": "Discută pe WhatsApp",
+                "header.call": "Sună acum",
+                
+                // Servicii
+                "services.title": "Serviciile Noastre",
+                "services.webdev.title": "Dezvoltare Web",
+                "services.webdev.description": "Site-uri moderne și responsive, optimizate pentru toate dispozitivele și browserele.",
+                "services.webdev.for": "Afaceri locale, freelanceri, portofolii profesionale.",
+                "services.design.title": "Design Personalizat",
+                "services.design.description": "Design unic care reflectă identitatea brandului tău și atrage clienții potriviți.",
+                "services.design.for": "Branduri personale, startup-uri, afaceri creative.",
+                "services.seo.title": "Optimizare SEO",
+                "services.seo.description": "Îmbunătățim vizibilitatea site-ului tău în motoarele de căutare pentru mai multe conversii.",
+                "services.seo.for": "Toate afacerile care vor să crească online.",
+                "services.perfectFor": "Perfect pentru:",
+                
+                // Pachete
+                "packages.title": "Pachete și Prețuri",
+                "packages.basic.title": "Basic",
+                "packages.basic.subtitle": "Perfect pentru afaceri mici",
+                "packages.basic.feature1": "Design responsive",
+                "packages.basic.feature2": "Până la 5 pagini",
+                "packages.basic.feature3": "Integrare social media",
+                "packages.basic.feature4": "Optimizare de bază SEO",
+                "packages.basic.feature5": "Asistență la configurare",
+                "packages.basic.feature6": "Livrare în 7 zile lucrătoare",
+                "packages.standard.title": "Standard",
+                "packages.standard.subtitle": "Ideal pentru afaceri în creștere",
+                "packages.standard.feature1": "Toate caracteristicile Basic",
+                "packages.standard.feature2": "Până la 10 pagini",
+                "packages.standard.feature3": "Design personalizat",
+                "packages.standard.feature4": "Galerie foto/video",
+                "packages.standard.feature5": "Blog integrat",
+                "packages.standard.feature6": "Optimizare SEO avansată",
+                "packages.standard.feature7": "Livrare în 10 zile lucrătoare",
+                "packages.premium.title": "Premium",
+                "packages.premium.subtitle": "Soluție completă pentru afaceri",
+                "packages.premium.feature1": "Toate caracteristicile Standard",
+                "packages.premium.feature2": "Număr nelimitat de pagini",
+                "packages.premium.feature3": "Design premium personalizat",
+                "packages.premium.feature4": "Sistem de rezervări online",
+                "packages.premium.feature5": "Integrare platformă de plăți",
+                "packages.premium.feature6": "Suport prioritar prima lună",
+                "packages.premium.feature7": "Consultanță post-lansare",
+                "packages.premium.feature8": "Livrare în 14 zile lucrătoare",
+                "packages.discount50": "REDUCERE 50%",
+                "packages.discount30": "REDUCERE 30%",
+                "packages.discount20": "REDUCERE 20%",
+                "packages.order": "Comandă",
+                
+                // Proces
+                "process.title": "Cum Funcționează",
+                "process.step1.title": "Consultare",
+                "process.step1.description": "Discutăm nevoile și obiectivele afacerii tale pentru a crea soluția perfectă.",
+                "process.step2.title": "Design",
+                "process.step2.description": "Creăm un design modern și personalizat care reflectă identitatea brandului tău.",
+                "process.step3.title": "Dezvoltare",
+                "process.step3.description": "Transformăm designul într-un site web funcțional, rapid și optimizat.",
+                "process.step4.title": "Lansare",
+                "process.step4.description": "Lansăm site-ul și oferim suport pentru orice ajustări necesare.",
+                
+                // Footer
+                "footer.description": "Oferim soluții web complete pentru afaceri mici și mijlocii, cu accent pe calitate și rezultate.",
+                "footer.quickLinks": "Link-uri Rapide",
+                "footer.contact": "Contact",
+                "footer.location": "București, România",
+                "footer.rights": "Toate drepturile rezervate."
+            },
+            en: {
+                // Navigare
+                "nav.home": "Home",
+                "nav.services": "Services",
+                "nav.packages": "Packages",
+                "nav.process": "Process",
+                "nav.contact": "Contact",
+                
+                // Header
+                "header.title": "Your Professional Website In Just A Few Days",
+                "header.subtitle": "We develop modern, fast and conversion-optimized websites. Turn visitors into customers with our customized solutions.",
+                "header.whatsapp": "Chat on WhatsApp",
+                "header.call": "Call Now",
+                
+                // Servicii
+                "services.title": "Our Services",
+                "services.webdev.title": "Web Development",
+                "services.webdev.description": "Modern and responsive websites, optimized for all devices and browsers.",
+                "services.webdev.for": "Local businesses, freelancers, professional portfolios.",
+                "services.design.title": "Custom Design",
+                "services.design.description": "Unique design that reflects your brand identity and attracts the right customers.",
+                "services.design.for": "Personal brands, startups, creative businesses.",
+                "services.seo.title": "SEO Optimization",
+                "services.seo.description": "We improve your website's visibility in search engines for more conversions.",
+                "services.seo.for": "All businesses that want to grow online.",
+                "services.perfectFor": "Perfect for:",
+                
+                // Pachete
+                "packages.title": "Packages and Prices",
+                "packages.basic.title": "Basic",
+                "packages.basic.subtitle": "Perfect for small businesses",
+                "packages.basic.feature1": "Responsive design",
+                "packages.basic.feature2": "Up to 5 pages",
+                "packages.basic.feature3": "Social media integration",
+                "packages.basic.feature4": "Basic SEO optimization",
+                "packages.basic.feature5": "Setup assistance",
+                "packages.basic.feature6": "Delivery in 7 working days",
+                "packages.standard.title": "Standard",
+                "packages.standard.subtitle": "Ideal for growing businesses",
+                "packages.standard.feature1": "All Basic features",
+                "packages.standard.feature2": "Up to 10 pages",
+                "packages.standard.feature3": "Custom design",
+                "packages.standard.feature4": "Photo/video gallery",
+                "packages.standard.feature5": "Integrated blog",
+                "packages.standard.feature6": "Advanced SEO optimization",
+                "packages.standard.feature7": "Delivery in 10 working days",
+                "packages.premium.title": "Premium",
+                "packages.premium.subtitle": "Complete solution for businesses",
+                "packages.premium.feature1": "All Standard features",
+                "packages.premium.feature2": "Unlimited number of pages",
+                "packages.premium.feature3": "Premium custom design",
+                "packages.premium.feature4": "Online booking system",
+                "packages.premium.feature5": "Payment platform integration",
+                "packages.premium.feature6": "Priority support first month",
+                "packages.premium.feature7": "Post-launch consultation",
+                "packages.premium.feature8": "Delivery in 14 working days",
+                "packages.discount50": "DISCOUNT 50%",
+                "packages.discount30": "DISCOUNT 30%",
+                "packages.discount20": "DISCOUNT 20%",
+                "packages.order": "Order",
+                
+                // Proces
+                "process.title": "How It Works",
+                "process.step1.title": "Consultation",
+                "process.step1.description": "We discuss your business needs and objectives to create the perfect solution.",
+                "process.step2.title": "Design",
+                "process.step2.description": "We create a modern and personalized design that reflects your brand identity.",
+                "process.step3.title": "Development",
+                "process.step3.description": "We transform the design into a functional, fast and optimized website.",
+                "process.step4.title": "Launch",
+                "process.step4.description": "We launch the website and provide support for any necessary adjustments.",
+                
+                // Footer
+                "footer.description": "We provide complete web solutions for small and medium businesses, with emphasis on quality and results.",
+                "footer.quickLinks": "Quick Links",
+                "footer.contact": "Contact",
+                "footer.location": "Bucharest, Romania",
+                "footer.rights": "All rights reserved."
+            },
+            ru: {
+                // Navigare
+                "nav.home": "Главная",
+                "nav.services": "Услуги",
+                "nav.packages": "Пакеты",
+                "nav.process": "Процесс",
+                "nav.contact": "Контакты",
+                
+                // Header
+                "header.title": "Ваш Профессиональный Сайт Всего За Несколько Дней",
+                "header.subtitle": "Мы разрабатываем современные, быстрые и оптимизированные для конверсии веб-сайты. Превращайте посетителей в клиентов с нашими индивидуальными решениями.",
+                "header.whatsapp": "Обсудить в WhatsApp",
+                "header.call": "Позвонить сейчас",
+                
+                // Servicii
+                "services.title": "Наши Услуги",
+                "services.webdev.title": "Веб-разработка",
+                "services.webdev.description": "Современные и адаптивные веб-сайты, оптимизированные для всех устройств и браузеров.",
+                "services.webdev.for": "Местный бизнес, фрилансеры, профессиональные портфолио.",
+                "services.design.title": "Индивидуальный Дизайн",
+                "services.design.description": "Уникальный дизайн, отражающий идентичность вашего бренда и привлекающий нужных клиентов.",
+                "services.design.for": "Личные бренды, стартапы, творческий бизнес.",
+                "services.seo.title": "SEO Оптимизация",
+                "services.seo.description": "Мы улучшаем видимость вашего сайта в поисковых системах для большего количества конверсий.",
+                "services.seo.for": "Весь бизнес, который хочет расти онлайн.",
+                "services.perfectFor": "Идеально для:",
+                
+                // Pachete
+                "packages.title": "Пакеты и Цены",
+                "packages.basic.title": "Базовый",
+                "packages.basic.subtitle": "Идеально для малого бизнеса",
+                "packages.basic.feature1": "Адаптивный дизайн",
+                "packages.basic.feature2": "До 5 страниц",
+                "packages.basic.feature3": "Интеграция с соцсетями",
+                "packages.basic.feature4": "Базовая SEO оптимизация",
+                "packages.basic.feature5": "Помощь в настройке",
+                "packages.basic.feature6": "Доставка за 7 рабочих дней",
+                "packages.standard.title": "Стандартный",
+                "packages.standard.subtitle": "Идеально для растущего бизнеса",
+                "packages.standard.feature1": "Все функции Базового",
+                "packages.standard.feature2": "До 10 страниц",
+                "packages.standard.feature3": "Индивидуальный дизайн",
+                "packages.standard.feature4": "Фото/видео галерея",
+                "packages.standard.feature5": "Встроенный блог",
+                "packages.standard.feature6": "Продвинутая SEO оптимизация",
+                "packages.standard.feature7": "Доставка за 10 рабочих дней",
+                "packages.premium.title": "Премиум",
+                "packages.premium.subtitle": "Полное решение для бизнеса",
+                "packages.premium.feature1": "Все функции Стандартного",
+                "packages.premium.feature2": "Неограниченное количество страниц",
+                "packages.premium.feature3": "Премиальный индивидуальный дизайн",
+                "packages.premium.feature4": "Система онлайн-бронирования",
+                "packages.premium.feature5": "Интеграция платежной платформы",
+                "packages.premium.feature6": "Приоритетная поддержка первый месяц",
+                "packages.premium.feature7": "Консультация после запуска",
+                "packages.premium.feature8": "Доставка за 14 рабочих дней",
+                "packages.discount50": "СКИДКА 50%",
+                "packages.discount30": "СКИДКА 30%",
+                "packages.discount20": "СКИДКА 20%",
+                "packages.order": "Заказать",
+                
+                // Proces
+                "process.title": "Как Это Работает",
+                "process.step1.title": "Консультация",
+                "process.step1.description": "Мы обсуждаем потребности и цели вашего бизнеса, чтобы создать идеальное решение.",
+                "process.step2.title": "Дизайн",
+                "process.step2.description": "Мы создаем современный и персонализированный дизайн, отражающий идентичность вашего бренда.",
+                "process.step3.title": "Разработка",
+                "process.step3.description": "Мы превращаем дизайн в функциональный, быстрый и оптимизированный веб-сайт.",
+                "process.step4.title": "Запуск",
+                "process.step4.description": "Мы запускаем сайт и предоставляем поддержку для любых необходимых корректировок.",
+                
+                // Footer
+                "footer.description": "Мы предоставляем полные веб-решения для малого и среднего бизнеса, с акцентом на качество и результаты.",
+                "footer.quickLinks": "Быстрые ссылки",
+                "footer.contact": "Контакты",
+                "footer.location": "Бухарест, Румыния",
+                "footer.rights": "Все права защищены."
+            }
+        };
+
+        // Funcție pentru schimbarea limbii
+        function setLanguage(lang) {
+            // Actualizează toate elementele cu atributul data-i18n
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            // Actualizează selectorul de limbă
+            document.querySelectorAll('.language-option').forEach(option => {
+                option.classList.remove('active');
+                if (option.getAttribute('data-lang') === lang) {
+                    option.classList.add('active');
+                }
+            });
+
+            // Salvează limba în localStorage
+            localStorage.setItem('preferred-language', lang);
+            
+            // Actualizează atributul lang al documentului
+            document.documentElement.lang = lang;
+        }
+
+        // Detecție automată a limbii browser-ului
+        function detectLanguage() {
+            const savedLang = localStorage.getItem('preferred-language');
+            if (savedLang) {
+                return savedLang;
+            }
+
+            const browserLang = navigator.language || navigator.userLanguage;
+            if (browserLang.startsWith('ro')) {
+                return 'ro';
+            } else if (browserLang.startsWith('ru')) {
+                return 'ru';
+            } else {
+                return 'en';
+            }
+        }
+
+        // Inițializare
+        document.addEventListener('DOMContentLoaded', function() {
+            // Setează limba inițială
+            const initialLang = detectLanguage();
+            setLanguage(initialLang);
+
+            // Meniu mobil
+            document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+                document.querySelector('.nav-links').classList.toggle('active');
+            });
+
+            // Animații fade-in la scroll (fallback pentru browsere vechi)
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            if (!window.IntersectionObserver) {
+                const fadeInOnScroll = () => {
+                    fadeElements.forEach(element => {
+                        const elementTop = element.getBoundingClientRect().top;
+                        const elementVisible = 150;
+                        
+                        if (elementTop < window.innerHeight - elementVisible) {
+                            element.classList.add('visible');
+                        }
+                    });
+                };
+
+                window.addEventListener('scroll', fadeInOnScroll);
+                window.addEventListener('load', fadeInOnScroll);
+            }
+
+            // Navigare smooth
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Închide meniul mobil dacă este deschis
+                        document.querySelector('.nav-links').classList.remove('active');
+                    }
+                });
+            });
+
+            // Schimbarea culorii navbar-ului la scroll cu animație smooth
+            let lastScroll = 0;
+            window.addEventListener('scroll', function() {
+                const nav = document.querySelector('nav');
+                const currentScroll = window.scrollY;
+                
+                if (currentScroll > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+                
+                lastScroll = currentScroll;
+            });
+
+            // Intersection Observer pentru animații mai smooth
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, index * 100);
+                    }
+                });
+            }, observerOptions);
+
+            // Observă toate elementele fade-in
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Funcționalitate pentru butoanele de schimbare a pachetelor pe mobile
+            const packageTabs = document.querySelectorAll('.package-tab');
+            const mobilePackages = document.querySelectorAll('.packages-mobile .package-card');
+            
+            packageTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Elimină clasa active de la toate tab-urile
+                    packageTabs.forEach(t => t.classList.remove('active'));
+                    // Adaugă clasa active la tab-ul curent
+                    this.classList.add('active');
+                    
+                    // Ascunde toate pachetele mobile
+                    mobilePackages.forEach(pkg => pkg.classList.remove('active'));
+                    
+                    // Afișează pachetul corespunzător
+                    const packageType = this.getAttribute('data-package');
+                    document.querySelector(`.packages-mobile .package-card.${packageType}`).classList.add('active');
+                });
+            });
+
+            // Funcționalitate pentru selectorul de limbă
+            document.querySelector('.language-float').addEventListener('click', function() {
+                document.querySelector('.language-selector').classList.toggle('active');
+            });
+
+            document.querySelectorAll('.language-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    setLanguage(lang);
+                    document.querySelector('.language-selector').classList.remove('active');
+                });
+            });
+
+            // Închide selectorul de limbă când se face click în afara lui
+            document.addEventListener('click', function(event) {
+                const languageFloat = document.querySelector('.language-float');
+                const languageSelector = document.querySelector('.language-selector');
+                
+                if (!languageFloat.contains(event.target) && !languageSelector.contains(event.target)) {
+                    languageSelector.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
