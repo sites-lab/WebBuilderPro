@@ -9,21 +9,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Variabile CSS pentru culori */
+        /* Variabile CSS pentru culori și stiluri */
         :root {
             --albastru: #3b82f6;
             --violet: #8b5cf6;
             --portocaliu: #f59e0b;
+            --verde: #10b981;
             --text-dark: #1e293b;
             --text-light: #64748b;
             --bg-light: #f8fafc;
             --white: #ffffff;
             --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
             --gradient-secondary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            --gradient-warm: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+            --gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --shadow-float: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         /* Reset și stiluri de bază */
@@ -46,6 +51,9 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
+            position: relative;
+            opacity: 1;
+            transition: opacity 0.5s ease;
         }
 
         .container {
@@ -57,6 +65,7 @@
 
         section {
             padding: 80px 0;
+            position: relative;
         }
 
         h1, h2, h3, h4 {
@@ -66,39 +75,109 @@
         }
 
         h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
+            letter-spacing: -1.5px;
         }
 
         h2 {
-            font-size: 2.75rem;
+            font-size: 3rem;
             font-weight: 800;
             text-align: center;
             margin-bottom: 3rem;
             letter-spacing: -1px;
             color: var(--text-dark);
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
         }
 
         h3 {
-            font-size: 1.5rem;
+            font-size: 1.75rem;
         }
 
         p {
             margin-bottom: 1rem;
+            font-size: 1.1rem;
         }
 
+        /* Particle background effect */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--albastru) 0%, transparent 70%);
+            opacity: 0.1;
+            animation: floatParticle 20s infinite linear;
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0.1;
+            }
+            25% {
+                opacity: 0.15;
+            }
+            50% {
+                opacity: 0.1;
+                transform: translateY(-100px) translateX(50px) rotate(180deg);
+            }
+            75% {
+                opacity: 0.15;
+            }
+            100% {
+                transform: translateY(0) translateX(0) rotate(360deg);
+                opacity: 0.1;
+            }
+        }
+
+        /* Enhanced fade-in animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            transition: all 0.8s var(--transition-smooth);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Enhanced button animations */
         .btn {
             display: inline-block;
-            padding: 14px 32px;
+            padding: 16px 36px;
             border-radius: 12px;
             font-weight: 600;
             text-decoration: none;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
             border: none;
-            font-size: 1rem;
+            font-size: 1.05rem;
             position: relative;
             overflow: hidden;
             letter-spacing: -0.2px;
+            box-shadow: var(--shadow-md);
+            transform-style: preserve-3d;
         }
 
         .btn::before {
@@ -119,69 +198,128 @@
             height: 300px;
         }
 
+        .btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: var(--shadow-float);
+        }
+
+        .btn:active {
+            transform: translateY(-2px) scale(1);
+        }
+
         .btn-primary {
             background: var(--gradient-primary);
             color: white;
-            box-shadow: var(--shadow-md);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .btn-primary:active {
-            transform: translateY(-2px) scale(1);
         }
 
         .btn-whatsapp {
             background-color: #25D366;
             color: white;
-            box-shadow: var(--shadow-md);
         }
 
         .btn-whatsapp:hover {
             background-color: #20ba5a;
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: var(--shadow-xl);
+        }
+
+        .btn-telegram {
+            background-color: #0088cc;
+            color: white;
+        }
+
+        .btn-telegram:hover {
+            background-color: #0077b5;
         }
 
         .btn-large {
-            padding: 16px 44px;
-            font-size: 1.1rem;
+            padding: 18px 44px;
+            font-size: 1.15rem;
         }
 
-        /* Header */
+        /* Header cu efect de baloane */
         header {
             background: var(--gradient-primary);
             color: white;
-            padding: 120px 0 100px;
+            padding: 140px 0 120px;
             text-align: center;
             position: relative;
             overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
         }
 
-        header::before {
+        .balloon {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: enhancedFloat 20s ease-in-out infinite;
+            z-index: 1;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+        }
+
+        @keyframes enhancedFloat {
+            0%, 100% { 
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+            33% { 
+                transform: translateY(-40px) rotate(3deg) scale(1.02);
+            }
+            66% { 
+                transform: translateY(-20px) rotate(-2deg) scale(0.98);
+            }
+        }
+
+        .balloon::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
-            animation: float 20s ease-in-out infinite;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.3);
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
+        .balloon-1 {
+            width: 120px;
+            height: 140px;
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+        }
+
+        .balloon-2 {
+            width: 80px;
+            height: 100px;
+            top: 20%;
+            right: 10%;
+            animation-delay: 2s;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
+        }
+
+        .balloon-3 {
+            width: 100px;
+            height: 120px;
+            bottom: 15%;
+            left: 15%;
+            animation-delay: 4s;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.25), rgba(255,255,255,0.08));
+        }
+
+        .balloon-4 {
+            width: 70px;
+            height: 90px;
+            bottom: 25%;
+            right: 5%;
+            animation-delay: 6s;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
         }
 
         .header-content {
             position: relative;
-            z-index: 1;
-            max-width: 800px;
+            z-index: 2;
+            max-width: 900px;
             margin: 0 auto;
             animation: fadeInUp 1s ease-out;
         }
@@ -199,15 +337,46 @@
 
         .header-content h1 {
             margin-bottom: 1.5rem;
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 800;
             letter-spacing: -1.5px;
             line-height: 1.1;
-            animation: fadeInUp 1s ease-out 0.2s both;
+            animation: titleReveal 1.2s var(--transition-smooth) 0.2s both;
+            background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.9) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes titleReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+                filter: blur(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+            }
+        }
+
+        @keyframes titleRevealMobile {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+                filter: blur(5px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
         }
 
         .header-content p {
-            font-size: 1.25rem;
+            font-size: 1.35rem;
             margin-bottom: 2.5rem;
             opacity: 0.95;
             font-weight: 400;
@@ -216,13 +385,27 @@
 
         .header-buttons {
             display: flex;
-            gap: 16px;
+            gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
             animation: fadeInUp 1s ease-out 0.6s both;
         }
 
-        /* Navigare */
+        /* Progress scroll indicator */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: var(--gradient-primary);
+            z-index: 1001;
+            transition: width 0.1s ease;
+            box-shadow: 0 2px 10px rgba(59, 130, 246, 0.5);
+            cursor: pointer;
+        }
+
+        /* Navigare - IMPROVED FOR MOBILE */
         nav {
             position: fixed;
             top: 0;
@@ -248,7 +431,7 @@
         }
 
         .logo {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-weight: 800;
             background: var(--gradient-primary);
             -webkit-background-clip: text;
@@ -256,6 +439,13 @@
             background-clip: text;
             letter-spacing: -0.5px;
             transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 1.5rem;
         }
 
         .logo:hover {
@@ -300,6 +490,7 @@
             width: 100%;
         }
 
+        /* MOBILE MENU BUTTON - FIXED */
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -310,34 +501,61 @@
             padding: 8px;
             border-radius: 8px;
             transition: all 0.3s ease;
+            width: 44px;
+            height: 44px;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
         }
 
         .mobile-menu-btn:hover {
             background: var(--bg-light);
         }
 
+        /* Enhanced mobile menu */
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
         /* Secțiune Servicii */
         .services {
             background-color: var(--white);
-            padding: 100px 0;
+            padding: 80px 0;
         }
 
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 32px;
+            gap: 30px;
         }
 
         .service-card {
             background-color: var(--white);
-            border-radius: 16px;
-            padding: 40px 32px;
-            box-shadow: var(--shadow);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: var(--shadow-lg);
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: center;
             border: 1px solid transparent;
             position: relative;
             overflow: hidden;
+            z-index: 1;
+            transform-style: preserve-3d;
+            perspective: 1000px;
         }
 
         .service-card::before {
@@ -350,7 +568,7 @@
             background: var(--gradient-primary);
             opacity: 0;
             transition: opacity 0.5s ease;
-            z-index: 0;
+            z-index: -1;
         }
 
         .service-card:hover::before {
@@ -358,8 +576,8 @@
         }
 
         .service-card:hover {
-            transform: translateY(-12px) scale(1.02);
-            box-shadow: var(--shadow-xl);
+            transform: translateY(-10px) scale(1.03) rotateX(5deg);
+            box-shadow: var(--shadow-float);
             border-color: rgba(59, 130, 246, 0.2);
         }
 
@@ -376,32 +594,39 @@
         }
 
         .service-card:hover .service-icon {
-            transform: scale(1.1) rotate(5deg);
+            transform: scale(1.15) rotate(5deg);
         }
 
         /* Secțiune Pachete */
         .packages {
             background: linear-gradient(to bottom, var(--bg-light) 0%, #ffffff 100%);
-            padding: 100px 0;
+            padding: 80px 0;
         }
 
         .packages-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
+            gap: 30px;
         }
 
         .package-card {
             background-color: var(--white);
-            border-radius: 20px;
+            border-radius: 24px;
             overflow: hidden;
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow-lg);
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             display: flex;
             flex-direction: column;
             height: 100%;
             border: 1px solid transparent;
+            transform-style: preserve-3d;
+        }
+
+        .package-card:hover {
+            transform: translateY(-10px) scale(1.03) rotateY(5deg);
+            box-shadow: var(--shadow-float);
+            border-color: rgba(59, 130, 246, 0.2);
         }
 
         .package-card::before {
@@ -410,7 +635,7 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
+            height: 6px;
             background: var(--gradient-primary);
             transform: scaleX(0);
             transform-origin: left;
@@ -422,14 +647,8 @@
             transform: scaleX(1);
         }
 
-        .package-card:hover {
-            transform: translateY(-12px) scale(1.02);
-            box-shadow: var(--shadow-xl);
-            border-color: rgba(59, 130, 246, 0.2);
-        }
-
         .package-header {
-            padding: 36px 32px;
+            padding: 35px 28px;
             text-align: center;
             color: white;
             position: relative;
@@ -465,19 +684,19 @@
         }
 
         .package-price-container {
-            margin: 16px 0;
+            margin: 15px 0;
             position: relative;
             z-index: 1;
         }
 
         .package-price {
-            font-size: 2.75rem;
+            font-size: 2.5rem;
             font-weight: 800;
             letter-spacing: -1px;
         }
 
         .package-old-price {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             text-decoration: line-through;
             opacity: 0.7;
             margin-right: 12px;
@@ -488,11 +707,11 @@
             display: inline-block;
             background: linear-gradient(135deg, #f59e0b, #d97706);
             color: white;
-            padding: 6px 14px;
+            padding: 8px 16px;
             border-radius: 20px;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 700;
-            margin-top: 8px;
+            margin-top: 10px;
             box-shadow: var(--shadow-md);
             letter-spacing: 0.5px;
             animation: bounce 2s infinite;
@@ -500,11 +719,11 @@
 
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-4px); }
+            50% { transform: translateY(-5px); }
         }
 
         .package-features {
-            padding: 36px 32px;
+            padding: 35px 28px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
@@ -514,7 +733,7 @@
 
         .package-features ul {
             list-style: none;
-            margin-bottom: 32px;
+            margin-bottom: 28px;
             flex-grow: 1;
         }
 
@@ -523,11 +742,13 @@
             border-bottom: 1px solid #e5e7eb;
             display: flex;
             align-items: center;
-            transition: all 0.3s ease;
+            transition: all 0.3s var(--transition-smooth);
         }
 
         .package-features li:hover {
-            padding-left: 8px;
+            transform: translateX(10px);
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.1), transparent);
+            padding-left: 15px;
             color: var(--albastru);
         }
 
@@ -553,43 +774,23 @@
             margin-top: auto;
         }
 
-        /* Butoane pentru schimbarea pachetelor pe mobile */
+        /* Butoane pentru schimbarea pachetelor pe mobile - SIMPLIFIED */
         .package-tabs-mobile {
             display: none;
             justify-content: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             gap: 10px;
+            flex-wrap: wrap;
         }
 
         .package-tab {
-            padding: 14px 28px;
+            padding: 12px 24px;
             background-color: var(--white);
             border: 2px solid var(--albastru);
-            border-radius: 12px;
+            border-radius: 10px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .package-tab::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: var(--gradient-primary);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-            z-index: 0;
-        }
-
-        .package-tab span {
-            position: relative;
-            z-index: 1;
+            transition: all 0.3s ease;
         }
 
         .package-tab:hover {
@@ -604,12 +805,7 @@
             box-shadow: var(--shadow-md);
         }
 
-        .package-tab.active::before {
-            width: 200px;
-            height: 200px;
-        }
-
-        /* Pachete pentru mobile (afișate unul câte unul) */
+        /* Pachete pentru mobile - SIMPLIFIED */
         .packages-mobile {
             display: none;
         }
@@ -620,27 +816,154 @@
 
         .packages-mobile .package-card.active {
             display: flex;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Additional Services Section */
+        .additional-services {
+            background-color: var(--white);
+            padding: 80px 0;
+        }
+        
+        .additional-services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .additional-card {
+            background-color: var(--white);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .additional-card:hover {
+            transform: translateY(-10px) scale(1.03) rotateX(5deg);
+            box-shadow: var(--shadow-float);
+            border-color: rgba(59, 130, 246, 0.2);
+        }
+        
+        .additional-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: -1;
+        }
+        
+        .additional-card:hover::before {
+            opacity: 0.03;
+        }
+        
+        .additional-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .additional-card:hover .additional-icon {
+            transform: scale(1.15) rotate(5deg);
+        }
+        
+        .additional-price {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: 15px 0;
+            color: var(--text-dark);
+        }
+        
+        .additional-price span {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+        
+        .additional-features {
+            list-style: none;
+            margin: 20px 0;
+            text-align: left;
+            flex-grow: 1;
+        }
+        
+        .additional-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s var(--transition-smooth);
+        }
+        
+        .additional-features li:hover {
+            transform: translateX(10px);
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.1), transparent);
+            padding-left: 15px;
+            color: var(--albastru);
+        }
+        
+        .additional-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .additional-features li i {
+            color: var(--verde);
+            margin-right: 12px;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .additional-features li:hover i {
+            transform: scale(1.2) rotate(5deg);
         }
 
         /* Secțiune Proces */
         .process {
             background-color: var(--white);
-            padding: 100px 0;
+            padding: 80px 0;
         }
 
         .process-steps {
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
-            margin-top: 60px;
+            margin-top: 50px;
         }
 
         .process-step {
             flex: 1;
-            min-width: 220px;
+            min-width: 200px;
             text-align: center;
-            padding: 0 24px;
-            margin-bottom: 40px;
+            padding: 0 20px;
+            margin-bottom: 30px;
             transition: transform 0.3s ease;
         }
 
@@ -649,59 +972,301 @@
         }
 
         .step-number {
-            width: 72px;
-            height: 72px;
+            width: 70px;
+            height: 70px;
             background: var(--gradient-primary);
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.75rem;
+            font-size: 1.8rem;
             font-weight: 800;
-            margin: 0 auto 24px;
+            margin: 0 auto 20px;
             box-shadow: var(--shadow-lg);
             position: relative;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
         }
 
         .step-number::before {
             content: '';
             position: absolute;
-            inset: -4px;
-            border-radius: 50%;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
             background: var(--gradient-primary);
-            opacity: 0;
+            border-radius: 50%;
             z-index: -1;
-            transition: opacity 0.5s ease;
-            filter: blur(8px);
+            opacity: 0;
+            animation: pulseRing 2s infinite;
+        }
+
+        @keyframes pulseRing {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(1.2);
+                opacity: 0;
+            }
         }
 
         .process-step:hover .step-number {
-            transform: scale(1.1) rotate(5deg);
+            transform: scale(1.15) rotate(5deg);
         }
 
-        .process-step:hover .step-number::before {
-            opacity: 0.5;
+        /* Enhanced section reveal */
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.8s ease;
+        }
+
+        section.revealed::before {
+            left: 100%;
+        }
+
+        /* Enhanced scroll-triggered animations */
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.6s var(--transition-smooth);
+        }
+
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.6s var(--transition-smooth);
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.6s var(--transition-smooth);
+        }
+
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Order Form Styles */
+        .order-form-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .order-form-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .order-form {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 20px;
+            padding: 35px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: formReveal 0.4s var(--transition-smooth);
+        }
+
+        @keyframes formReveal {
+            0% {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        
+        .close-form {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .close-form:hover {
+            color: var(--text-dark);
+            background: rgba(0, 0, 0, 0.05);
+        }
+        
+        .order-form h3 {
+            margin-bottom: 1.5rem;
+            text-align: center;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 18px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--albastru);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1rem;
+            background-color: white;
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%233b82f6'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+            padding-right: 40px;
+        }
+        
+        .form-checkbox {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .form-checkbox input {
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+        
+        .form-checkbox label {
+            margin-bottom: 0;
+            font-weight: normal;
+        }
+        
+        .submit-order {
+            width: 100%;
+            padding: 16px;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .submit-order:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .hosting-option {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(59, 130, 246, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        .hosting-option label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .hosting-option input {
+            margin-right: 10px;
+        }
+        
+        .hosting-price-display {
+            font-weight: 600;
+            color: var(--albastru);
+            margin-left: 5px;
         }
 
         /* Footer */
         footer {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
             color: white;
-            padding: 80px 0 32px;
+            padding: 80px 0 30px;
         }
 
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 48px;
-            margin-bottom: 48px;
+            gap: 40px;
+            margin-bottom: 40px;
         }
 
         .footer-column h3 {
             color: white;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             font-size: 1.4rem;
             font-weight: 700;
             letter-spacing: -0.5px;
@@ -735,7 +1300,7 @@
         .social-links {
             display: flex;
             gap: 12px;
-            margin-top: 24px;
+            margin-top: 20px;
         }
 
         .social-links a {
@@ -758,142 +1323,191 @@
 
         .copyright {
             text-align: center;
-            padding-top: 32px;
+            padding-top: 30px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: rgba(255, 255, 255, 0.6);
             font-size: 0.9rem;
         }
 
-        /* Buton WhatsApp flotant */
+        /* Improved Floating WhatsApp Button */
         .whatsapp-float {
             position: fixed;
-            bottom: 32px;
-            right: 32px;
-            width: 64px;
-            height: 64px;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
             background-color: #25D366;
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.9rem;
-            box-shadow: var(--shadow-xl);
+            font-size: 40px;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
             z-index: 1000;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            animation: pulse 2s infinite, floatButton 3s ease-in-out infinite;
-        }
-
-        @keyframes floatButton {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
         }
 
         .whatsapp-float:hover {
-            transform: scale(1.15) translateY(-5px);
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
             background-color: #20ba5a;
-            box-shadow: 0 25px 50px -12px rgba(37, 211, 102, 0.4);
         }
 
-        /* Buton limbi flotant */
-        .language-float {
+        /* Improved Floating Telegram Button */
+        .telegram-float {
             position: fixed;
-            bottom: 108px;
-            right: 32px;
-            width: 64px;
-            height: 64px;
-            background: var(--gradient-primary);
+            bottom: 110px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background-color: #0088cc;
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.6rem;
-            box-shadow: var(--shadow-xl);
+            font-size: 40px;
+            box-shadow: 0 4px 20px rgba(0, 136, 204, 0.3);
             z-index: 1000;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
         }
 
-        .language-float:hover {
-            transform: scale(1.15) translateY(-5px);
-            box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.4);
+        .telegram-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(0, 136, 204, 0.4);
+            background-color: #0077b5;
         }
 
-        .language-selector {
+        /* Buton limbi simplificat */
+        .language-selector-fixed {
             position: fixed;
-            bottom: 184px;
-            right: 32px;
-            background-color: white;
-            border-radius: 16px;
-            box-shadow: var(--shadow-xl);
-            padding: 12px;
+            top: 100px;
+            right: 1685px;
             z-index: 1000;
-            display: none;
-            flex-direction: column;
-            gap: 6px;
-            opacity: 0;
-            transform: translateY(10px) scale(0.95);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .language-selector.active {
             display: flex;
-            opacity: 1;
-            transform: translateY(0) scale(1);
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 8px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(59, 130, 246, 0.1);
         }
 
-        .language-option {
-            padding: 12px 16px;
-            border-radius: 10px;
+        .language-option-fixed {
+            padding: 8px 16px;
+            border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-light);
+            background: transparent;
+            border: 1px solid transparent;
         }
 
-        .language-option:hover {
-            background-color: var(--bg-light);
-            transform: translateX(4px);
+        .language-option-fixed:hover {
+            background: var(--bg-light);
+            color: var(--text-dark);
         }
 
-        .language-option.active {
+        .language-option-fixed.active {
             background: var(--gradient-primary);
             color: white;
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow);
         }
 
-        .flag-icon {
-            width: 24px;
-            height: 18px;
-            border-radius: 4px;
-            object-fit: cover;
+        /* Notification Banner */
+        .notification-banner {
+            position: fixed;
+            top: 95px;
+            right: -400px;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-xl);
+            z-index: 999;
+            transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            max-width: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+        
+        .notification-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
         }
 
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
-            }
-            70% {
-                box-shadow: 0 0 0 20px rgba(37, 211, 102, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
-            }
+        .notification-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 16px;
         }
 
-        /* Animații fade-in */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(40px) scale(0.95);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        .notification-link:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0) scale(1);
+        .notification-banner.show {
+            right: 20px;
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-content h4 {
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .notification-content p {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 0;
+        }
+
+        .notification-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .notification-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Ripple effect styles */
+        .btn-ripple {
+            position: relative;
+            overflow: hidden;
         }
 
         /* Staggered animation for service cards */
@@ -906,24 +1520,76 @@
         .package-card:nth-child(2) { transition-delay: 0.2s; }
         .package-card:nth-child(3) { transition-delay: 0.3s; }
 
+        /* Staggered animation for additional cards */
+        .additional-card:nth-child(1) { transition-delay: 0.1s; }
+        .additional-card:nth-child(2) { transition-delay: 0.2s; }
+
         /* Staggered animation for process steps */
         .process-step:nth-child(1) { transition-delay: 0.1s; }
         .process-step:nth-child(2) { transition-delay: 0.2s; }
         .process-step:nth-child(3) { transition-delay: 0.3s; }
         .process-step:nth-child(4) { transition-delay: 0.4s; }
 
-        /* Responsive Design */
+        /* Prevent animation on page load for better performance */
+        .preload * {
+            animation-duration: 0s !important;
+            transition-duration: 0s !important;
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Touch device optimizations */
+        @media (hover: none) and (pointer: coarse) {
+            .service-card:hover, 
+            .package-card:hover,
+            .additional-card:hover {
+                transform: none !important;
+            }
+            
+            .btn:hover {
+                transform: none !important;
+            }
+            
+            .language-selector-fixed {
+                top: 10px;
+                right: 10px;
+            }
+        }
+
+        /* Responsive Design - MOBILE IMPROVEMENTS */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 0 30px;
+            }
+        }
+
         @media (max-width: 992px) {
             h1 {
-                font-size: 2.5rem;
+                font-size: 3rem;
             }
             
             h2 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
             
             .packages-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+            
+            .additional-services-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
             }
             
             .process-steps {
@@ -931,171 +1597,516 @@
             }
             
             .process-step {
-                margin-bottom: 40px;
+                margin-bottom: 35px;
+            }
+            
+            .whatsapp-float,
+            .telegram-float {
+                width: 55px;
+                height: 55px;
+                font-size: 26px;
+            }
+            
+            .telegram-float {
+                bottom: 90px;
             }
         }
 
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: white;
-                flex-direction: column;
-                padding: 20px;
-                box-shadow: var(--shadow);
-            }
-            
-            .nav-links.active {
-                display: flex;
-            }
-            
-            .nav-links li {
-                margin: 10px 0;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .header-content {
-                padding: 0 20px;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
+            /* Mobile Compact Styles */
             section {
                 padding: 60px 0;
             }
             
+            .services,
+            .packages,
+            .additional-services,
+            .process {
+                padding: 60px 0;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+                margin-bottom: 2rem;
+            }
+            
+            h2::after {
+                bottom: -12px;
+                width: 60px;
+                height: 3px;
+            }
+            
+            h3 {
+                font-size: 1.5rem;
+            }
+            
+            p {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+            
+            /* Header compact */
+            header {
+                padding: 100px 0 80px;
+                min-height: 90vh;
+            }
+            
+            .header-content h1 {
+                font-size: 2.5rem;
+                animation: titleRevealMobile 1s var(--transition-smooth) 0.2s both;
+                margin-bottom: 1rem;
+            }
+            
+            .header-content p {
+                font-size: 1.1rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .header-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .btn-large {
+                padding: 16px 30px;
+                font-size: 1rem;
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            /* Navigation - MOBILE FIXES */
+            .mobile-menu-btn {
+                display: flex !important;
+                background: var(--gradient-primary);
+                color: white;
+                box-shadow: var(--shadow);
+            }
+            
+            .nav-links {
+                display: none !important;
+                position: fixed;
+                top: 52px; /* CHANGED FROM 70px to 60px - MENU HIGHER */
+                left: 0;
+                width: 100%;
+                background-color: rgba(255, 255, 255, 0.98);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                z-index: 1000;
+                max-height: calc(100vh - 60px); /* UPDATED to match top value */
+                overflow-y: auto;
+                animation: slideDown 0.3s var(--transition-smooth);
+            }
+            
+            .nav-links.active {
+                display: flex !important;
+            }
+            
+            .nav-links li {
+                margin: 10px 0 !important;
+                width: 100%;
+                opacity: 0;
+                transform: translateX(20px);
+                animation: fadeInRight 0.5s ease forwards;
+            }
+            
+            @keyframes fadeInRight {
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+            
+            .nav-links li:nth-child(1) { animation-delay: 0.1s; }
+            .nav-links li:nth-child(2) { animation-delay: 0.2s; }
+            .nav-links li:nth-child(3) { animation-delay: 0.3s; }
+            .nav-links li:nth-child(4) { animation-delay: 0.4s; }
+            .nav-links li:nth-child(5) { animation-delay: 0.5s; }
+            
+            .nav-links a {
+                display: block;
+                padding: 15px 0;
+                font-size: 16px;
+                font-weight: 600;
+                color: var(--text-dark);
+                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+                width: 100%;
+                text-align: left;
+            }
+            
+            .nav-links a::after {
+                display: none;
+            }
+            
+            .nav-links a:hover {
+                color: var(--albastru);
+                background: rgba(59, 130, 246, 0.05);
+                padding-left: 10px;
+                border-radius: 8px;
+            }
+            
+            .mobile-menu-btn i {
+                transition: transform 0.3s ease;
+            }
+            
+            /* Services compact */
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .service-card {
+                padding: 30px 25px;
+            }
+            
+            .service-icon {
+                font-size: 3rem;
+            }
+            
+            /* Packages mobile version - SIMPLIFIED */
             .packages-grid {
                 display: none;
             }
             
             .package-tabs-mobile {
                 display: flex;
+                flex-wrap: wrap;
             }
             
             .packages-mobile {
                 display: block;
             }
-        }
-
-        @media (max-width: 576px) {
-            .services-grid {
+            
+            .package-card {
+                margin-bottom: 0;
+            }
+            
+            .package-header {
+                padding: 30px 25px;
+            }
+            
+            .package-price {
+                font-size: 2.2rem;
+            }
+            
+            .package-features {
+                padding: 30px 25px;
+            }
+            
+            .package-features li {
+                padding: 10px 0;
+                font-size: 0.95rem;
+            }
+            
+            /* Additional services compact */
+            .additional-services-grid {
                 grid-template-columns: 1fr;
+                gap: 25px;
             }
             
-            .package-card, .service-card {
-                margin-bottom: 20px;
+            .additional-card {
+                padding: 30px 25px;
             }
             
-            .btn-large {
-                padding: 12px 30px;
-                font-size: 1rem;
+            .additional-icon {
+                font-size: 3rem;
             }
             
-            .package-tabs-mobile {
-                flex-direction: column;
-                align-items: center;
+            .additional-price {
+                font-size: 2rem;
             }
             
-            .language-float {
+            .additional-features li {
+                padding: 8px 0;
+                font-size: 0.95rem;
+            }
+            
+            /* Process compact */
+            .process-step {
+                min-width: 100%;
+                padding: 0;
+                margin-bottom: 30px;
+            }
+            
+            .step-number {
+                width: 60px;
+                height: 60px;
+                font-size: 1.6rem;
+                margin-bottom: 15px;
+            }
+            
+            /* Footer compact */
+            footer {
+                padding: 60px 0 25px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .footer-column h3 {
+                margin-bottom: 15px;
+            }
+            
+            .copyright {
+                padding-top: 25px;
+                font-size: 0.85rem;
+            }
+            
+            /* Floating buttons for mobile - LARGER */
+            .telegram-float {
                 bottom: 90px;
                 right: 20px;
-                width: 50px;
-                height: 50px;
-            }
-            
-            .language-selector {
-                bottom: 155px;
-                right: 20px;
+                width: 65px;
+                height: 65px;
+                font-size: 28px;
             }
             
             .whatsapp-float {
                 bottom: 20px;
                 right: 20px;
-                width: 50px;
-                height: 50px;
+                width: 65px;
+                height: 65px;
+                font-size: 28px;
+            }
+            
+            /* Language selector */
+            .language-selector-fixed {
+                top: 55px;
+                right: 470px;
+                padding: 10px;
+            }
+            
+            .language-option-fixed {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            /* Notification banner */
+            .notification-banner {
+                max-width: calc(100% - 40px);
+                top: 80px;
+                padding: 14px 20px;
+            }
+            
+            .notification-content h4 {
+                font-size: 15px;
+            }
+            
+            .notification-content p {
+                font-size: 13px;
+            }
+            
+            /* Form compact */
+            .order-form {
+                padding: 25px;
+            }
+            
+            .order-form h3 {
+                font-size: 1.7rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            /* Extra small devices */
+            .container {
+                padding: 0 20px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            header {
+                padding: 80px 0 60px;
+                min-height: 85vh;
+            }
+            
+            .header-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .header-content p {
+                font-size: 1rem;
+            }
+            
+            .service-card,
+            .package-card,
+            .additional-card {
+                padding: 25px 20px;
+            }
+            
+            .package-tabs-mobile {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .package-tab {
+                padding: 10px 20px;
+                text-align: center;
+            }
+            
+            .btn-large {
+                padding: 14px 25px;
+            }
+            
+            /* Even larger floating buttons for small phones */
+            .telegram-float,
+            .whatsapp-float {
+                width: 70px;
+                height: 70px;
+                font-size: 32px;
+            }
+            
+            .telegram-float {
+                bottom: 90px;
+                right: 15px;
+            }
+            
+            .whatsapp-float {
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .notification-banner {
+                top: 70px;
+                right: 15px;
+                max-width: calc(100% - 30px);
+            }
+            
+            /* Mobile menu even higher */
+            .nav-links {
+                top: 55px; /* Even higher on very small screens */
+                max-height: calc(100vh - 55px);
+            }
+        }
+
+        @media (max-width: 400px) {
+            h1 {
+                font-size: 1.9rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .header-content h1 {
+                font-size: 1.9rem;
+            }
+            
+            .package-price {
+                font-size: 2rem;
+            }
+            
+            .additional-price {
+                font-size: 1.8rem;
+            }
+            
+            .btn-large {
+                font-size: 0.95rem;
+                padding: 12px 20px;
+            }
+            
+            /* Largest floating buttons for very small screens */
+            .telegram-float,
+            .whatsapp-float {
+                width: 75px;
+                height: 75px;
+                font-size: 34px;
+            }
+            
+            /* Mobile menu highest on smallest screens */
+            .nav-links {
+                top: 50px; /* Highest position */
+                max-height: calc(100vh - 50px);
             }
         }
     </style>
 </head>
-<body>
+<body class="preload">
+    <!-- Particle Background -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Notification Banner -->
+    <div class="notification-banner" id="notificationBanner">
+        <div class="notification-content">
+            <h4>Check out my other projects!</h4>
+            <p>Visit my portfolio for more amazing work</p>
+        </div>
+        <div class="notification-actions">
+            <a href="https://sites-lab.github.io/YourWebBuilder/" target="_blank" class="notification-link" id="portfolioLink">
+                <i class="fas fa-external-link-alt"></i>
+            </a>
+            <button class="notification-close" id="notificationClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Language Selector (Fixed) -->
+    <div class="language-selector-fixed" id="languageSelector">
+        <div class="language-option-fixed" data-lang="ro">RO</div>
+        <div class="language-option-fixed" data-lang="en">EN</div>
+        <div class="language-option-fixed" data-lang="ru">RU</div>
+    </div>
+
     <!-- Navigare -->
     <nav>
         <div class="nav-container container">
-            <div class="logo">WebBuilder Pro</div>
+            <div class="logo"><i class="fas fa-rocket"></i> WebBuilder Pro</div>
             <ul class="nav-links">
-                <li><a href="#home" data-i18n="nav.home">Acasă</a></li>
-                <li><a href="#services" data-i18n="nav.services">Servicii</a></li>
-                <li><a href="#packages" data-i18n="nav.packages">Pachete</a></li>
-                <li><a href="#process" data-i18n="nav.process">Proces</a></li>
+                <li><a href="#home" data-i18n="nav.home">Home</a></li>
+                <li><a href="#packages" data-i18n="nav.packages">Packages</a></li>
+                <li><a href="#services" data-i18n="nav.services">Services</a></li>
+                <li><a href="#process" data-i18n="nav.process">Process</a></li>
                 <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
             </ul>
-            <button class="mobile-menu-btn">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
     </nav>
 
-    <!-- Header -->
+    <!-- Header cu baloane -->
     <header id="home">
+        <div class="balloon balloon-1"></div>
+        <div class="balloon balloon-2"></div>
+        <div class="balloon balloon-3"></div>
+        <div class="balloon balloon-4"></div>
+        
         <div class="header-content container">
-            <h1 data-i18n="header.title">Site-ul Tău Profesional În Doar Câteva Zile</h1>
-            <p data-i18n="header.subtitle">Dezvoltăm site-uri web moderne, rapide și optimizate pentru conversii. Transformă-vizita în clienți cu soluțiile noastre personalizate.</p>
+            <h1 data-i18n="header.title">Your Professional Website In Just A Few Days</h1>
+            <p data-i18n="header.subtitle">We develop modern, fast and conversion-optimized websites. Turn visitors into customers with our customized solutions.</p>
             <div class="header-buttons">
                 <a href="https://wa.me/40729552767" class="btn btn-primary btn-large" target="_blank" data-i18n="header.whatsapp">
-                    <i class="fab fa-whatsapp"></i> Discută pe WhatsApp
+                    <i class="fab fa-whatsapp"></i> Chat on WhatsApp
                 </a>
                 <a href="tel:+40729552767" class="btn btn-whatsapp btn-large" data-i18n="header.call">
-                    <i class="fas fa-phone"></i> Sună acum
+                    <i class="fas fa-phone"></i> Call Now
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- Secțiune Servicii -->
-    <section id="services" class="services">
-        <div class="container">
-            <h2 data-i18n="services.title">Serviciile Noastre</h2>
-            <div class="services-grid">
-                <div class="service-card fade-in">
-                    <div class="service-icon">
-                        <i class="fas fa-laptop-code"></i>
-                    </div>
-                    <h3 data-i18n="services.webdev.title">Dezvoltare Web</h3>
-                    <p data-i18n="services.webdev.description">Site-uri moderne și responsive, optimizate pentru toate dispozitivele și browserele.</p>
-                    <p><strong data-i18n="services.perfectFor">Perfect pentru:</strong> <span data-i18n="services.webdev.for">Afaceri locale, freelanceri, portofolii profesionale.</span></p>
-                </div>
-                <div class="service-card fade-in">
-                    <div class="service-icon">
-                        <i class="fas fa-paint-brush"></i>
-                    </div>
-                    <h3 data-i18n="services.design.title">Design Personalizat</h3>
-                    <p data-i18n="services.design.description">Design unic care reflectă identitatea brandului tău și atrage clienții potriviți.</p>
-                    <p><strong data-i18n="services.perfectFor">Perfect pentru:</strong> <span data-i18n="services.design.for">Branduri personale, startup-uri, afaceri creative.</span></p>
-                </div>
-                <div class="service-card fade-in">
-                    <div class="service-icon">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <h3 data-i18n="services.seo.title">Optimizare SEO</h3>
-                    <p data-i18n="services.seo.description">Îmbunătățim vizibilitatea site-ului tău în motoarele de căutare pentru mai multe conversii.</p>
-                    <p><strong data-i18n="services.perfectFor">Perfect pentru:</strong> <span data-i18n="services.seo.for">Toate afacerile care vor să crească online.</span></p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Secțiune Pachete -->
     <section id="packages" class="packages">
         <div class="container">
-            <h2 data-i18n="packages.title">Pachete și Prețuri</h2>
+            <h2 data-i18n="packages.title">Packages and Prices</h2>
             
             <!-- Pachete pentru desktop -->
             <div class="packages-grid">
@@ -1104,24 +2115,24 @@
                     <div class="package-header">
                         <h3 data-i18n="packages.basic.title">Basic</h3>
                         <div class="package-price-container">
-                            <span class="package-old-price">€158</span>
-                            <span class="package-price">€79</span>
-                            <div class="discount-badge" data-i18n="packages.discount50">REDUCERE 50%</div>
+                            <span class="package-old-price">€250</span>
+                            <span class="package-price">€150</span>
+                            <div class="discount-badge" data-i18n="packages.basic.discount">DISCOUNT 40%</div>
                         </div>
-                        <p data-i18n="packages.basic.subtitle">Perfect pentru afaceri mici</p>
+                        <p data-i18n="packages.basic.description">Perfect for small businesses</p>
                     </div>
                     <div class="package-features">
                         <ul>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature1">Design responsive</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature2">Până la 5 pagini</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature3">Integrare social media</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature4">Optimizare de bază SEO</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature5">Asistență la configurare</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature6">Livrare în 7 zile lucrătoare</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature1">Responsive design</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature2">Up to 5 pages</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature3">Social media integration</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature4">Basic SEO optimization</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature5">Setup assistance</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature6">Delivery in 2-3 working days</span></li>
                         </ul>
-                        <a href="https://wa.me/40729552767?text=Vreau%20pachetul%20BASIC%20de%20€79" class="btn btn-primary package-btn" target="_blank" data-i18n="packages.order">
-                            Comandă
-                        </a>
+                        <button class="btn btn-primary package-btn order-btn" data-package="basic" data-price="150" data-i18n="packages.order">
+                            Order
+                        </button>
                     </div>
                 </div>
 
@@ -1130,25 +2141,25 @@
                     <div class="package-header">
                         <h3 data-i18n="packages.standard.title">Standard</h3>
                         <div class="package-price-container">
-                            <span class="package-old-price">€213</span>
-                            <span class="package-price">€149</span>
-                            <div class="discount-badge" data-i18n="packages.discount30">REDUCERE 30%</div>
+                            <span class="package-old-price">€350</span>
+                            <span class="package-price">€250</span>
+                            <div class="discount-badge" data-i18n="packages.standard.discount">DISCOUNT 29%</div>
                         </div>
-                        <p data-i18n="packages.standard.subtitle">Ideal pentru afaceri în creștere</p>
+                        <p data-i18n="packages.standard.description">Ideal for growing businesses</p>
                     </div>
                     <div class="package-features">
                         <ul>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature1">Toate caracteristicile Basic</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature2">Până la 10 pagini</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature3">Design personalizat</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature4">Galerie foto/video</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature5">Blog integrat</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature6">Optimizare SEO avansată</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature7">Livrare în 10 zile lucrătoare</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature1">All Basic features</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature2">Up to 10 pages</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature3">Custom design</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature4">Photo/video gallery</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature5">Integrated blog</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature6">Advanced SEO optimization</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature7">Delivery in 10 working days</span></li>
                         </ul>
-                        <a href="https://wa.me/40729552767?text=Vreau%20pachetul%20STANDARD%20de%20€149" class="btn btn-primary package-btn" target="_blank" data-i18n="packages.order">
-                            Comandă
-                        </a>
+                        <button class="btn btn-primary package-btn order-btn" data-package="standard" data-price="250" data-i18n="packages.order">
+                            Order
+                        </button>
                     </div>
                 </div>
 
@@ -1157,35 +2168,35 @@
                     <div class="package-header">
                         <h3 data-i18n="packages.premium.title">Premium</h3>
                         <div class="package-price-container">
-                            <span class="package-old-price">€311</span>
-                            <span class="package-price">€249</span>
-                            <div class="discount-badge" data-i18n="packages.discount20">REDUCERE 20%</div>
+                            <span class="package-old-price">€650</span>
+                            <span class="package-price">€500</span>
+                            <div class="discount-badge" data-i18n="packages.premium.discount">DISCOUNT 23%</div>
                         </div>
-                        <p data-i18n="packages.premium.subtitle">Soluție completă pentru afaceri</p>
+                        <p data-i18n="packages.premium.description">Complete solution for businesses</p>
                     </div>
                     <div class="package-features">
                         <ul>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature1">Toate caracteristicile Standard</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature2">Număr nelimitat de pagini</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature3">Design premium personalizat</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature4">Sistem de rezervări online</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature5">Integrare platformă de plăți</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature6">Suport prioritar prima lună</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature7">Consultanță post-lansare</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature8">Livrare în 14 zile lucrătoare</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature1">All Standard features</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature2">Unlimited number of pages</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature3">Premium custom design</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature4">Online booking system</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature5">Payment platform integration</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature6">Priority support first month</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature7">Post-launch consultation</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature8">Delivery in 14 working days</span></li>
                         </ul>
-                        <a href="https://wa.me/40729552767?text=Vreau%20pachetul%20PREMIUM%20de%20€249" class="btn btn-primary package-btn" target="_blank" data-i18n="packages.order">
-                            Comandă
-                        </a>
+                        <button class="btn btn-primary package-btn order-btn" data-package="premium" data-price="500" data-i18n="packages.order">
+                            Order
+                        </button>
                     </div>
                 </div>
             </div>
             
             <!-- Butoane pentru schimbarea pachetelor pe mobile -->
             <div class="package-tabs-mobile">
-                <div class="package-tab" data-package="basic" data-i18n="packages.basic.title"><span>Basic</span></div>
-                <div class="package-tab active" data-package="standard" data-i18n="packages.standard.title"><span>Standard</span></div>
-                <div class="package-tab" data-package="premium" data-i18n="packages.premium.title"><span>Premium</span></div>
+                <div class="package-tab" data-package="basic"><span data-i18n="packages.basic.title">Basic</span></div>
+                <div class="package-tab active" data-package="standard"><span data-i18n="packages.standard.title">Standard</span></div>
+                <div class="package-tab" data-package="premium"><span data-i18n="packages.premium.title">Premium</span></div>
             </div>
             
             <!-- Pachete pentru mobile (afișate unul câte unul) -->
@@ -1195,24 +2206,24 @@
                     <div class="package-header">
                         <h3 data-i18n="packages.basic.title">Basic</h3>
                         <div class="package-price-container">
-                            <span class="package-old-price">€158</span>
-                            <span class="package-price">€79</span>
-                            <div class="discount-badge" data-i18n="packages.discount50">REDUCERE 50%</div>
+                            <span class="package-old-price">€250</span>
+                            <span class="package-price">€150</span>
+                            <div class="discount-badge" data-i18n="packages.basic.discount">DISCOUNT 40%</div>
                         </div>
-                        <p data-i18n="packages.basic.subtitle">Perfect pentru afaceri mici</p>
+                        <p data-i18n="packages.basic.description">Perfect for small businesses</p>
                     </div>
                     <div class="package-features">
                         <ul>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature1">Design responsive</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature2">Până la 5 pagini</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature3">Integrare social media</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature4">Optimizare de bază SEO</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature5">Asistență la configurare</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature6">Livrare în 7 zile lucrătoare</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature1">Responsive design</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature2">Up to 5 pages</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature3">Social media integration</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature4">Basic SEO optimization</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature5">Setup assistance</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.basic.feature6">Delivery in 2-3 working days</span></li>
                         </ul>
-                        <a href="https://wa.me/40729552767?text=Vreau%20pachetul%20BASIC%20de%20€79" class="btn btn-primary package-btn" target="_blank" data-i18n="packages.order">
-                            Comandă
-                        </a>
+                        <button class="btn btn-primary package-btn order-btn" data-package="basic" data-price="150" data-i18n="packages.order">
+                            Order
+                        </button>
                     </div>
                 </div>
 
@@ -1221,25 +2232,25 @@
                     <div class="package-header">
                         <h3 data-i18n="packages.standard.title">Standard</h3>
                         <div class="package-price-container">
-                            <span class="package-old-price">€213</span>
-                            <span class="package-price">€149</span>
-                            <div class="discount-badge" data-i18n="packages.discount30">REDUCERE 30%</div>
+                            <span class="package-old-price">€350</span>
+                            <span class="package-price">€250</span>
+                            <div class="discount-badge" data-i18n="packages.standard.discount">DISCOUNT 29%</div>
                         </div>
-                        <p data-i18n="packages.standard.subtitle">Ideal pentru afaceri în creștere</p>
+                        <p data-i18n="packages.standard.description">Ideal for growing businesses</p>
                     </div>
                     <div class="package-features">
                         <ul>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature1">Toate caracteristicile Basic</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature2">Până la 10 pagini</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature3">Design personalizat</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature4">Galerie foto/video</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature5">Blog integrat</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature6">Optimizare SEO avansată</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature7">Livrare în 10 zile lucrătoare</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature1">All Basic features</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature2">Up to 10 pages</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature3">Custom design</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature4">Photo/video gallery</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature5">Integrated blog</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature6">Advanced SEO optimization</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.standard.feature7">Delivery in 10 working days</span></li>
                         </ul>
-                        <a href="https://wa.me/40729552767?text=Vreau%20pachetul%20STANDARD%20de%20€149" class="btn btn-primary package-btn" target="_blank" data-i18n="packages.order">
-                            Comandă
-                        </a>
+                        <button class="btn btn-primary package-btn order-btn" data-package="standard" data-price="250" data-i18n="packages.order">
+                            Order
+                        </button>
                     </div>
                 </div>
 
@@ -1248,27 +2259,112 @@
                     <div class="package-header">
                         <h3 data-i18n="packages.premium.title">Premium</h3>
                         <div class="package-price-container">
-                            <span class="package-old-price">€311</span>
-                            <span class="package-price">€249</span>
-                            <div class="discount-badge" data-i18n="packages.discount20">REDUCERE 20%</div>
+                            <span class="package-old-price">€650</span>
+                            <span class="package-price">€500</span>
+                            <div class="discount-badge" data-i18n="packages.premium.discount">DISCOUNT 23%</div>
                         </div>
-                        <p data-i18n="packages.premium.subtitle">Soluție completă pentru afaceri</p>
+                        <p data-i18n="packages.premium.description">Complete solution for businesses</p>
                     </div>
                     <div class="package-features">
                         <ul>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature1">Toate caracteristicile Standard</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature2">Număr nelimitat de pagini</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature3">Design premium personalizat</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature4">Sistem de rezervări online</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature5">Integrare platformă de plăți</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature6">Suport prioritar prima lună</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature7">Consultanță post-lansare</span></li>
-                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature8">Livrare în 14 zile lucrătoare</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature1">All Standard features</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature2">Unlimited number of pages</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature3">Premium custom design</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature4">Online booking system</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature5">Payment platform integration</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature6">Priority support first month</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature7">Post-launch consultation</span></li>
+                            <li><i class="fas fa-check"></i> <span data-i18n="packages.premium.feature8">Delivery in 14 working days</span></li>
                         </ul>
-                        <a href="https://wa.me/40729552767?text=Vreau%20pachetul%20PREMIUM%20de%20€249" class="btn btn-primary package-btn" target="_blank" data-i18n="packages.order">
-                            Comandă
-                        </a>
+                        <button class="btn btn-primary package-btn order-btn" data-package="premium" data-price="500" data-i18n="packages.order">
+                            Order
+                        </button>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Secțiune Servicii -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 data-i18n="services.title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 data-i18n="services.webdev.title">Web Development</h3>
+                    <p data-i18n="services.webdev.description">Modern and responsive websites, optimized for all devices and browsers.</p>
+                    <p><strong data-i18n="services.perfectFor">Perfect for:</strong> <span data-i18n="services.webdev.for">Local businesses, freelancers, professional portfolios.</span></p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3 data-i18n="services.design.title">Custom Design</h3>
+                    <p data-i18n="services.design.description">Unique design that reflects your brand identity and attracts the right customers.</p>
+                    <p><strong data-i18n="services.perfectFor">Perfect for:</strong> <span data-i18n="services.design.for">Personal brands, startups, creative businesses.</span></p>
+                </div>
+                <div class="service-card fade-in">
+                    <div class="service-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 data-i18n="services.seo.title">SEO Optimization</h3>
+                    <p data-i18n="services.seo.description">We improve your website's visibility in search engines for more conversions.</p>
+                    <p><strong data-i18n="services.perfectFor">Perfect for:</strong> <span data-i18n="services.seo.for">All businesses that want to grow online.</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Services Section -->
+    <section id="additional" class="additional-services">
+        <div class="container">
+            <h2 data-i18n="additional.title">Additional Services</h2>
+            <div class="additional-services-grid">
+                <!-- Maintenance Card -->
+                <div class="additional-card fade-in">
+                    <div class="additional-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 data-i18n="additional.maintenance.title">Maintenance</h3>
+                    <div class="additional-price">€15<span data-i18n="additional.month">/month</span></div>
+                    <p data-i18n="additional.maintenance.description">Keep your website running smoothly with our maintenance services</p>
+                    
+                    <ul class="additional-features">
+                        <li><i class="fas fa-check"></i> <span data-i18n="additional.maintenance.feature1">Regular updates and security patches</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="additional.maintenance.feature2">Performance monitoring</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="additional.maintenance.feature3">Content updates (up to 5 pages)</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="additional.maintenance.feature4">Technical support</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="additional.maintenance.feature5">Backup management</span></li>
+                    </ul>
+                    
+                    <button class="btn btn-primary order-btn" data-package="maintenance" data-price="15" data-i18n="additional.order" style="margin-top: auto;">
+                        Order Maintenance
+                    </button>
+                </div>
+
+                <!-- Hosting Card -->
+                <div class="additional-card fade-in">
+                    <div class="additional-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3 data-i18n="additional.hosting.title">Hosting</h3>
+                    <div class="additional-price">€10<span data-i18n="additional.month">/month</span></div>
+                    <p data-i18n="additional.hosting.description">Fast and secure hosting for your website, with 24/7 technical support</p>
+                    
+                    <ul class="additional-features">
+                        <li><i class="fas fa-check"></i> <span data-i18n="additional.hosting.feature1">10 GB SSD storage space</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="additional.hosting.feature2">Unlimited traffic</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="additional.hosting.feature3">SSL certificate included</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="additional.hosting.feature4">Daily backups</span></li>
+                        <li><i class="fas fa-check"></i> <span data-i18n="additional.hosting.feature5">24/7 technical support</span></li>
+                    </ul>
+                    
+                    <button class="btn btn-primary order-btn" data-package="hosting" data-price="10" data-i18n="additional.order" style="margin-top: auto;">
+                        Order Hosting
+                    </button>
                 </div>
             </div>
         </div>
@@ -1277,27 +2373,27 @@
     <!-- Secțiune Proces -->
     <section id="process" class="process">
         <div class="container">
-            <h2 data-i18n="process.title">Cum Funcționează</h2>
+            <h2 data-i18n="process.title">How It Works</h2>
             <div class="process-steps">
                 <div class="process-step fade-in">
                     <div class="step-number">1</div>
-                    <h3 data-i18n="process.step1.title">Consultare</h3>
-                    <p data-i18n="process.step1.description">Discutăm nevoile și obiectivele afacerii tale pentru a crea soluția perfectă.</p>
+                    <h3 data-i18n="process.step1.title">Consultation</h3>
+                    <p data-i18n="process.step1.description">We discuss your business needs and objectives to create the perfect solution.</p>
                 </div>
                 <div class="process-step fade-in">
                     <div class="step-number">2</div>
                     <h3 data-i18n="process.step2.title">Design</h3>
-                    <p data-i18n="process.step2.description">Creăm un design modern și personalizat care reflectă identitatea brandului tău.</p>
+                    <p data-i18n="process.step2.description">We create a modern and personalized design that reflects your brand identity.</p>
                 </div>
                 <div class="process-step fade-in">
                     <div class="step-number">3</div>
-                    <h3 data-i18n="process.step3.title">Dezvoltare</h3>
-                    <p data-i18n="process.step3.description">Transformăm designul într-un site web funcțional, rapid și optimizat.</p>
+                    <h3 data-i18n="process.step3.title">Development</h3>
+                    <p data-i18n="process.step3.description">We transform the design into a functional, fast and optimized website.</p>
                 </div>
                 <div class="process-step fade-in">
                     <div class="step-number">4</div>
-                    <h3 data-i18n="process.step4.title">Lansare</h3>
-                    <p data-i18n="process.step4.description">Lansăm site-ul și oferim suport pentru orice ajustări necesare.</p>
+                    <h3 data-i18n="process.step4.title">Launch</h3>
+                    <p data-i18n="process.step4.description">We launch the website and provide support for any necessary adjustments.</p>
                 </div>
             </div>
         </div>
@@ -1309,7 +2405,7 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>WebBuilder Pro</h3>
-                    <p data-i18n="footer.description">Oferim soluții web complete pentru afaceri mici și mijlocii, cu accent pe calitate și rezultate.</p>
+                    <p data-i18n="footer.description">We provide complete web solutions for small and medium businesses, with emphasis on quality and results.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
@@ -1317,12 +2413,12 @@
                     </div>
                 </div>
                 <div class="footer-column">
-                    <h3 data-i18n="footer.quickLinks">Link-uri Rapide</h3>
+                    <h3 data-i18n="footer.quickLinks">Quick Links</h3>
                     <ul>
-                        <li><a href="#home" data-i18n="nav.home">Acasă</a></li>
-                        <li><a href="#services" data-i18n="nav.services">Servicii</a></li>
-                        <li><a href="#packages" data-i18n="nav.packages">Pachete</a></li>
-                        <li><a href="#process" data-i18n="nav.process">Proces</a></li>
+                        <li><a href="#home" data-i18n="nav.home">Home</a></li>
+                        <li><a href="#packages" data-i18n="nav.packages">Packages</a></li>
+                        <li><a href="#services" data-i18n="nav.services">Services</a></li>
+                        <li><a href="#process" data-i18n="nav.process">Process</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
@@ -1330,455 +2426,975 @@
                     <ul>
                         <li><i class="fas fa-phone"></i> +40 729 552 767</li>
                         <li><i class="fas fa-envelope"></i> contact@webbuilderpro.ro</li>
-                        <li><i class="fas fa-map-marker-alt"></i> <span data-i18n="footer.location">București, România</span></li>
+                        <li><i class="fas fa-map-marker-alt"></i> <span data-i18n="footer.location">Bucharest, Romania</span></li>
                     </ul>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2023 WebBuilder Pro. <span data-i18n="footer.rights">Toate drepturile rezervate.</span></p>
+                <p>&copy; 2025 WebBuilder Pro. <span data-i18n="footer.rights">All rights reserved.</span></p>
             </div>
         </div>
     </footer>
+
+    <!-- Order Form Overlay -->
+    <div class="order-form-overlay" id="order-form">
+        <div class="order-form">
+            <button class="close-form" id="close-form">&times;</button>
+            <h3 data-i18n="order.title">Order Service</h3>
+            
+            <form id="order-form-content">
+                <div class="form-group">
+                    <label for="customer-name" data-i18n="order.name">Full Name</label>
+                    <input type="text" id="customer-name" name="customer_name" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="customer-email" data-i18n="order.email">Email Address</label>
+                    <input type="email" id="customer-email" name="customer_email" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="customer-phone" data-i18n="order.phone">Phone Number</label>
+                    <input type="tel" id="customer-phone" name="customer_phone" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="service-type" data-i18n="order.service">Service Type</label>
+                    <select id="service-type" name="service_type" class="form-select" required>
+                        <option value="" data-i18n="order.select">Select service</option>
+                        <option value="basic">Basic - €150</option>
+                        <option value="standard">Standard - €250</option>
+                        <option value="premium">Premium - €500</option>
+                        <option value="maintenance">Maintenance - €15/month</option>
+                        <option value="hosting">Hosting - €10/month</option>
+                    </select>
+                </div>
+                
+                <!-- Hidden fields for package price and additional services -->
+                <input type="hidden" id="package-price" name="package_price" value="">
+                <input type="hidden" id="add-hosting-field" name="add_hosting" value="no">
+                <input type="hidden" id="add-maintenance-field" name="add_maintenance" value="no">
+                
+                <div class="hosting-option" id="hosting-addon" style="display: none;">
+                    <label>
+                        <input type="checkbox" id="add-hosting-checkbox" value="yes">
+                        <span data-i18n="order.addHosting">Add hosting</span>
+                        <span class="hosting-price-display">(€10/month)</span>
+                    </label>
+                </div>
+                
+                <div class="hosting-option" id="maintenance-addon" style="display: none;">
+                    <label>
+                        <input type="checkbox" id="add-maintenance-checkbox" value="yes">
+                        <span data-i18n="order.addMaintenance">Add website maintenance</span>
+                        <span class="hosting-price-display">(€15/month)</span>
+                    </label>
+                </div>
+                
+                <div class="form-group">
+                    <label for="additional-notes" data-i18n="order.notes">Additional Notes</label>
+                    <textarea id="additional-notes" name="additional_notes" class="form-control" rows="3"></textarea>
+                </div>
+                
+                <div class="form-checkbox">
+                    <input type="checkbox" id="agree-terms" name="agree_terms" required>
+                    <label for="agree-terms" data-i18n="order.terms">I agree with the terms and conditions</label>
+                </div>
+                
+                <button type="submit" class="submit-order" data-i18n="order.submit">Submit Order</button>
+            </form>
+        </div>
+    </div>
 
     <!-- Buton WhatsApp flotant -->
     <a href="https://wa.me/40729552767" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- Buton limbi flotant -->
-    <div class="language-float">
-        <i class="fas fa-globe"></i>
-    </div>
-
-    <!-- Selector de limbi -->
-    <div class="language-selector">
-        <div class="language-option active" data-lang="ro">
-            <img src="https://images.unsplash.com/photo-1676286155294-4bba34d8ca78?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="flag-icon" alt="RO">
-            <span>Română</span>
-        </div>
-        <div class="language-option" data-lang="en">
-            <img src="https://plus.unsplash.com/premium_photo-1675865395884-a55553783995?q=80&w=1025&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="flag-icon" alt="EN">
-            <span>English</span>
-        </div>
-        <div class="language-option" data-lang="ru">
-            <img src="https://images.unsplash.com/photo-1676286155904-b0800262ed00?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="flag-icon" alt="RU">
-            <span>Русский</span>
-        </div>
-    </div>
+    <!-- Buton Telegram flotant -->
+    <a href="https://t.me/LoveBomboclaut" class="telegram-float" target="_blank">
+        <i class="fab fa-telegram"></i>
+    </a>
 
     <script>
-        // Traduceri pentru toate limbile
-        const translations = {
-            ro: {
-                // Navigare
-                "nav.home": "Acasă",
-                "nav.services": "Servicii",
-                "nav.packages": "Pachete",
-                "nav.process": "Proces",
-                "nav.contact": "Contact",
+        // Enhanced Language System with Complete Translations
+        class LanguageSystem {
+            constructor() {
+                this.translations = {
+                    ro: {
+                        "nav.home": "Acasă",
+                        "nav.packages": "Pachete",
+                        "nav.services": "Servicii",
+                        "nav.process": "Proces",
+                        "nav.contact": "Contact",
+                        "header.title": "Site-ul Tău Profesional În Doar Câteva Zile",
+                        "header.subtitle": "Dezvoltăm site-uri web moderne, rapide și optimizate pentru conversii. Transformă vizita în clienți cu soluțiile noastre personalizate.",
+                        "header.whatsapp": "Discută pe WhatsApp",
+                        "header.call": "Sună acum",
+                        "packages.title": "Pachete și Prețuri",
+                        "packages.basic.title": "Basic",
+                        "packages.basic.discount": "REDUCERE 40%",
+                        "packages.basic.description": "Perfect pentru afaceri mici",
+                        "packages.basic.feature1": "Design responsive",
+                        "packages.basic.feature2": "Până la 5 pagini",
+                        "packages.basic.feature3": "Integrare cu rețelele sociale",
+                        "packages.basic.feature4": "Optimizare SEO de bază",
+                        "packages.basic.feature5": "Asistență la configurare",
+                        "packages.basic.feature6": "Livrare în 2-3 zile lucrătoare",
+                        "packages.standard.title": "Standard",
+                        "packages.standard.discount": "REDUCERE 29%",
+                        "packages.standard.description": "Ideal pentru afaceri în creștere",
+                        "packages.standard.feature1": "Toate caracteristicile Basic",
+                        "packages.standard.feature2": "Până la 10 pagini",
+                        "packages.standard.feature3": "Design personalizat",
+                        "packages.standard.feature4": "Galerie foto/video",
+                        "packages.standard.feature5": "Blog integrat",
+                        "packages.standard.feature6": "Optimizare SEO avansată",
+                        "packages.standard.feature7": "Livrare în 10 zile lucrătoare",
+                        "packages.premium.title": "Premium",
+                        "packages.premium.discount": "REDUCERE 23%",
+                        "packages.premium.description": "Soluție completă pentru afaceri",
+                        "packages.premium.feature1": "Toate caracteristicile Standard",
+                        "packages.premium.feature2": "Număr nelimitat de pagini",
+                        "packages.premium.feature3": "Design personalizat premium",
+                        "packages.premium.feature4": "Sistem de rezervări online",
+                        "packages.premium.feature5": "Integrare platformă de plăți",
+                        "packages.premium.feature6": "Suport prioritar prima lună",
+                        "packages.premium.feature7": "Consultație post-lansare",
+                        "packages.premium.feature8": "Livrare în 14 zile lucrătoare",
+                        "packages.order": "Comandă",
+                        "services.title": "Serviciile Noastre",
+                        "services.webdev.title": "Dezvoltare Web",
+                        "services.webdev.description": "Site-uri moderne și responsive, optimizate pentru toate dispozitivele și browserele.",
+                        "services.webdev.for": "Afaceri locale, freelanceri, portofolii profesionale.",
+                        "services.design.title": "Design Personalizat",
+                        "services.design.description": "Design unic care reflectă identitatea brandului tău și atrage clienții potriviți.",
+                        "services.design.for": "Branduri personale, startup-uri, afaceri creative.",
+                        "services.seo.title": "Optimizare SEO",
+                        "services.seo.description": "Îmbunătățim vizibilitatea site-ului tău în motoarele de căutare pentru mai multe conversii.",
+                        "services.seo.for": "Toate afacerile care vor să crească online.",
+                        "services.perfectFor": "Perfect pentru:",
+                        "additional.title": "Servicii Adiționale",
+                        "additional.maintenance.title": "Întreținere",
+                        "additional.maintenance.description": "Menține-ți site-ul în funcțiune cu serviciile noastre de întreținere",
+                        "additional.maintenance.feature1": "Actualizări regulate și patch-uri de securitate",
+                        "additional.maintenance.feature2": "Monitorizare performanță",
+                        "additional.maintenance.feature3": "Actualizări conținut (până la 5 pagini)",
+                        "additional.maintenance.feature4": "Suport tehnic",
+                        "additional.maintenance.feature5": "Gestionare backup-uri",
+                        "additional.hosting.title": "Hosting",
+                        "additional.hosting.description": "Hosting rapid și sigur pentru site-ul tău, cu suport tehnic non-stop",
+                        "additional.hosting.feature1": "Spațiu de stocare SSD 10 GB",
+                        "additional.hosting.feature2": "Trafic nelimitat",
+                        "additional.hosting.feature3": "Certificat SSL inclus",
+                        "additional.hosting.feature4": "Backup-uri zilnice",
+                        "additional.hosting.feature5": "Suport tehnic 24/7",
+                        "additional.month": "/lună",
+                        "additional.order": "Comandă",
+                        "process.title": "Cum Funcționează",
+                        "process.step1.title": "Consultare",
+                        "process.step1.description": "Discutăm nevoile și obiectivele afacerii tale pentru a crea soluția perfectă.",
+                        "process.step2.title": "Design",
+                        "process.step2.description": "Creăm un design modern și personalizat care reflectă identitatea brandului tău.",
+                        "process.step3.title": "Dezvoltare",
+                        "process.step3.description": "Transformăm designul într-un site web funcțional, rapid și optimizat.",
+                        "process.step4.title": "Lansare",
+                        "process.step4.description": "Lansăm site-ul și oferim suport pentru orice ajustări necesare.",
+                        "footer.description": "Oferim soluții web complete pentru afaceri mici și mijlocii, cu accent pe calitate și rezultate.",
+                        "footer.quickLinks": "Link-uri Rapide",
+                        "footer.contact": "Contact",
+                        "footer.location": "București, România",
+                        "footer.rights": "Toate drepturile rezervate.",
+                        "order.title": "Comandă Serviciu",
+                        "order.name": "Nume complet",
+                        "order.email": "Adresă de email",
+                        "order.phone": "Număr de telefon",
+                        "order.service": "Tip serviciu",
+                        "order.select": "Selectează serviciu",
+                        "order.addHosting": "Adaugă hosting",
+                        "order.addMaintenance": "Adaugă întreținere site",
+                        "order.notes": "Note suplimentare",
+                        "order.terms": "Sunt de acord cu termenii și condițiile",
+                        "order.submit": "Trimite Comanda"
+                    },
+                    en: {
+                        "nav.home": "Home",
+                        "nav.packages": "Packages",
+                        "nav.services": "Services",
+                        "nav.process": "Process",
+                        "nav.contact": "Contact",
+                        "header.title": "Your Professional Website In Just A Few Days",
+                        "header.subtitle": "We develop modern, fast and conversion-optimized websites. Turn visitors into customers with our customized solutions.",
+                        "header.whatsapp": "Chat on WhatsApp",
+                        "header.call": "Call Now",
+                        "packages.title": "Packages and Prices",
+                        "packages.basic.title": "Basic",
+                        "packages.basic.discount": "DISCOUNT 40%",
+                        "packages.basic.description": "Perfect for small businesses",
+                        "packages.basic.feature1": "Responsive design",
+                        "packages.basic.feature2": "Up to 5 pages",
+                        "packages.basic.feature3": "Social media integration",
+                        "packages.basic.feature4": "Basic SEO optimization",
+                        "packages.basic.feature5": "Setup assistance",
+                        "packages.basic.feature6": "Delivery in 2-3 working days",
+                        "packages.standard.title": "Standard",
+                        "packages.standard.discount": "DISCOUNT 29%",
+                        "packages.standard.description": "Ideal for growing businesses",
+                        "packages.standard.feature1": "All Basic features",
+                        "packages.standard.feature2": "Up to 10 pages",
+                        "packages.standard.feature3": "Custom design",
+                        "packages.standard.feature4": "Photo/video gallery",
+                        "packages.standard.feature5": "Integrated blog",
+                        "packages.standard.feature6": "Advanced SEO optimization",
+                        "packages.standard.feature7": "Delivery in 10 working days",
+                        "packages.premium.title": "Premium",
+                        "packages.premium.discount": "DISCOUNT 23%",
+                        "packages.premium.description": "Complete solution for businesses",
+                        "packages.premium.feature1": "All Standard features",
+                        "packages.premium.feature2": "Unlimited number of pages",
+                        "packages.premium.feature3": "Premium custom design",
+                        "packages.premium.feature4": "Online booking system",
+                        "packages.premium.feature5": "Payment platform integration",
+                        "packages.premium.feature6": "Priority support first month",
+                        "packages.premium.feature7": "Post-launch consultation",
+                        "packages.premium.feature8": "Delivery in 14 working days",
+                        "packages.order": "Order",
+                        "services.title": "Our Services",
+                        "services.webdev.title": "Web Development",
+                        "services.webdev.description": "Modern and responsive websites, optimized for all devices and browsers.",
+                        "services.webdev.for": "Local businesses, freelancers, professional portfolios.",
+                        "services.design.title": "Custom Design",
+                        "services.design.description": "Unique design that reflects your brand identity and attracts the right customers.",
+                        "services.design.for": "Personal brands, startups, creative businesses.",
+                        "services.seo.title": "SEO Optimization",
+                        "services.seo.description": "We improve your website's visibility in search engines for more conversions.",
+                        "services.seo.for": "All businesses that want to grow online.",
+                        "services.perfectFor": "Perfect for:",
+                        "additional.title": "Additional Services",
+                        "additional.maintenance.title": "Maintenance",
+                        "additional.maintenance.description": "Keep your website running smoothly with our maintenance services",
+                        "additional.maintenance.feature1": "Regular updates and security patches",
+                        "additional.maintenance.feature2": "Performance monitoring",
+                        "additional.maintenance.feature3": "Content updates (up to 5 pages)",
+                        "additional.maintenance.feature4": "Technical support",
+                        "additional.maintenance.feature5": "Backup management",
+                        "additional.hosting.title": "Hosting",
+                        "additional.hosting.description": "Fast and secure hosting for your website, with 24/7 technical support",
+                        "additional.hosting.feature1": "10 GB SSD storage space",
+                        "additional.hosting.feature2": "Unlimited traffic",
+                        "additional.hosting.feature3": "SSL certificate included",
+                        "additional.hosting.feature4": "Daily backups",
+                        "additional.hosting.feature5": "24/7 technical support",
+                        "additional.month": "/month",
+                        "additional.order": "Order",
+                        "process.title": "How It Works",
+                        "process.step1.title": "Consultation",
+                        "process.step1.description": "We discuss your business needs and objectives to create the perfect solution.",
+                        "process.step2.title": "Design",
+                        "process.step2.description": "We create a modern and personalized design that reflects your brand identity.",
+                        "process.step3.title": "Development",
+                        "process.step3.description": "We transform the design into a functional, fast and optimized website.",
+                        "process.step4.title": "Launch",
+                        "process.step4.description": "We launch the website and provide support for any necessary adjustments.",
+                        "footer.description": "We provide complete web solutions for small and medium businesses, with emphasis on quality and results.",
+                        "footer.quickLinks": "Quick Links",
+                        "footer.contact": "Contact",
+                        "footer.location": "Bucharest, Romania",
+                        "footer.rights": "All rights reserved.",
+                        "order.title": "Order Service",
+                        "order.name": "Full Name",
+                        "order.email": "Email Address",
+                        "order.phone": "Phone Number",
+                        "order.service": "Service Type",
+                        "order.select": "Select service",
+                        "order.addHosting": "Add hosting",
+                        "order.addMaintenance": "Add website maintenance",
+                        "order.notes": "Additional Notes",
+                        "order.terms": "I agree with the terms and conditions",
+                        "order.submit": "Submit Order"
+                    },
+                    ru: {
+                        "nav.home": "Главная",
+                        "nav.packages": "Пакеты",
+                        "nav.services": "Услуги",
+                        "nav.process": "Процесс",
+                        "nav.contact": "Контакты",
+                        "header.title": "Ваш Профессиональный Сайт Всего За Несколько Дней",
+                        "header.subtitle": "Мы разрабатываем современные, быстрые и оптимизированные для конверсии веб-сайты. Превращайте посетителей в клиентов с нашими индивидуальными решениями.",
+                        "header.whatsapp": "Обсудить в WhatsApp",
+                        "header.call": "Позвонить сейчас",
+                        "packages.title": "Пакеты и Цены",
+                        "packages.basic.title": "Базовый",
+                        "packages.basic.discount": "СКИДКА 40%",
+                        "packages.basic.description": "Идеально для малого бизнеса",
+                        "packages.basic.feature1": "Адаптивный дизайн",
+                        "packages.basic.feature2": "До 5 страниц",
+                        "packages.basic.feature3": "Интеграция с соцсетями",
+                        "packages.basic.feature4": "Базовая SEO-оптимизация",
+                        "packages.basic.feature5": "Помощь в настройке",
+                        "packages.basic.feature6": "Доставка за 2-3 рабочих дня",
+                        "packages.standard.title": "Стандартный",
+                        "packages.standard.discount": "СКИДКА 29%",
+                        "packages.standard.description": "Идеально для растущего бизнеса",
+                        "packages.standard.feature1": "Все функции Базового пакета",
+                        "packages.standard.feature2": "До 10 страниц",
+                        "packages.standard.feature3": "Индивидуальный дизайн",
+                        "packages.standard.feature4": "Фото/видео галерея",
+                        "packages.standard.feature5": "Интегрированный блог",
+                        "packages.standard.feature6": "Продвинутая SEO-оптимизация",
+                        "packages.standard.feature7": "Доставка за 10 рабочих дней",
+                        "packages.premium.title": "Премиум",
+                        "packages.premium.discount": "СКИДКА 23%",
+                        "packages.premium.description": "Полное решение для бизнеса",
+                        "packages.premium.feature1": "Все функции Стандартного пакета",
+                        "packages.premium.feature2": "Неограниченное количество страниц",
+                        "packages.premium.feature3": "Премиум индивидуальный дизайн",
+                        "packages.premium.feature4": "Система онлайн-бронирования",
+                        "packages.premium.feature5": "Интеграция платежной платформы",
+                        "packages.premium.feature6": "Приоритетная поддержка первый месяц",
+                        "packages.premium.feature7": "Консультация после запуска",
+                        "packages.premium.feature8": "Доставка за 14 рабочих дней",
+                        "packages.order": "Заказать",
+                        "services.title": "Наши Услуги",
+                        "services.webdev.title": "Веб-разработка",
+                        "services.webdev.description": "Современные и адаптивные веб-сайты, оптимизированные для всех устройств и браузеров.",
+                        "services.webdev.for": "Местный бизнес, фрилансеры, профессиональные портфолио.",
+                        "services.design.title": "Индивидуальный Дизайн",
+                        "services.design.description": "Уникальный дизайн, отражающий идентичность вашего бренда и привлекающий нужных клиентов.",
+                        "services.design.for": "Личные бренды, стартапы, творческий бизнес.",
+                        "services.seo.title": "SEO Оптимизация",
+                        "services.seo.description": "Мы улучшаем видимость вашего сайта в поисковых системах для большего количества конверсий.",
+                        "services.seo.for": "Весь бизнес, который хочет расти онлайн.",
+                        "services.perfectFor": "Идеально для:",
+                        "additional.title": "Дополнительные Услуги",
+                        "additional.maintenance.title": "Обслуживание",
+                        "additional.maintenance.description": "Поддерживайте работу вашего сайта с нашими услугами обслуживания",
+                        "additional.maintenance.feature1": "Регулярные обновления и патчи безопасности",
+                        "additional.maintenance.feature2": "Мониторинг производительности",
+                        "additional.maintenance.feature3": "Обновление контента (до 5 страниц)",
+                        "additional.maintenance.feature4": "Техническая поддержка",
+                        "additional.maintenance.feature5": "Управление резервными копиями",
+                        "additional.hosting.title": "Хостинг",
+                        "additional.hosting.description": "Быстрый и безопасный хостинг для вашего сайта с круглосуточной техподдержкой",
+                        "additional.hosting.feature1": "10 ГБ SSD-хранилища",
+                        "additional.hosting.feature2": "Безлимитный трафик",
+                        "additional.hosting.feature3": "SSL-сертификат включен",
+                        "additional.hosting.feature4": "Ежедневное резервное копирование",
+                        "additional.hosting.feature5": "Техподдержка 24/7",
+                        "additional.month": "/месяц",
+                        "additional.order": "Заказать",
+                        "process.title": "Как Это Работает",
+                        "process.step1.title": "Консультация",
+                        "process.step1.description": "Мы обсуждаем потребности и цели вашего бизнеса, чтобы создать идеальное решение.",
+                        "process.step2.title": "Дизайн",
+                        "process.step2.description": "Мы создаем современный и персонализированный дизайн, отражающий идентичность вашего бренда.",
+                        "process.step3.title": "Разработка",
+                        "process.step3.description": "Мы превращаем дизайн в функциональный, быстрый и оптимизированный веб-сайт.",
+                        "process.step4.title": "Запуск",
+                        "process.step4.description": "Мы запускаем сайт и предоставляем поддержку для любых необходимых корректировок.",
+                        "footer.description": "Мы предоставляем полные веб-решения для малого и среднего бизнеса, с акцентом на качество и результаты.",
+                        "footer.quickLinks": "Быстрые ссылки",
+                        "footer.contact": "Контакты",
+                        "footer.location": "Бухарест, Румыния",
+                        "footer.rights": "Все права защищены.",
+                        "order.title": "Заказать Услугу",
+                        "order.name": "Полное имя",
+                        "order.email": "Адрес электронной почты",
+                        "order.phone": "Номер телефона",
+                        "order.service": "Тип услуги",
+                        "order.select": "Выберите услугу",
+                        "order.addHosting": "Добавить хостинг",
+                        "order.addMaintenance": "Добавить обслуживание сайта",
+                        "order.notes": "Дополнительные заметки",
+                        "order.terms": "Я согласен с условиями и положениями",
+                        "order.submit": "Отправить Заказ"
+                    }
+                };
                 
-                // Header
-                "header.title": "Site-ul Tău Profesional În Doar Câteva Zile",
-                "header.subtitle": "Dezvoltăm site-uri web moderne, rapide și optimizate pentru conversii. Transformă-vizita în clienți cu soluțiile noastre personalizate.",
-                "header.whatsapp": "Discută pe WhatsApp",
-                "header.call": "Sună acum",
-                
-                // Servicii
-                "services.title": "Serviciile Noastre",
-                "services.webdev.title": "Dezvoltare Web",
-                "services.webdev.description": "Site-uri moderne și responsive, optimizate pentru toate dispozitivele și browserele.",
-                "services.webdev.for": "Afaceri locale, freelanceri, portofolii profesionale.",
-                "services.design.title": "Design Personalizat",
-                "services.design.description": "Design unic care reflectă identitatea brandului tău și atrage clienții potriviți.",
-                "services.design.for": "Branduri personale, startup-uri, afaceri creative.",
-                "services.seo.title": "Optimizare SEO",
-                "services.seo.description": "Îmbunătățim vizibilitatea site-ului tău în motoarele de căutare pentru mai multe conversii.",
-                "services.seo.for": "Toate afacerile care vor să crească online.",
-                "services.perfectFor": "Perfect pentru:",
-                
-                // Pachete
-                "packages.title": "Pachete și Prețuri",
-                "packages.basic.title": "Basic",
-                "packages.basic.subtitle": "Perfect pentru afaceri mici",
-                "packages.basic.feature1": "Design responsive",
-                "packages.basic.feature2": "Până la 5 pagini",
-                "packages.basic.feature3": "Integrare social media",
-                "packages.basic.feature4": "Optimizare de bază SEO",
-                "packages.basic.feature5": "Asistență la configurare",
-                "packages.basic.feature6": "Livrare în 7 zile lucrătoare",
-                "packages.standard.title": "Standard",
-                "packages.standard.subtitle": "Ideal pentru afaceri în creștere",
-                "packages.standard.feature1": "Toate caracteristicile Basic",
-                "packages.standard.feature2": "Până la 10 pagini",
-                "packages.standard.feature3": "Design personalizat",
-                "packages.standard.feature4": "Galerie foto/video",
-                "packages.standard.feature5": "Blog integrat",
-                "packages.standard.feature6": "Optimizare SEO avansată",
-                "packages.standard.feature7": "Livrare în 10 zile lucrătoare",
-                "packages.premium.title": "Premium",
-                "packages.premium.subtitle": "Soluție completă pentru afaceri",
-                "packages.premium.feature1": "Toate caracteristicile Standard",
-                "packages.premium.feature2": "Număr nelimitat de pagini",
-                "packages.premium.feature3": "Design premium personalizat",
-                "packages.premium.feature4": "Sistem de rezervări online",
-                "packages.premium.feature5": "Integrare platformă de plăți",
-                "packages.premium.feature6": "Suport prioritar prima lună",
-                "packages.premium.feature7": "Consultanță post-lansare",
-                "packages.premium.feature8": "Livrare în 14 zile lucrătoare",
-                "packages.discount50": "REDUCERE 50%",
-                "packages.discount30": "REDUCERE 30%",
-                "packages.discount20": "REDUCERE 20%",
-                "packages.order": "Comandă",
-                
-                // Proces
-                "process.title": "Cum Funcționează",
-                "process.step1.title": "Consultare",
-                "process.step1.description": "Discutăm nevoile și obiectivele afacerii tale pentru a crea soluția perfectă.",
-                "process.step2.title": "Design",
-                "process.step2.description": "Creăm un design modern și personalizat care reflectă identitatea brandului tău.",
-                "process.step3.title": "Dezvoltare",
-                "process.step3.description": "Transformăm designul într-un site web funcțional, rapid și optimizat.",
-                "process.step4.title": "Lansare",
-                "process.step4.description": "Lansăm site-ul și oferim suport pentru orice ajustări necesare.",
-                
-                // Footer
-                "footer.description": "Oferim soluții web complete pentru afaceri mici și mijlocii, cu accent pe calitate și rezultate.",
-                "footer.quickLinks": "Link-uri Rapide",
-                "footer.contact": "Contact",
-                "footer.location": "București, România",
-                "footer.rights": "Toate drepturile rezervate."
-            },
-            en: {
-                // Navigare
-                "nav.home": "Home",
-                "nav.services": "Services",
-                "nav.packages": "Packages",
-                "nav.process": "Process",
-                "nav.contact": "Contact",
-                
-                // Header
-                "header.title": "Your Professional Website In Just A Few Days",
-                "header.subtitle": "We develop modern, fast and conversion-optimized websites. Turn visitors into customers with our customized solutions.",
-                "header.whatsapp": "Chat on WhatsApp",
-                "header.call": "Call Now",
-                
-                // Servicii
-                "services.title": "Our Services",
-                "services.webdev.title": "Web Development",
-                "services.webdev.description": "Modern and responsive websites, optimized for all devices and browsers.",
-                "services.webdev.for": "Local businesses, freelancers, professional portfolios.",
-                "services.design.title": "Custom Design",
-                "services.design.description": "Unique design that reflects your brand identity and attracts the right customers.",
-                "services.design.for": "Personal brands, startups, creative businesses.",
-                "services.seo.title": "SEO Optimization",
-                "services.seo.description": "We improve your website's visibility in search engines for more conversions.",
-                "services.seo.for": "All businesses that want to grow online.",
-                "services.perfectFor": "Perfect for:",
-                
-                // Pachete
-                "packages.title": "Packages and Prices",
-                "packages.basic.title": "Basic",
-                "packages.basic.subtitle": "Perfect for small businesses",
-                "packages.basic.feature1": "Responsive design",
-                "packages.basic.feature2": "Up to 5 pages",
-                "packages.basic.feature3": "Social media integration",
-                "packages.basic.feature4": "Basic SEO optimization",
-                "packages.basic.feature5": "Setup assistance",
-                "packages.basic.feature6": "Delivery in 7 working days",
-                "packages.standard.title": "Standard",
-                "packages.standard.subtitle": "Ideal for growing businesses",
-                "packages.standard.feature1": "All Basic features",
-                "packages.standard.feature2": "Up to 10 pages",
-                "packages.standard.feature3": "Custom design",
-                "packages.standard.feature4": "Photo/video gallery",
-                "packages.standard.feature5": "Integrated blog",
-                "packages.standard.feature6": "Advanced SEO optimization",
-                "packages.standard.feature7": "Delivery in 10 working days",
-                "packages.premium.title": "Premium",
-                "packages.premium.subtitle": "Complete solution for businesses",
-                "packages.premium.feature1": "All Standard features",
-                "packages.premium.feature2": "Unlimited number of pages",
-                "packages.premium.feature3": "Premium custom design",
-                "packages.premium.feature4": "Online booking system",
-                "packages.premium.feature5": "Payment platform integration",
-                "packages.premium.feature6": "Priority support first month",
-                "packages.premium.feature7": "Post-launch consultation",
-                "packages.premium.feature8": "Delivery in 14 working days",
-                "packages.discount50": "DISCOUNT 50%",
-                "packages.discount30": "DISCOUNT 30%",
-                "packages.discount20": "DISCOUNT 20%",
-                "packages.order": "Order",
-                
-                // Proces
-                "process.title": "How It Works",
-                "process.step1.title": "Consultation",
-                "process.step1.description": "We discuss your business needs and objectives to create the perfect solution.",
-                "process.step2.title": "Design",
-                "process.step2.description": "We create a modern and personalized design that reflects your brand identity.",
-                "process.step3.title": "Development",
-                "process.step3.description": "We transform the design into a functional, fast and optimized website.",
-                "process.step4.title": "Launch",
-                "process.step4.description": "We launch the website and provide support for any necessary adjustments.",
-                
-                // Footer
-                "footer.description": "We provide complete web solutions for small and medium businesses, with emphasis on quality and results.",
-                "footer.quickLinks": "Quick Links",
-                "footer.contact": "Contact",
-                "footer.location": "Bucharest, Romania",
-                "footer.rights": "All rights reserved."
-            },
-            ru: {
-                // Navigare
-                "nav.home": "Главная",
-                "nav.services": "Услуги",
-                "nav.packages": "Пакеты",
-                "nav.process": "Процесс",
-                "nav.contact": "Контакты",
-                
-                // Header
-                "header.title": "Ваш Профессиональный Сайт Всего За Несколько Дней",
-                "header.subtitle": "Мы разрабатываем современные, быстрые и оптимизированные для конверсии веб-сайты. Превращайте посетителей в клиентов с нашими индивидуальными решениями.",
-                "header.whatsapp": "Обсудить в WhatsApp",
-                "header.call": "Позвонить сейчас",
-                
-                // Servicii
-                "services.title": "Наши Услуги",
-                "services.webdev.title": "Веб-разработка",
-                "services.webdev.description": "Современные и адаптивные веб-сайты, оптимизированные для всех устройств и браузеров.",
-                "services.webdev.for": "Местный бизнес, фрилансеры, профессиональные портфолио.",
-                "services.design.title": "Индивидуальный Дизайн",
-                "services.design.description": "Уникальный дизайн, отражающий идентичность вашего бренда и привлекающий нужных клиентов.",
-                "services.design.for": "Личные бренды, стартапы, творческий бизнес.",
-                "services.seo.title": "SEO Оптимизация",
-                "services.seo.description": "Мы улучшаем видимость вашего сайта в поисковых системах для большего количества конверсий.",
-                "services.seo.for": "Весь бизнес, который хочет расти онлайн.",
-                "services.perfectFor": "Идеально для:",
-                
-                // Pachete
-                "packages.title": "Пакеты и Цены",
-                "packages.basic.title": "Базовый",
-                "packages.basic.subtitle": "Идеально для малого бизнеса",
-                "packages.basic.feature1": "Адаптивный дизайн",
-                "packages.basic.feature2": "До 5 страниц",
-                "packages.basic.feature3": "Интеграция с соцсетями",
-                "packages.basic.feature4": "Базовая SEO оптимизация",
-                "packages.basic.feature5": "Помощь в настройке",
-                "packages.basic.feature6": "Доставка за 7 рабочих дней",
-                "packages.standard.title": "Стандартный",
-                "packages.standard.subtitle": "Идеально для растущего бизнеса",
-                "packages.standard.feature1": "Все функции Базового",
-                "packages.standard.feature2": "До 10 страниц",
-                "packages.standard.feature3": "Индивидуальный дизайн",
-                "packages.standard.feature4": "Фото/видео галерея",
-                "packages.standard.feature5": "Встроенный блог",
-                "packages.standard.feature6": "Продвинутая SEO оптимизация",
-                "packages.standard.feature7": "Доставка за 10 рабочих дней",
-                "packages.premium.title": "Премиум",
-                "packages.premium.subtitle": "Полное решение для бизнеса",
-                "packages.premium.feature1": "Все функции Стандартного",
-                "packages.premium.feature2": "Неограниченное количество страниц",
-                "packages.premium.feature3": "Премиальный индивидуальный дизайн",
-                "packages.premium.feature4": "Система онлайн-бронирования",
-                "packages.premium.feature5": "Интеграция платежной платформы",
-                "packages.premium.feature6": "Приоритетная поддержка первый месяц",
-                "packages.premium.feature7": "Консультация после запуска",
-                "packages.premium.feature8": "Доставка за 14 рабочих дней",
-                "packages.discount50": "СКИДКА 50%",
-                "packages.discount30": "СКИДКА 30%",
-                "packages.discount20": "СКИДКА 20%",
-                "packages.order": "Заказать",
-                
-                // Proces
-                "process.title": "Как Это Работает",
-                "process.step1.title": "Консультация",
-                "process.step1.description": "Мы обсуждаем потребности и цели вашего бизнеса, чтобы создать идеальное решение.",
-                "process.step2.title": "Дизайн",
-                "process.step2.description": "Мы создаем современный и персонализированный дизайн, отражающий идентичность вашего бренда.",
-                "process.step3.title": "Разработка",
-                "process.step3.description": "Мы превращаем дизайн в функциональный, быстрый и оптимизированный веб-сайт.",
-                "process.step4.title": "Запуск",
-                "process.step4.description": "Мы запускаем сайт и предоставляем поддержку для любых необходимых корректировок.",
-                
-                // Footer
-                "footer.description": "Мы предоставляем полные веб-решения для малого и среднего бизнеса, с акцентом на качество и результаты.",
-                "footer.quickLinks": "Быстрые ссылки",
-                "footer.contact": "Контакты",
-                "footer.location": "Бухарест, Румыния",
-                "footer.rights": "Все права защищены."
+                this.currentLang = 'ro';
+                this.init();
             }
-        };
 
-        // Funcție pentru schimbarea limbii
-        function setLanguage(lang) {
-            // Actualizează toate elementele cu atributul data-i18n
-            document.querySelectorAll('[data-i18n]').forEach(element => {
-                const key = element.getAttribute('data-i18n');
-                if (translations[lang] && translations[lang][key]) {
-                    element.textContent = translations[lang][key];
+            init() {
+                // Auto-detect browser language
+                this.detectBrowserLanguage();
+                
+                // Initialize language selector
+                this.initLanguageSelector();
+                
+                // Set initial language
+                this.setLanguage(this.currentLang);
+            }
+
+            detectBrowserLanguage() {
+                const savedLang = localStorage.getItem('preferred-language');
+                if (savedLang && this.translations[savedLang]) {
+                    this.currentLang = savedLang;
+                    return;
                 }
-            });
 
-            // Actualizează selectorul de limbă
-            document.querySelectorAll('.language-option').forEach(option => {
-                option.classList.remove('active');
-                if (option.getAttribute('data-lang') === lang) {
-                    option.classList.add('active');
+                const browserLang = navigator.language || navigator.userLanguage;
+                
+                if (browserLang.startsWith('ro')) {
+                    this.currentLang = 'ro';
+                } else if (browserLang.startsWith('ru')) {
+                    this.currentLang = 'ru';
+                } else {
+                    this.currentLang = 'en';
                 }
-            });
+            }
 
-            // Salvează limba în localStorage
-            localStorage.setItem('preferred-language', lang);
+            initLanguageSelector() {
+                const languageOptions = document.querySelectorAll('.language-option-fixed');
+                
+                languageOptions.forEach(option => {
+                    option.addEventListener('click', (e) => {
+                        const lang = e.target.getAttribute('data-lang');
+                        this.setLanguage(lang);
+                    });
+                });
+            }
+
+            setLanguage(lang) {
+                if (!this.translations[lang]) return;
+                
+                this.currentLang = lang;
+                
+                // Update all translatable elements
+                document.querySelectorAll('[data-i18n]').forEach(element => {
+                    const key = element.getAttribute('data-i18n');
+                    if (this.translations[lang][key]) {
+                        // Special handling for elements with inner HTML structure
+                        if (element.tagName === 'BUTTON' || element.tagName === 'A') {
+                            // For buttons with icons, keep the icon and change only the text
+                            const icon = element.querySelector('i');
+                            if (icon) {
+                                element.innerHTML = icon.outerHTML + ' ' + this.translations[lang][key];
+                            } else {
+                                element.textContent = this.translations[lang][key];
+                            }
+                        } else {
+                            element.textContent = this.translations[lang][key];
+                        }
+                    }
+                });
+
+                // Update active language button
+                document.querySelectorAll('.language-option-fixed').forEach(option => {
+                    option.classList.remove('active');
+                    if (option.getAttribute('data-lang') === lang) {
+                        option.classList.add('active');
+                    }
+                });
+
+                // Save language preference
+                localStorage.setItem('preferred-language', lang);
+                document.documentElement.lang = lang;
+                
+                // Update mobile tabs text if they exist
+                this.updateMobileTabs(lang);
+            }
             
-            // Actualizează atributul lang al documentului
-            document.documentElement.lang = lang;
+            updateMobileTabs(lang) {
+                const mobileTabs = document.querySelectorAll('.package-tab span[data-i18n]');
+                mobileTabs.forEach(tab => {
+                    const key = tab.getAttribute('data-i18n');
+                    if (this.translations[lang][key]) {
+                        tab.textContent = this.translations[lang][key];
+                    }
+                });
+            }
         }
 
-        // Detecție automată a limbii browser-ului
-        function detectLanguage() {
-            const savedLang = localStorage.getItem('preferred-language');
-            if (savedLang) {
-                return savedLang;
+        // Simple and Reliable Mobile Menu System
+        class MobileMenu {
+            constructor() {
+                this.menuBtn = document.getElementById('mobileMenuBtn');
+                this.navLinks = document.querySelector('.nav-links');
+                this.isOpen = false;
+                this.init();
             }
 
-            const browserLang = navigator.language || navigator.userLanguage;
-            if (browserLang.startsWith('ro')) {
-                return 'ro';
-            } else if (browserLang.startsWith('ru')) {
-                return 'ru';
-            } else {
-                return 'en';
+            init() {
+                if (!this.menuBtn || !this.navLinks) {
+                    console.log('Mobile menu elements not found');
+                    return;
+                }
+
+                console.log('Mobile menu initialized');
+
+                // Simple toggle on click
+                this.menuBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    this.toggle();
+                });
+
+                // Close menu when clicking on a link
+                this.navLinks.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        this.close();
+                    });
+                });
+
+                // Close menu when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (this.isOpen && 
+                        !this.navLinks.contains(e.target) && 
+                        !this.menuBtn.contains(e.target)) {
+                        this.close();
+                    }
+                });
+
+                // Handle window resize
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth > 768) {
+                        this.close();
+                    }
+                });
+            }
+
+            toggle() {
+                if (this.isOpen) {
+                    this.close();
+                } else {
+                    this.open();
+                }
+            }
+
+            open() {
+                this.navLinks.classList.add('active');
+                this.menuBtn.innerHTML = '<i class="fas fa-times"></i>';
+                this.isOpen = true;
+                document.body.style.overflow = 'hidden';
+            }
+
+            close() {
+                this.navLinks.classList.remove('active');
+                this.menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                this.isOpen = false;
+                document.body.style.overflow = '';
             }
         }
 
-        // Inițializare
-        document.addEventListener('DOMContentLoaded', function() {
-            // Setează limba inițială
-            const initialLang = detectLanguage();
-            setLanguage(initialLang);
-
-            // Meniu mobil
-            document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-                document.querySelector('.nav-links').classList.toggle('active');
-            });
-
-            // Animații fade-in la scroll (fallback pentru browsere vechi)
-            const fadeElements = document.querySelectorAll('.fade-in');
+        // Simple Mobile Tabs System
+        function initMobileTabs() {
+            const packageTabs = document.querySelectorAll('.package-tab');
+            const mobilePackages = document.querySelectorAll('.packages-mobile .package-card');
             
-            if (!window.IntersectionObserver) {
-                const fadeInOnScroll = () => {
-                    fadeElements.forEach(element => {
-                        const elementTop = element.getBoundingClientRect().top;
-                        const elementVisible = 150;
+            if (packageTabs.length === 0 || mobilePackages.length === 0) {
+                return;
+            }
+            
+            // Hide all mobile packages first
+            mobilePackages.forEach(pkg => {
+                pkg.style.display = 'none';
+            });
+            
+            // Show only the active one (Standard by default)
+            const activePackage = document.querySelector('.packages-mobile .package-card.active');
+            if (activePackage) {
+                activePackage.style.display = 'flex';
+            }
+            
+            // Add click event to each tab
+            packageTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    packageTabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Hide all mobile packages
+                    mobilePackages.forEach(pkg => {
+                        pkg.style.display = 'none';
+                        pkg.classList.remove('active');
+                    });
+                    
+                    // Show the selected package
+                    const packageType = this.getAttribute('data-package');
+                    const targetPackage = document.querySelector(`.packages-mobile .package-card.${packageType}`);
+                    
+                    if (targetPackage) {
+                        targetPackage.style.display = 'flex';
+                        targetPackage.classList.add('active');
+                    }
+                });
+            });
+        }
+
+        // Simple Animation System
+        class AnimationSystem {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                // Remove preload class after page load
+                window.addEventListener('load', () => {
+                    setTimeout(() => {
+                        document.body.classList.remove('preload');
+                        document.body.style.opacity = '1';
+                    }, 100);
+                    
+                    // Create particles
+                    this.createParticles();
+                    
+                    // Show notification banner after 2 seconds
+                    setTimeout(() => {
+                        this.showNotification();
+                    }, 2000);
+                    
+                    // Initialize mobile tabs
+                    initMobileTabs();
+                });
+
+                // Initialize scroll animations
+                this.initScrollAnimations();
+            }
+
+            createParticles() {
+                const particlesContainer = document.getElementById('particles');
+                if (!particlesContainer) return;
+                
+                const particleCount = window.innerWidth <= 768 ? 20 : 40;
+                
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    
+                    const size = Math.random() * 100 + 50;
+                    const x = Math.random() * 100;
+                    const y = Math.random() * 100;
+                    const delay = Math.random() * 20;
+                    
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    particle.style.left = `${x}%`;
+                    particle.style.top = `${y}%`;
+                    particle.style.animationDelay = `${delay}s`;
+                    particle.style.animationDuration = `${Math.random() * 30 + 20}s`;
+                    
+                    particlesContainer.appendChild(particle);
+                }
+            }
+
+            showNotification() {
+                const notification = document.getElementById('notificationBanner');
+                if (!notification) return;
+                
+                notification.classList.add('show');
+                
+                // Auto-hide after 5 seconds
+                setTimeout(() => {
+                    this.hideNotification();
+                }, 5000);
+                
+                // Setup close button
+                const closeBtn = document.getElementById('notificationClose');
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', () => this.hideNotification());
+                }
+            }
+
+            hideNotification() {
+                const notification = document.getElementById('notificationBanner');
+                if (notification) {
+                    notification.classList.remove('show');
+                }
+            }
+
+            initScrollAnimations() {
+                // Scroll progress bar
+                window.addEventListener('scroll', () => {
+                    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const scrolled = (winScroll / height) * 100;
+                    
+                    const progressBar = document.getElementById('scrollProgress');
+                    if (progressBar) {
+                        progressBar.style.width = scrolled + "%";
+                    }
+
+                    // Reveal sections on scroll
+                    const sections = document.querySelectorAll('section');
+                    sections.forEach(section => {
+                        const sectionTop = section.offsetTop;
                         
-                        if (elementTop < window.innerHeight - elementVisible) {
-                            element.classList.add('visible');
+                        if (window.scrollY > sectionTop - window.innerHeight + 100) {
+                            section.classList.add('revealed');
                         }
                     });
-                };
 
-                window.addEventListener('scroll', fadeInOnScroll);
-                window.addEventListener('load', fadeInOnScroll);
+                    // Navbar scroll effect
+                    const nav = document.querySelector('nav');
+                    if (window.scrollY > 50) {
+                        nav.classList.add('scrolled');
+                    } else {
+                        nav.classList.remove('scrolled');
+                    }
+                });
+                
+                // Intersection Observer for fade-in animations
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                document.querySelectorAll('.fade-in').forEach(el => {
+                    observer.observe(el);
+                });
+            }
+        }
+
+        // Simple Order Form System
+        class OrderFormSystem {
+            constructor() {
+                this.orderForm = document.getElementById('order-form');
+                this.orderButtons = document.querySelectorAll('.order-btn');
+                this.closeButton = document.getElementById('close-form');
+                this.submitForm = document.getElementById('order-form-content');
+                this.init();
             }
 
-            // Navigare smooth
+            init() {
+                if (!this.orderForm) return;
+
+                // Setup order button click handlers
+                this.orderButtons.forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const packageType = e.target.getAttribute('data-package');
+                        const packagePrice = e.target.getAttribute('data-price');
+                        this.openOrderForm(packageType, packagePrice);
+                    });
+                });
+
+                // Close form button
+                if (this.closeButton) {
+                    this.closeButton.addEventListener('click', () => this.closeOrderForm());
+                }
+
+                // Close form when clicking outside
+                this.orderForm.addEventListener('click', (e) => {
+                    if (e.target === this.orderForm) {
+                        this.closeOrderForm();
+                    }
+                });
+
+                // Handle service type change
+                const serviceSelect = document.getElementById('service-type');
+                if (serviceSelect) {
+                    serviceSelect.addEventListener('change', (e) => this.handleServiceChange(e));
+                }
+
+                // Handle form submission
+                if (this.submitForm) {
+                    this.submitForm.addEventListener('submit', (e) => this.handleSubmit(e));
+                }
+            }
+
+            openOrderForm(serviceType, price) {
+                const serviceSelect = document.getElementById('service-type');
+                const packagePriceField = document.getElementById('package-price');
+                
+                if (!serviceSelect || !packagePriceField) return;
+                
+                // Set service type and price
+                serviceSelect.value = serviceType;
+                packagePriceField.value = price;
+                
+                // Reset checkboxes
+                const hostingCheckbox = document.getElementById('add-hosting-checkbox');
+                const maintenanceCheckbox = document.getElementById('add-maintenance-checkbox');
+                if (hostingCheckbox) hostingCheckbox.checked = false;
+                if (maintenanceCheckbox) maintenanceCheckbox.checked = false;
+                
+                // Show/hide addons based on service type
+                const hostingAddon = document.getElementById('hosting-addon');
+                const maintenanceAddon = document.getElementById('maintenance-addon');
+                
+                if (serviceType === 'hosting') {
+                    if (hostingAddon) hostingAddon.style.display = 'none';
+                    if (maintenanceAddon) maintenanceAddon.style.display = 'block';
+                } else if (serviceType === 'maintenance') {
+                    if (hostingAddon) hostingAddon.style.display = 'block';
+                    if (maintenanceAddon) maintenanceAddon.style.display = 'none';
+                } else {
+                    if (hostingAddon) hostingAddon.style.display = 'block';
+                    if (maintenanceAddon) maintenanceAddon.style.display = 'block';
+                }
+                
+                // Show form
+                this.orderForm.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            closeOrderForm() {
+                this.orderForm.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            handleServiceChange(e) {
+                const hostingAddon = document.getElementById('hosting-addon');
+                const maintenanceAddon = document.getElementById('maintenance-addon');
+                const packagePriceField = document.getElementById('package-price');
+                
+                // Reset checkboxes
+                const hostingCheckbox = document.getElementById('add-hosting-checkbox');
+                const maintenanceCheckbox = document.getElementById('add-maintenance-checkbox');
+                if (hostingCheckbox) hostingCheckbox.checked = false;
+                if (maintenanceCheckbox) maintenanceCheckbox.checked = false;
+                
+                // Set package price based on selection
+                let price = '';
+                switch(e.target.value) {
+                    case 'basic': price = '150'; break;
+                    case 'standard': price = '250'; break;
+                    case 'premium': price = '500'; break;
+                    case 'maintenance': price = '15'; break;
+                    case 'hosting': price = '10'; break;
+                }
+                if (packagePriceField) packagePriceField.value = price;
+                
+                // Show/hide addons
+                if (e.target.value === 'hosting') {
+                    if (hostingAddon) hostingAddon.style.display = 'none';
+                    if (maintenanceAddon) maintenanceAddon.style.display = 'block';
+                } else if (e.target.value === 'maintenance') {
+                    if (hostingAddon) hostingAddon.style.display = 'block';
+                    if (maintenanceAddon) maintenanceAddon.style.display = 'none';
+                } else {
+                    if (hostingAddon) hostingAddon.style.display = 'block';
+                    if (maintenanceAddon) maintenanceAddon.style.display = 'block';
+                }
+            }
+
+            handleSubmit(e) {
+                e.preventDefault();
+                
+                // Collect all form data
+                const formData = new FormData(this.submitForm);
+                const orderData = {};
+                
+                for (let [key, value] of formData.entries()) {
+                    orderData[key] = value;
+                }
+                
+                // Add timestamp and order ID
+                orderData.timestamp = new Date().toISOString();
+                orderData.order_id = 'WB-' + Date.now();
+                
+                // Update checkbox values
+                const hostingCheckbox = document.getElementById('add-hosting-checkbox');
+                const maintenanceCheckbox = document.getElementById('add-maintenance-checkbox');
+                
+                if (hostingCheckbox) {
+                    orderData.add_hosting = hostingCheckbox.checked ? 'yes' : 'no';
+                }
+                
+                if (maintenanceCheckbox) {
+                    orderData.add_maintenance = maintenanceCheckbox.checked ? 'yes' : 'no';
+                }
+                
+                // Store order data in localStorage
+                localStorage.setItem('webOrderData', JSON.stringify(orderData));
+                
+                // Show loading state briefly
+                const submitBtn = this.submitForm.querySelector('.submit-order');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                submitBtn.disabled = true;
+                
+                // Close order form
+                this.closeOrderForm();
+                
+                // Redirect to payment page after brief delay
+                setTimeout(() => {
+                    window.location.href = 'payment.html';
+                }, 500);
+                
+                return false;
+            }
+        }
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, initializing...');
+            
+            // Initialize systems
+            const mobileMenu = new MobileMenu();
+            const animations = new AnimationSystem();
+            const languageSystem = new LanguageSystem();
+            const orderFormSystem = new OrderFormSystem();
+            
+            // Smooth scrolling for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    
                     const targetId = this.getAttribute('href');
                     if (targetId === '#') return;
                     
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
+                        e.preventDefault();
                         window.scrollTo({
                             top: targetElement.offsetTop - 80,
                             behavior: 'smooth'
                         });
                         
-                        // Închide meniul mobil dacă este deschis
-                        document.querySelector('.nav-links').classList.remove('active');
+                        // Close mobile menu if open
+                        if (mobileMenu.isOpen) {
+                            mobileMenu.close();
+                        }
                     }
                 });
             });
-
-            // Schimbarea culorii navbar-ului la scroll cu animație smooth
-            let lastScroll = 0;
-            window.addEventListener('scroll', function() {
-                const nav = document.querySelector('nav');
-                const currentScroll = window.scrollY;
-                
-                if (currentScroll > 50) {
-                    nav.classList.add('scrolled');
-                } else {
-                    nav.classList.remove('scrolled');
-                }
-                
-                lastScroll = currentScroll;
-            });
-
-            // Intersection Observer pentru animații mai smooth
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry, index) => {
-                    if (entry.isIntersecting) {
-                        setTimeout(() => {
-                            entry.target.classList.add('visible');
-                        }, index * 100);
-                    }
-                });
-            }, observerOptions);
-
-            // Observă toate elementele fade-in
-            document.querySelectorAll('.fade-in').forEach(el => {
-                observer.observe(el);
-            });
-
-            // Funcționalitate pentru butoanele de schimbare a pachetelor pe mobile
-            const packageTabs = document.querySelectorAll('.package-tab');
-            const mobilePackages = document.querySelectorAll('.packages-mobile .package-card');
             
-            packageTabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    // Elimină clasa active de la toate tab-urile
-                    packageTabs.forEach(t => t.classList.remove('active'));
-                    // Adaugă clasa active la tab-ul curent
-                    this.classList.add('active');
+            // Ripple effect for buttons
+            document.querySelectorAll('.btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
                     
-                    // Ascunde toate pachetele mobile
-                    mobilePackages.forEach(pkg => pkg.classList.remove('active'));
+                    const ripple = document.createElement('span');
+                    ripple.style.cssText = `
+                        position: absolute;
+                        border-radius: 50%;
+                        background: rgba(255, 255, 255, 0.5);
+                        transform: translate(-50%, -50%) scale(0);
+                        animation: ripple 0.6s linear;
+                        pointer-events: none;
+                    `;
                     
-                    // Afișează pachetul corespunzător
-                    const packageType = this.getAttribute('data-package');
-                    document.querySelector(`.packages-mobile .package-card.${packageType}`).classList.add('active');
+                    const size = Math.max(rect.width, rect.height);
+                    ripple.style.width = ripple.style.height = `${size}px`;
+                    ripple.style.left = `${x}px`;
+                    ripple.style.top = `${y}px`;
+                    
+                    this.style.position = 'relative';
+                    this.style.overflow = 'hidden';
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => ripple.remove(), 600);
                 });
             });
-
-            // Funcționalitate pentru selectorul de limbă
-            document.querySelector('.language-float').addEventListener('click', function() {
-                document.querySelector('.language-selector').classList.toggle('active');
-            });
-
-            document.querySelectorAll('.language-option').forEach(option => {
-                option.addEventListener('click', function() {
-                    const lang = this.getAttribute('data-lang');
-                    setLanguage(lang);
-                    document.querySelector('.language-selector').classList.remove('active');
-                });
-            });
-
-            // Închide selectorul de limbă când se face click în afara lui
-            document.addEventListener('click', function(event) {
-                const languageFloat = document.querySelector('.language-float');
-                const languageSelector = document.querySelector('.language-selector');
-                
-                if (!languageFloat.contains(event.target) && !languageSelector.contains(event.target)) {
-                    languageSelector.classList.remove('active');
+            
+            // Add CSS for ripple animation
+            const rippleStyle = document.createElement('style');
+            rippleStyle.textContent = `
+                @keyframes ripple {
+                    to {
+                        transform: translate(-50%, -50%) scale(4);
+                        opacity: 0;
+                    }
                 }
-            });
+            `;
+            document.head.appendChild(rippleStyle);
+            
+            console.log('All systems initialized successfully');
         });
     </script>
 </body>
