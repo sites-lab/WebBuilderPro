@@ -1043,7 +1043,7 @@
         .mobile-additional-services h3 {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 1px;
             color: var(--text-dark);
             margin-bottom: 20px;
             font-size: 1.4rem;
@@ -2445,7 +2445,7 @@
         }
 
         @media (max-width: 768px) {
-            /* Mobile Compact Styles */
+            /* Mobile Compact Styles - MODIFIED TO KEEP BLUE THEME */
             section {
                 padding: 60px 0;
             }
@@ -2481,16 +2481,21 @@
                 line-height: 1.6;
             }
             
-            /* Header compact */
+            /* Header compact - KEEP BLUE THEME */
             header {
                 padding: 120px 0 80px;
                 min-height: auto;
+                background: var(--gradient-primary); /* Ensure blue gradient */
             }
             
             .header-content h1 {
                 font-size: 2.5rem;
                 animation: titleRevealMobile 1s var(--transition-smooth) 0.2s both;
                 margin-bottom: 1rem;
+                background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.9) 100%);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
             }
             
             .header-content p {
@@ -2511,9 +2516,10 @@
                 max-width: 300px;
             }
             
-            /* Navigation - ENHANCED MOBILE MENU */
+            /* Navigation - ENHANCED MOBILE MENU - KEEP BLUE THEME */
             .mobile-menu-btn {
                 display: flex !important;
+                background: var(--gradient-primary); /* Blue gradient */
             }
             
             .nav-links {
@@ -2527,6 +2533,32 @@
             /* Hide desktop additional dropdown on mobile */
             .desktop-dropdown .desktop-dropdown-content {
                 display: none;
+            }
+            
+            /* Mobile menu content - KEEP BLUE ACCENTS */
+            .mobile-menu-content {
+                background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            }
+            
+            .mobile-menu-header {
+                border-bottom: 2px solid var(--gradient-primary);
+            }
+            
+            .mobile-nav-links a:hover,
+            .mobile-nav-links a.active {
+                background: linear-gradient(90deg, rgba(59, 130, 246, 0.1), transparent);
+                color: var(--albastru);
+                border-left-color: var(--albastru);
+            }
+            
+            .mobile-dropdown-toggle:hover {
+                background: linear-gradient(90deg, rgba(59, 130, 246, 0.1), transparent);
+                color: var(--albastru);
+                border-left-color: var(--albastru);
+            }
+            
+            .mobile-social-links a {
+                background: var(--gradient-primary);
             }
             
             /* Services compact */
@@ -2543,7 +2575,7 @@
                 font-size: 3rem;
             }
             
-            /* Packages mobile version - SIMPLIFIED */
+            /* Packages mobile version - KEEP BLUE THEME */
             .packages-grid {
                 display: none !important;
             }
@@ -2563,6 +2595,19 @@
             
             .package-header {
                 padding: 30px 25px;
+            }
+            
+            /* KEEP SAME BLUE GRADIENTS FOR MOBILE PACKAGES */
+            .packages-mobile .basic .package-header {
+                background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            }
+            
+            .packages-mobile .standard .package-header {
+                background: var(--gradient-primary);
+            }
+            
+            .packages-mobile .premium .package-header {
+                background: var(--gradient-primary); /* Changed from purple to blue */
             }
             
             .package-price {
@@ -2587,6 +2632,19 @@
             
             .example-preview {
                 height: 200px;
+            }
+            
+            /* KEEP BLUE GRADIENTS FOR MOBILE EXAMPLE SITES */
+            .example-preview.basic {
+                background: linear-gradient(135deg, #3b82f6, #2563eb, #1d4ed8);
+            }
+            
+            .example-preview.standard {
+                background: var(--gradient-primary); /* Changed from purple to blue */
+            }
+            
+            .example-preview.premium {
+                background: var(--gradient-primary); /* Changed from orange to blue */
             }
             
             .example-icon {
@@ -2629,6 +2687,7 @@
                 height: 50px;
                 font-size: 1.4rem;
                 margin-bottom: 15px;
+                background: var(--gradient-primary);
             }
             
             .process-step h3 {
@@ -2695,11 +2754,17 @@
                 font-size: 12px;
             }
             
+            .language-option-fixed.active {
+                background: var(--gradient-primary);
+                color: white;
+            }
+            
             /* Notification banner */
             .notification-banner {
                 max-width: calc(100% - 40px);
                 top: 80px;
                 padding: 14px 20px;
+                background: var(--gradient-primary);
             }
             
             .notification-content h4 {
@@ -2738,6 +2803,10 @@
             .additional-service-item {
                 padding: 15px;
             }
+            
+            .additional-service-icon {
+                background: var(--gradient-primary);
+            }
         }
 
         @media (max-width: 576px) {
@@ -2757,6 +2826,7 @@
             header {
                 padding: 100px 0 60px;
                 min-height: auto;
+                background: var(--gradient-primary);
             }
             
             .header-content h1 {
@@ -2813,8 +2883,9 @@
             
             .notification-banner {
                 top: 70px;
-                right: 15px;
+                left: 15px;
                 max-width: calc(100% - 30px);
+                background: var(--gradient-primary);
             }
             
             /* Mobile menu even higher */
@@ -2975,8 +3046,6 @@
             <li><a href="#contact" data-i18n="nav.contact"><i class="fas fa-envelope"></i> <span>Contact</span></a></li>
         </ul>
         
-        
-        
         <div class="mobile-menu-footer">
             <div class="mobile-menu-cta">
                 <a href="https://wa.me/40729552767" class="btn btn-primary" target="_blank">
@@ -2995,7 +3064,7 @@
             
             <div class="mobile-contact-info">
                 <p><i class="fas fa-phone"></i> +40 729 552 767</p>
-                <p><i class="fas fa-envelope"></i> boghack18@gmail.com@gmail.com</p>
+                <p><i class="fas fa-envelope"></i> boghack18@gmail.com</p>
             </div>
         </div>
     </div>
@@ -4750,10 +4819,10 @@
                     
                     this.closeOrderForm();
                     
-        
-                    
                     // In a real implementation, you would redirect to a payment gateway
-                     window.location.href = 'payment.html';
+                    // window.location.href = 'payment.html';
+                    
+                    alert('Thank you for your order! We will contact you shortly to discuss the details.');
                 }, 1500);
                 
                 return false;
