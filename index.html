@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebBuilder Pro - Professional Web Services</title>
+ <!-- FAVICON CODE - ADD HERE -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+<link rel="manifest" href="/favicon/site.webmanifest">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -437,7 +443,7 @@
 
         .header-content h1 {
             margin-bottom: 1.5rem;
-            font-size: 4rem;
+            font-size: 2.5rem;
             font-weight: 800;
             letter-spacing: -1.5px;
             line-height: 1.1;
@@ -713,7 +719,7 @@
             font-weight: 700;
         }
 
-        /* ENHANCED MOBILE MENU BUTTON */
+        /* IMPROVED MOBILE MENU BUTTON - Better hamburger */
         .mobile-menu-btn {
             display: none;
             background: var(--gradient-primary);
@@ -732,6 +738,38 @@
             box-shadow: var(--shadow-md);
             position: relative;
             overflow: hidden;
+        }
+
+        /* Better hamburger lines */
+        .mobile-menu-btn .hamburger {
+            width: 24px;
+            height: 20px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .mobile-menu-btn .hamburger span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background-color: white;
+            border-radius: 2px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: center;
+        }
+
+        .mobile-menu-btn.active .hamburger span:nth-child(1) {
+            transform: translateY(8.5px) rotate(45deg);
+        }
+
+        .mobile-menu-btn.active .hamburger span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.active .hamburger span:nth-child(3) {
+            transform: translateY(-8.5px) rotate(-45deg);
         }
 
         .mobile-menu-btn:hover {
@@ -1030,113 +1068,6 @@
             margin-right: 8px;
         }
 
-        /* Additional Services Section (For Mobile) */
-        .mobile-additional-services {
-            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
-            border-radius: 20px;
-            padding: 25px;
-            margin: 20px 0;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid rgba(59, 130, 246, 0.1);
-        }
-
-        .mobile-additional-services h3 {
-            display: flex;
-            align-items: center;
-            gap: 1px;
-            color: var(--text-dark);
-            margin-bottom: 20px;
-            font-size: 1.4rem;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--gradient-primary);
-        }
-
-        .mobile-additional-services h3 i {
-            color: var(--albastru);
-            font-size: 1.2rem;
-        }
-
-        .additional-services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 15px;
-        }
-
-        .additional-service-item {
-            background: white;
-            border-radius: 12px;
-            padding: 18px;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-        }
-
-        .additional-service-item:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
-            border-color: var(--albastru);
-        }
-
-        .additional-service-icon {
-            background: var(--gradient-primary);
-            color: white;
-            width: 45px;
-            height: 45px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            flex-shrink: 0;
-        }
-
-        .additional-service-content {
-            flex: 1;
-        }
-
-        .additional-service-content h4 {
-            font-size: 1rem;
-            margin-bottom: 5px;
-            color: var(--text-dark);
-        }
-
-        .additional-service-content p {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            margin-bottom: 8px;
-            line-height: 1.4;
-        }
-
-        .additional-service-price {
-            font-weight: 700;
-            color: var(--albastru);
-            font-size: 1.1rem;
-        }
-
-        .additional-service-btn {
-            background: var(--gradient-primary);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            margin-top: 5px;
-        }
-
-        .additional-service-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow);
-        }
-
         /* Secțiune Servicii */
         .services {
             background-color: var(--white);
@@ -1430,10 +1361,11 @@
             to { opacity: 1; }
         }
 
-        /* Example Websites Section - IMPROVED */
-         .example-sites {
-        display: none !important;
-    }
+        /* Example Websites Section - FIXED FOR MOBILE */
+        .example-sites {
+            background-color: var(--bg-light);
+            padding: 80px 0;
+        }
 
         .example-sites h2 {
             text-align: center;
@@ -1443,8 +1375,8 @@
 
         .example-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
         }
 
         .example-card {
@@ -1453,15 +1385,17 @@
             overflow: hidden;
             box-shadow: var(--shadow-xl);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            display: block !important;
             border: 2px solid transparent;
             height: 100%;
             position: relative;
             z-index: 1;
+            text-decoration: none;
+            display: block;
+            color: inherit;
         }
 
         .example-card:hover {
-            transform: translateY(-12px) scale(1.02);
+            transform: translateY(-8px) scale(1.02);
             box-shadow: var(--shadow-float);
             border-color: rgba(59, 130, 246, 0.3);
         }
@@ -1484,7 +1418,7 @@
         }
 
         .example-preview {
-            height: 240px;
+            height: 180px;
             position: relative;
             overflow: hidden;
             display: flex;
@@ -1527,56 +1461,52 @@
             100% { background-position: 0% 50%; }
         }
 
+        .example-icon {
+            font-size: 4.5rem;
+            margin-bottom: 0;
+            animation: float 4s ease-in-out infinite;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+
+        /* COMPACT: Remove text from example preview */
         .example-content {
             position: relative;
             z-index: 2;
             text-align: center;
             color: white;
             padding: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        .example-icon {
-            font-size: 4rem;
-            margin-bottom: 15px;
-            animation: float 4s ease-in-out infinite;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
-        }
-
-        .example-title {
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-
+        .example-title,
         .example-package-type {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            font-weight: 600;
-            margin-bottom: 20px;
-            padding: 5px 15px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 20px;
-            display: inline-block;
-            backdrop-filter: blur(10px);
+            display: none; /* Hide text in preview */
         }
 
         .example-info {
-            padding: 30px;
+            padding: 25px;
             background: white;
+            text-align: center;
         }
 
         .example-info h4 {
             margin-bottom: 15px;
             color: var(--text-dark);
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 700;
         }
 
         .example-info p {
             font-size: 1rem;
             color: var(--text-light);
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             line-height: 1.6;
         }
 
@@ -1604,7 +1534,7 @@
             font-size: 0.9rem;
         }
 
-        /* Example Sites Mobile Buttons - Updated to match package tabs */
+        /* Example Sites Mobile Buttons - FIXED & WORKING */
         .example-mobile-buttons {
             display: none;
             justify-content: center;
@@ -1634,6 +1564,26 @@
             color: white;
             border-color: transparent;
             box-shadow: var(--shadow-md);
+        }
+
+        /* Example Mobile Cards - FIXED */
+        .example-mobile-container {
+            display: none;
+        }
+
+        .example-mobile-card {
+            display: none;
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            border: 2px solid transparent;
+            margin-bottom: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .example-mobile-card.active {
+            display: block;
         }
 
         @keyframes float {
@@ -2251,90 +2201,6 @@
             box-shadow: var(--shadow);
         }
 
-        /* Notification Banner */
-        .notification-banner {
-            position: fixed;
-            top: 95px;
-            left: -400px; /* Changed from right to left */
-            background: var(--gradient-primary);
-            color: white;
-            padding: 16px 24px;
-            border-radius: 12px;
-            box-shadow: var(--shadow-xl);
-            z-index: 999;
-            transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* Changed from right to left */
-            max-width: 350px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-        }
-        
-        .notification-actions {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .notification-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            background-color: rgba(255, 255, 255, 0.15);
-            border-radius: 50%;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-size: 16px;
-        }
-
-        .notification-link:hover {
-            background-color: rgba(255, 255, 255, 0.25);
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .notification-banner.show {
-            left: 20px;
-        }
-
-        .notification-content {
-            flex: 1;
-        }
-
-        .notification-content h4 {
-            margin-bottom: 5px;
-            font-size: 16px;
-        }
-
-        .notification-content p {
-            font-size: 14px;
-            opacity: 0.9;
-            margin-bottom: 0;
-        }
-
-        .notification-close {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            padding: 5px;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .notification-close:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
         /* Ripple effect styles */
         .btn-ripple {
             position: relative;
@@ -2445,7 +2311,7 @@
         }
 
         @media (max-width: 768px) {
-            /* Mobile Compact Styles - MODIFIED TO KEEP BLUE THEME */
+            /* Mobile Compact Styles */
             section {
                 padding: 60px 0;
             }
@@ -2453,7 +2319,8 @@
             .services,
             .packages,
             .process,
-            .faq-section {
+            .faq-section,
+            .example-sites {
                 padding: 60px 0;
             }
             
@@ -2481,15 +2348,17 @@
                 line-height: 1.6;
             }
             
-            /* Header compact - KEEP BLUE THEME */
-            header {
-                padding: 120px 0 80px;
-                min-height: auto;
-                background: var(--gradient-primary); /* Ensure blue gradient */
-            }
+            /* Header compact */
+           header {
+    padding: 140px 0 0 100px;
+    min-height: 85vh; /* Sau 90vh pentru mai mult */
+    background: var(--gradient-primary);
+    display: flex;
+    align-items: center;
+}
             
             .header-content h1 {
-                font-size: 2.5rem;
+                font-size: 10rem;
                 animation: titleRevealMobile 1s var(--transition-smooth) 0.2s both;
                 margin-bottom: 1rem;
                 background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.9) 100%);
@@ -2516,10 +2385,10 @@
                 max-width: 300px;
             }
             
-            /* Navigation - ENHANCED MOBILE MENU - KEEP BLUE THEME */
+            /* Navigation - ENHANCED MOBILE MENU */
             .mobile-menu-btn {
                 display: flex !important;
-                background: var(--gradient-primary); /* Blue gradient */
+                background: var(--gradient-primary);
             }
             
             .nav-links {
@@ -2535,7 +2404,7 @@
                 display: none;
             }
             
-            /* Mobile menu content - KEEP BLUE ACCENTS */
+            /* Mobile menu content */
             .mobile-menu-content {
                 background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
             }
@@ -2575,7 +2444,7 @@
                 font-size: 3rem;
             }
             
-            /* Packages mobile version - KEEP BLUE THEME */
+            /* Packages mobile version */
             .packages-grid {
                 display: none !important;
             }
@@ -2597,7 +2466,6 @@
                 padding: 30px 25px;
             }
             
-            /* KEEP SAME BLUE GRADIENTS FOR MOBILE PACKAGES */
             .packages-mobile .basic .package-header {
                 background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
             }
@@ -2607,7 +2475,7 @@
             }
             
             .packages-mobile .premium .package-header {
-                background: var(--gradient-primary); /* Changed from purple to blue */
+                background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
             }
             
             .package-price {
@@ -2623,48 +2491,41 @@
                 font-size: 0.95rem;
             }
             
-            /* Example sites compact */
+            /* Example sites compact - FIXED FOR MOBILE */
             .example-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
                 display: none !important;
             }
             
-            .example-preview {
-                height: 200px;
-            }
-            
-            /* KEEP BLUE GRADIENTS FOR MOBILE EXAMPLE SITES */
-            .example-preview.basic {
-                background: linear-gradient(135deg, #3b82f6, #2563eb, #1d4ed8);
-            }
-            
-            .example-preview.standard {
-                background: var(--gradient-primary); /* Changed from purple to blue */
-            }
-            
-            .example-preview.premium {
-                background: var(--gradient-primary); /* Changed from orange to blue */
-            }
-            
-            .example-icon {
-                font-size: 3rem;
-            }
-            
-            .example-title {
-                font-size: 1.8rem;
-            }
-            
-            .example-info {
-                padding: 25px;
-            }
-            
-            /* Example sites mobile buttons - Updated to match package tabs */
             .example-mobile-buttons {
                 display: flex;
                 justify-content: center;
                 flex-wrap: wrap;
                 gap: 10px;
+                margin-bottom: 30px;
+            }
+            
+            .example-mobile-container {
+                display: block;
+            }
+            
+            .example-preview {
+                height: 150px;
+            }
+            
+            .example-icon {
+                font-size: 3.5rem;
+            }
+            
+            .example-info {
+                padding: 20px;
+            }
+            
+            .example-info h4 {
+                font-size: 1.3rem;
+            }
+            
+            .example-info p {
+                font-size: 0.95rem;
             }
             
             /* Process compact - Updated for 2x2 grid */
@@ -2725,7 +2586,7 @@
                 font-size: 0.85rem;
             }
             
-            /* Floating buttons for mobile - LARGER */
+            /* Floating buttons for mobile */
             .telegram-float {
                 bottom: 90px;
                 right: 20px;
@@ -2744,9 +2605,9 @@
             
             /* Language selector */
             .language-selector-fixed {
-                top: 80px;
-                right: 20px;
-                padding: 10px;
+                top: 60px;
+                right: 15px;
+                padding: 5px;
             }
             
             .language-option-fixed {
@@ -2757,22 +2618,6 @@
             .language-option-fixed.active {
                 background: var(--gradient-primary);
                 color: white;
-            }
-            
-            /* Notification banner */
-            .notification-banner {
-                max-width: calc(100% - 40px);
-                top: 80px;
-                padding: 14px 20px;
-                background: var(--gradient-primary);
-            }
-            
-            .notification-content h4 {
-                font-size: 15px;
-            }
-            
-            .notification-content p {
-                font-size: 13px;
             }
             
             /* Form compact */
@@ -2788,24 +2633,6 @@
             /* Order summary mobile */
             .order-summary {
                 padding: 20px;
-            }
-            
-            /* Mobile Additional Services Section */
-            .mobile-additional-services {
-                margin: 30px 0;
-                padding: 20px;
-            }
-            
-            .additional-services-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .additional-service-item {
-                padding: 15px;
-            }
-            
-            .additional-service-icon {
-                background: var(--gradient-primary);
             }
         }
 
@@ -2838,8 +2665,7 @@
             }
             
             .service-card,
-            .package-card,
-            .example-card {
+            .package-card {
                 padding: 25px 20px;
             }
             
@@ -2863,7 +2689,7 @@
                 gap: 15px;
             }
             
-            /* Even larger floating buttons for small phones */
+            /* Larger floating buttons for small phones */
             .telegram-float,
             .whatsapp-float {
                 width: 70px;
@@ -2881,21 +2707,10 @@
                 right: 15px;
             }
             
-            .notification-banner {
-                top: 70px;
-                left: 15px;
-                max-width: calc(100% - 30px);
-                background: var(--gradient-primary);
-            }
-            
-            /* Mobile menu even higher */
+            /* Mobile menu */
             .mobile-menu-content {
                 width: 90%;
                 padding: 70px 15px 15px;
-            }
-            
-            .mobile-additional-services {
-                padding: 15px;
             }
             
             /* Order form on very small screens */
@@ -2904,7 +2719,113 @@
             }
         }
 
-        @media (max-width: 400px) {
+        @media (max-width: 425px) {
+            /* Specific fixes for 425px screens */
+            .header-content h1 {
+                font-size: 2rem;
+            }
+            
+            .example-mobile-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .example-mobile-btn {
+                width: 100%;
+                max-width: 250px;
+                text-align: center;
+            }
+            
+            .example-mobile-card {
+                margin: 0 5px 20px 5px;
+            }
+            
+            .example-preview {
+                height: 120px;
+            }
+            
+            .example-icon {
+                font-size: 3rem;
+            }
+            
+            .example-info {
+                padding: 15px;
+            }
+            
+            .example-info h4 {
+                font-size: 1.2rem;
+            }
+            
+            .example-info p {
+                font-size: 0.9rem;
+            }
+            
+            .mobile-menu-btn {
+                width: 46px;
+                height: 46px;
+                padding: 10px;
+            }
+            
+            .mobile-menu-btn .hamburger {
+                width: 22px;
+                height: 18px;
+            }
+            
+            .mobile-menu-content {
+                width: 92%;
+                padding: 65px 12px 12px;
+            }
+            
+            .mobile-nav-links a {
+                padding: 14px 10px;
+                font-size: 15px;
+                gap: 10px;
+            }
+            
+            .mobile-dropdown-toggle {
+                padding: 14px 10px;
+                font-size: 15px;
+                gap: 10px;
+            }
+            
+            .mobile-dropdown-toggle span {
+                gap: 10px;
+            }
+            
+            .mobile-dropdown-content a {
+                padding: 12px 10px 12px 20px;
+                font-size: 13px;
+                gap: 10px;
+            }
+            
+            .mobile-menu-cta .btn {
+                font-size: 13px;
+                padding: 10px;
+            }
+            
+            /* Fix additional text alignment in mobile menu */
+            .mobile-dropdown-toggle span {
+                display: flex;
+                align-items: center;
+            }
+            
+            .mobile-nav-links a span {
+                padding-left: 0;
+            }
+            
+            /* Additional badge alignment fix */
+            .additional-badge {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin-left: 8px;
+                font-size: 9px;
+                padding: 1px 5px;
+            }
+        }
+
+        @media (max-width: 375px) {
+            /* Extra small mobile improvements */
             h1 {
                 font-size: 1.9rem;
             }
@@ -2934,10 +2855,10 @@
                 font-size: 34px;
             }
             
-            /* Mobile menu highest on smallest screens */
+            /* Mobile menu on smallest screens */
             .mobile-menu-content {
                 width: 95%;
-                padding: 70px 15px 15px;
+                padding: 70px 10px 10px;
             }
             
             .mobile-menu-cta {
@@ -2945,11 +2866,78 @@
             }
             
             .mobile-nav-links a {
-                padding: 14px 12px;
+                padding: 12px 8px;
+                font-size: 14px;
+                gap: 8px;
             }
             
             .mobile-dropdown-toggle {
-                padding: 14px 12px;
+                padding: 12px 8px;
+                font-size: 14px;
+                gap: 8px;
+            }
+            
+            .mobile-dropdown-content a {
+                padding: 10px 8px 10px 18px;
+                font-size: 12px;
+                gap: 8px;
+            }
+            
+            .mobile-menu-btn {
+                width: 44px;
+                height: 44px;
+                padding: 8px;
+            }
+            
+            .mobile-menu-btn .hamburger {
+                width: 20px;
+                height: 16px;
+            }
+            
+            /* Example sites for 375px */
+            .example-mobile-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .example-preview {
+                height: 100px;
+            }
+            
+            .example-icon {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            h1 {
+                font-size: 1.7rem;
+            }
+            
+            h2 {
+                font-size: 1.6rem;
+            }
+            
+            .mobile-menu-content {
+                width: 100%;
+                padding: 60px 10px 10px;
+            }
+            
+            .example-mobile-btn {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+            }
+            
+            .example-preview {
+                height: 90px;
+            }
+            
+            .example-icon {
+                font-size: 2rem;
             }
         }
     </style>
@@ -2968,22 +2956,6 @@
     
     <!-- Scroll Progress Indicator -->
     <div class="scroll-progress" id="scrollProgress"></div>
-
-    <!-- Notification Banner -->
-    <div class="notification-banner" id="notificationBanner">
-        <div class="notification-content">
-            <h4>Check out my other projects!</h4>
-            <p>Visit my portfolio for more amazing work</p>
-        </div>
-        <div class="notification-actions">
-            <a href="https://sites-lab.github.io/YourWebBuilder/" target="_blank" class="notification-link" id="portfolioLink">
-                <i class="fas fa-external-link-alt"></i>
-            </a>
-            <button class="notification-close" id="notificationClose">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-    </div>
 
     <!-- Language Selector (Fixed) -->
     <div class="language-selector-fixed" id="languageSelector">
@@ -3006,37 +2978,38 @@
             <li><a href="#home" data-i18n="nav.home"><i class="fas fa-home"></i> <span>Home</span></a></li>
             <li><a href="#packages" data-i18n="nav.packages"><i class="fas fa-box-open"></i> <span>Packages</span></a></li>
             <li><a href="#services" data-i18n="nav.services"><i class="fas fa-cogs"></i> <span>Services</span></a></li>
+            <li><a href="#examples" data-i18n="nav.examples"><i class="fas fa-desktop"></i> <span>Examples</span></a></li>
             
             <!-- Additional Services Dropdown for Mobile -->
             <li class="mobile-dropdown-item">
                 <button class="mobile-dropdown-toggle" data-i18n="nav.additional">
-                    <span><i class="fas fa-plus-circle"></i> Additional Services</span>
+                    <span><i class="fas fa-plus-circle"></i> <span>Additional</span> <span class="additional-badge">NEW</span></span>
                     <i class="fas fa-chevron-down"></i>
                 </button>
                 <div class="mobile-dropdown-content">
                     <a href="javascript:void(0)" class="add-on-btn" data-service="hosting" data-price="4">
                         <i class="fas fa-server"></i>
-                        <span>Hosting (€4/month)</span>
+                        <span data-i18n="additional.hosting">Hosting (€4/month)</span>
                     </a>
                     <a href="javascript:void(0)" class="add-on-btn" data-service="simple_maintenance" data-price="20">
                         <i class="fas fa-cogs"></i>
-                        <span>Simple Maintenance (€20/month)</span>
+                        <span data-i18n="additional.simple_maintenance">Simple Maintenance (€20/month)</span>
                     </a>
                     <a href="javascript:void(0)" class="add-on-btn" data-service="standard_maintenance" data-price="35">
                         <i class="fas fa-cogs"></i>
-                        <span>Standard Maintenance (€35/month)</span>
+                        <span data-i18n="additional.standard_maintenance">Standard Maintenance (€35/month)</span>
                     </a>
                     <a href="javascript:void(0)" class="add-on-btn" data-service="domain_com" data-price="12">
                         <i class="fas fa-globe"></i>
-                        <span>.com Domain (€12/year)</span>
+                        <span data-i18n="additional.domain_com">.com Domain (€12/year)</span>
                     </a>
                     <a href="javascript:void(0)" class="add-on-btn" data-service="domain_eu" data-price="5">
                         <i class="fas fa-globe"></i>
-                        <span>.eu Domain (€5/year)</span>
+                        <span data-i18n="additional.domain_eu">.eu Domain (€5/year)</span>
                     </a>
                     <a href="javascript:void(0)" class="add-on-btn" data-service="domain_ro" data-price="8">
                         <i class="fas fa-globe"></i>
-                        <span>.ro Domain (€8/year)</span>
+                        <span data-i18n="additional.domain_ro">.ro Domain (€8/year)</span>
                     </a>
                 </div>
             </li>
@@ -3049,10 +3022,10 @@
         <div class="mobile-menu-footer">
             <div class="mobile-menu-cta">
                 <a href="https://wa.me/40729552767" class="btn btn-primary" target="_blank">
-                    <i class="fab fa-whatsapp"></i> WhatsApp
+                    <i class="fab fa-whatsapp"></i> <span data-i18n="header.whatsapp">Chat on WhatsApp</span>
                 </a>
                 <a href="tel:+40729552767" class="btn btn-secondary">
-                    <i class="fas fa-phone"></i> Call Now
+                    <i class="fas fa-phone"></i> <span data-i18n="header.call">Call Now</span>
                 </a>
             </div>
             
@@ -3077,6 +3050,7 @@
                 <li><a href="#home" data-i18n="nav.home">Home</a></li>
                 <li><a href="#packages" data-i18n="nav.packages">Packages</a></li>
                 <li><a href="#services" data-i18n="nav.services">Services</a></li>
+                <li><a href="#examples" data-i18n="nav.examples">Examples</a></li>
                 <li class="desktop-dropdown">
                     <a href="#additional" data-i18n="nav.additional">
                         <span>Additional</span>
@@ -3086,27 +3060,27 @@
                     <div class="desktop-dropdown-content">
                         <a href="javascript:void(0)" class="add-on-btn" data-service="hosting" data-price="4">
                             <i class="fas fa-server"></i>
-                            <span>Hosting (€4/month)</span>
+                            <span data-i18n="additional.hosting">Hosting (€4/month)</span>
                         </a>
                         <a href="javascript:void(0)" class="add-on-btn" data-service="simple_maintenance" data-price="20">
                             <i class="fas fa-cogs"></i>
-                            <span>Simple Maintenance (€20/month)</span>
+                            <span data-i18n="additional.simple_maintenance">Simple Maintenance (€20/month)</span>
                         </a>
                         <a href="javascript:void(0)" class="add-on-btn" data-service="standard_maintenance" data-price="35">
                             <i class="fas fa-cogs"></i>
-                            <span>Standard Maintenance (€35/month)</span>
+                            <span data-i18n="additional.standard_maintenance">Standard Maintenance (€35/month)</span>
                         </a>
                         <a href="javascript:void(0)" class="add-on-btn" data-service="domain_com" data-price="12">
                             <i class="fas fa-globe"></i>
-                            <span>.com Domain (€12/year)</span>
+                            <span data-i18n="additional.domain_com">.com Domain (€12/year)</span>
                         </a>
                         <a href="javascript:void(0)" class="add-on-btn" data-service="domain_eu" data-price="5">
                             <i class="fas fa-globe"></i>
-                            <span>.eu Domain (€5/year)</span>
+                            <span data-i18n="additional.domain_eu">.eu Domain (€5/year)</span>
                         </a>
                         <a href="javascript:void(0)" class="add-on-btn" data-service="domain_ro" data-price="8">
                             <i class="fas fa-globe"></i>
-                            <span>.ro Domain (€8/year)</span>
+                            <span data-i18n="additional.domain_ro">.ro Domain (€8/year)</span>
                         </a>
                     </div>
                 </li>
@@ -3115,7 +3089,11 @@
                 <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
             </ul>
             <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </button>
         </div>
     </nav>
@@ -3329,6 +3307,152 @@
         </div>
     </section>
 
+    <!-- FIXED: Example Websites Section - MOBILE WORKING -->
+    <section id="examples" class="example-sites">
+        <div class="container">
+            <h2 data-i18n="examples.title">Example Websites</h2>
+            
+            <!-- Example Mobile Tabs - FIXED & WORKING -->
+            <div class="example-mobile-buttons">
+                <div class="example-mobile-btn active" data-example="basic">Basic</div>
+                <div class="example-mobile-btn" data-example="standard">Standard</div>
+                <div class="example-mobile-btn" data-example="premium">Premium</div>
+            </div>
+            
+            <!-- Desktop Examples Grid -->
+            <div class="example-grid">
+                <!-- Basic Example -->
+                <a href="https://123webcreator.github.io" target="_blank" class="example-card fade-in">
+                    <div class="example-preview basic">
+                        <div class="example-content">
+                            <i class="fas fa-briefcase example-icon"></i>
+                        </div>
+                    </div>
+                    <div class="example-info">
+                        <h4 data-i18n="examples.basic.title">Informational Website</h4>
+                        <p data-i18n="examples.basic.description">Perfect for showcasing products or services with a clean, professional design. Ideal for small businesses and personal portfolios.</p>
+                        <ul class="example-features">
+                            <li><i class="fas fa-check"></i> <span>Responsive design</span></li>
+                            <li><i class="fas fa-check"></i> <span>Contact form integration</span></li>
+                            <li><i class="fas fa-check"></i> <span>Basic SEO optimization</span></li>
+                            <li><i class="fas fa-check"></i> <span>Social media links</span></li>
+                            <li><i class="fas fa-check"></i> <span>Fast loading speed</span></li>
+                        </ul>
+                    </div>
+                </a>
+                
+                <!-- Standard Example -->
+                <a href="https://example-sites.github.io/coffee-shop-example/" target="_blank" class="example-card fade-in">
+                    <div class="example-preview standard">
+                        <div class="example-content">
+                            <i class="fas fa-coffee example-icon"></i>
+                        </div>
+                    </div>
+                    <div class="example-info">
+                        <h4 data-i18n="examples.standard.title">Coffee Shop Website</h4>
+                        <p data-i18n="examples.standard.description">Great for cafes, small restaurants, and businesses needing menu display. Features product showcase and online presence.</p>
+                        <ul class="example-features">
+                            <li><i class="fas fa-check"></i> <span>Menu display system</span></li>
+                            <li><i class="fas fa-check"></i> <span>Photo gallery</span></li>
+                            <li><i class="fas fa-check"></i> <span>Google Maps integration</span></li>
+                            <li><i class="fas fa-check"></i> <span>Advanced SEO</span></li>
+                            <li><i class="fas fa-check"></i> <span>Custom design</span></li>
+                        </ul>
+                    </div>
+                </a>
+                
+                <!-- Premium Example -->
+                <a href="https://example-sites.github.io/BurgerHaven/" target="_blank" class="example-card fade-in">
+                    <div class="example-preview premium">
+                        <div class="example-content">
+                            <i class="fas fa-utensils example-icon"></i>
+                        </div>
+                    </div>
+                    <div class="example-info">
+                        <h4 data-i18n="examples.premium.title">Restaurant Website</h4>
+                        <p data-i18n="examples.premium.description">Complete solution with online ordering, reservations, and payment integration. Perfect for growing businesses.</p>
+                        <ul class="example-features">
+                            <li><i class="fas fa-check"></i> <span>Online ordering system</span></li>
+                            <li><i class="fas fa-check"></i> <span>Reservation booking</span></li>
+                            <li><i class="fas fa-check"></i> <span>Payment integration</span></li>
+                            <li><i class="fas fa-check"></i> <span>Advanced animations</span></li>
+                            <li><i class="fas fa-check"></i> <span>Priority support</span></li>
+                        </ul>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Mobile Examples (One at a time) - FIXED -->
+            <div class="example-mobile-container">
+                <!-- Basic Example for Mobile -->
+                <div class="example-mobile-card basic active">
+                    <a href="https://123webcreator.github.io" target="_blank" class="example-card">
+                        <div class="example-preview basic">
+                            <div class="example-content">
+                                <i class="fas fa-briefcase example-icon"></i>
+                            </div>
+                        </div>
+                        <div class="example-info">
+                            <h4 data-i18n="examples.basic.title">Informational Website</h4>
+                            <p data-i18n="examples.basic.description">Perfect for showcasing products or services with a clean, professional design. Ideal for small businesses and personal portfolios.</p>
+                            <ul class="example-features">
+                                <li><i class="fas fa-check"></i> <span>Responsive design</span></li>
+                                <li><i class="fas fa-check"></i> <span>Contact form integration</span></li>
+                                <li><i class="fas fa-check"></i> <span>Basic SEO optimization</span></li>
+                                <li><i class="fas fa-check"></i> <span>Social media links</span></li>
+                                <li><i class="fas fa-check"></i> <span>Fast loading speed</span></li>
+                            </ul>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Standard Example for Mobile -->
+                <div class="example-mobile-card standard">
+                    <a href="https://example-sites.github.io/coffee-shop-example/" target="_blank" class="example-card">
+                        <div class="example-preview standard">
+                            <div class="example-content">
+                                <i class="fas fa-coffee example-icon"></i>
+                            </div>
+                        </div>
+                        <div class="example-info">
+                            <h4 data-i18n="examples.standard.title">Coffee Shop Website</h4>
+                            <p data-i18n="examples.standard.description">Great for cafes, small restaurants, and businesses needing menu display. Features product showcase and online presence.</p>
+                            <ul class="example-features">
+                                <li><i class="fas fa-check"></i> <span>Menu display system</span></li>
+                                <li><i class="fas fa-check"></i> <span>Photo gallery</span></li>
+                                <li><i class="fas fa-check"></i> <span>Google Maps integration</span></li>
+                                <li><i class="fas fa-check"></i> <span>Advanced SEO</span></li>
+                                <li><i class="fas fa-check"></i> <span>Custom design</span></li>
+                            </ul>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Premium Example for Mobile -->
+                <div class="example-mobile-card premium">
+                    <a href="https://example-sites.github.io/BurgerHaven/" target="_blank" class="example-card">
+                        <div class="example-preview premium">
+                            <div class="example-content">
+                                <i class="fas fa-utensils example-icon"></i>
+                            </div>
+                        </div>
+                        <div class="example-info">
+                            <h4 data-i18n="examples.premium.title">Restaurant Website</h4>
+                            <p data-i18n="examples.premium.description">Complete solution with online ordering, reservations, and payment integration. Perfect for growing businesses.</p>
+                            <ul class="example-features">
+                                <li><i class="fas fa-check"></i> <span>Online ordering system</span></li>
+                                <li><i class="fas fa-check"></i> <span>Reservation booking</span></li>
+                                <li><i class="fas fa-check"></i> <span>Payment integration</span></li>
+                                <li><i class="fas fa-check"></i> <span>Advanced animations</span></li>
+                                <li><i class="fas fa-check"></i> <span>Priority support</span></li>
+                            </ul>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Secțiune Servicii -->
     <section id="services" class="services">
         <div class="container">
@@ -3405,7 +3529,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p data-i18n="faq.a4">We provide 30 days of free support for any technical issues. After that, we recommend choosing a maintenance plan to keep your website secure and updated.</p>
+                        <p data-i18n="faq.a4">We provide 30 days of support for any technical issues. After that, we recommend choosing a maintenance plan to keep your website secure and updated.</p>
                     </div>
                 </div>
                 
@@ -3415,7 +3539,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p data-i18n="faq.a5">Yes, all our packages include basic SEO optimization. For advanced SEO services, we offer additional packages starting at €50/month.</p>
+                        <p data-i18n="faq.a5">Yes, all our packages include basic SEO optimization.</p>
                     </div>
                 </div>
                 
@@ -3425,7 +3549,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p data-i18n="faq.a6">We accept bank transfers, credit/debit cards, and PayPal. A 50% deposit is required to start the project, with the balance due upon completion.</p>
+                        <p data-i18n="faq.a6">We accept bank transfers and PayPal. A 20% deposit is required to start the project, with the balance due upon completion.</p>
                     </div>
                 </div>
                 
@@ -3490,6 +3614,7 @@
                         <li><a href="#home" data-i18n="nav.home">Home</a></li>
                         <li><a href="#packages" data-i18n="nav.packages">Packages</a></li>
                         <li><a href="#services" data-i18n="nav.services">Services</a></li>
+                        <li><a href="#examples" data-i18n="nav.examples">Examples</a></li>
                         <li><a href="#process" data-i18n="nav.process">Process</a></li>
                         <li><a href="#faq" data-i18n="nav.faq">FAQ</a></li>
                     </ul>
@@ -3546,14 +3671,14 @@
                 
                 <!-- Add-ons Section -->
                 <div class="add-ons-section">
-                    <h4>Add Additional Services</h4>
+                    <h4 data-i18n="order.addons">Add Additional Services</h4>
                     
                     <!-- Hosting -->
                     <div class="add-on-item">
                         <div class="add-on-label">
                             <input type="checkbox" id="add-hosting" class="add-on-checkbox" data-service="hosting" data-price="4" data-name="Basic Hosting">
                             <label for="add-hosting">
-                                <strong>Basic Hosting</strong> - €4/month
+                                <strong data-i18n="additional.hosting">Basic Hosting</strong> - €4/month
                             </label>
                         </div>
                         <div class="add-on-price">€4/month</div>
@@ -3564,7 +3689,7 @@
                         <div class="add-on-label">
                             <input type="checkbox" id="add-domain-com" class="add-on-checkbox" data-service="domain_com" data-price="12" data-name=".com Domain">
                             <label for="add-domain-com">
-                                <strong>.com Domain</strong> - €12/year
+                                <strong data-i18n="additional.domain_com">.com Domain</strong> - €12/year
                             </label>
                         </div>
                         <div class="add-on-price">€12/year</div>
@@ -3574,7 +3699,7 @@
                         <div class="add-on-label">
                             <input type="checkbox" id="add-domain-eu" class="add-on-checkbox" data-service="domain_eu" data-price="5" data-name=".eu Domain">
                             <label for="add-domain-eu">
-                                <strong>.eu Domain</strong> - €5/year
+                                <strong data-i18n="additional.domain_eu">.eu Domain</strong> - €5/year
                             </label>
                         </div>
                         <div class="add-on-price">€5/year</div>
@@ -3584,7 +3709,7 @@
                         <div class="add-on-label">
                             <input type="checkbox" id="add-domain-ro" class="add-on-checkbox" data-service="domain_ro" data-price="8" data-name=".ro Domain">
                             <label for="add-domain-ro">
-                                <strong>.ro Domain</strong> - €8/year
+                                <strong data-i18n="additional.domain_ro">.ro Domain</strong> - €8/year
                             </label>
                         </div>
                         <div class="add-on-price">€8/year</div>
@@ -3608,24 +3733,24 @@
                 </div>
                 
                 <!-- IMPROVED: Order Summary Section -->
-                <div class="order-summary" id="order-summary">
-                    <h4><i class="fas fa-receipt"></i> Order Summary</h4>
-                    <div id="summary-items">
-                        <!-- Summary items will be dynamically added here -->
-                    </div>
-                    <div class="summary-item summary-total">
-                        <div class="summary-item-name">Total:</div>
-                        <div class="summary-item-price" id="summary-total">€0</div>
-                    </div>
-                </div>
-                
-                <button type="submit" class="submit-order" data-i18n="order.submit">
-                    <i class="fas fa-paper-plane"></i> Submit Order
-                </button>
-                
-                <div style="text-align: center; margin-top: 15px; font-size: 0.9rem; color: var(--text-light);">
-                    <p data-i18n="order.note">You'll be redirected to secure payment after submitting</p>
-                </div>
+<div class="order-summary" id="order-summary">
+    <h4><i class="fas fa-receipt"></i> <span data-i18n="order.summary">Order Summary</span></h4>
+    <div id="summary-items">
+        <!-- Summary items will be dynamically added here -->
+    </div>
+    <div class="summary-item summary-total">
+        <div class="summary-item-name" data-i18n="order.total">Total:</div>
+        <div class="summary-item-price" id="summary-total">€0</div>
+    </div>
+</div>
+
+<button type="submit" class="submit-order" data-i18n="order.submit">
+    <i class="fas fa-paper-plane"></i> Submit Order
+</button>
+
+<div style="text-align: center; margin-top: 15px; font-size: 0.9rem; color: var(--text-light);">
+    <p data-i18n="order.note">You'll be redirected to secure payment after submitting</p>
+</div>
             </form>
         </div>
     </div>
@@ -3719,8 +3844,8 @@
             open() {
                 this.mobileMenu.classList.add('active');
                 this.overlay.classList.add('active');
-                this.menuBtn.innerHTML = '<i class="fas fa-times"></i>';
-                this.menuBtn.style.background = 'var(--gradient-warm)';
+                this.menuBtn.classList.add('active');
+                this.menuBtn.style.background = 'var(--gradient-primary)';
                 this.isOpen = true;
                 document.body.style.overflow = 'hidden';
                 
@@ -3734,7 +3859,7 @@
             close() {
                 this.mobileMenu.classList.remove('active');
                 this.overlay.classList.remove('active');
-                this.menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                this.menuBtn.classList.remove('active');
                 this.menuBtn.style.background = 'var(--gradient-primary)';
                 this.isOpen = false;
                 document.body.style.overflow = '';
@@ -3747,102 +3872,131 @@
             }
         }
 
-        // Enhanced Mobile Tabs System
+        // FIXED Mobile Tabs System - Example Sites
         class MobileTabsSystem {
             constructor() {
                 this.packageTabs = document.querySelectorAll('.package-tab');
                 this.mobilePackages = document.querySelectorAll('.packages-mobile .package-card');
                 this.exampleButtons = document.querySelectorAll('.example-mobile-btn');
-                this.exampleCards = document.querySelectorAll('.example-card');
+                this.exampleMobileCards = document.querySelectorAll('.example-mobile-card');
+                this.exampleDesktopGrid = document.querySelector('.example-grid');
+                this.exampleMobileContainer = document.querySelector('.example-mobile-container');
                 this.init();
             }
 
             init() {
                 this.initPackageTabs();
                 this.initExampleTabs();
+                this.handleResize();
+                
+                window.addEventListener('resize', () => this.handleResize());
+            }
+            
+            handleResize() {
+                if (window.innerWidth <= 768) {
+                    // Hide desktop grid, show mobile container
+                    if (this.exampleDesktopGrid) {
+                        this.exampleDesktopGrid.style.display = 'none';
+                    }
+                    if (this.exampleMobileContainer) {
+                        this.exampleMobileContainer.style.display = 'block';
+                    }
+                    
+                    // Show only active mobile card
+                    this.exampleMobileCards.forEach(card => {
+                        if (!card.classList.contains('active')) {
+                            card.style.display = 'none';
+                        } else {
+                            card.style.display = 'block';
+                        }
+                    });
+                    
+                    // Activate first button if none active
+                    const activeButton = document.querySelector('.example-mobile-btn.active');
+                    if (!activeButton && this.exampleButtons[0]) {
+                        this.exampleButtons[0].classList.add('active');
+                    }
+                } else {
+                    // Show desktop grid, hide mobile container
+                    if (this.exampleDesktopGrid) {
+                        this.exampleDesktopGrid.style.display = 'grid';
+                    }
+                    if (this.exampleMobileContainer) {
+                        this.exampleMobileContainer.style.display = 'none';
+                    }
+                }
             }
 
             initPackageTabs() {
                 if (this.packageTabs.length === 0 || this.mobilePackages.length === 0) return;
 
-                // Hide all mobile packages except active one
-                this.mobilePackages.forEach(pkg => {
-                    if (!pkg.classList.contains('active')) {
-                        pkg.style.display = 'none';
-                    }
-                });
-
-                // Add click event to each tab
-                this.packageTabs.forEach(tab => {
-                    tab.addEventListener('click', (e) => {
-                        // Remove active class from all tabs
-                        this.packageTabs.forEach(t => t.classList.remove('active'));
-                        
-                        // Add active class to clicked tab
-                        e.currentTarget.classList.add('active');
-                        
-                        // Hide all mobile packages
-                        this.mobilePackages.forEach(pkg => {
-                            pkg.style.display = 'none';
-                            pkg.classList.remove('active');
-                        });
-                        
-                        // Show the selected package
-                        const packageType = e.currentTarget.getAttribute('data-package');
-                        const targetPackage = document.querySelector(`.packages-mobile .package-card.${packageType}`);
-                        
-                        if (targetPackage) {
-                            targetPackage.style.display = 'flex';
-                            targetPackage.classList.add('active');
-                            targetPackage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                        }
-                    });
-                });
+               // Add click event to each tab
+this.packageTabs.forEach(tab => {
+    tab.addEventListener('click', (e) => {
+        // Remove active class from all tabs
+        this.packageTabs.forEach(t => t.classList.remove('active'));
+        
+        // Add active class to clicked tab
+        e.currentTarget.classList.add('active');
+        
+        // Hide all mobile packages
+        this.mobilePackages.forEach(pkg => {
+            pkg.style.display = 'none';
+            pkg.classList.remove('active');
+        });
+        
+        // Show the selected package
+        const packageType = e.currentTarget.getAttribute('data-package');
+        const targetPackage = document.querySelector(`.packages-mobile .package-card.${packageType}`);
+        
+        if (targetPackage) {
+            targetPackage.style.display = 'flex';
+            targetPackage.classList.add('active');
+            
+            // MODIFICAȚIE AICI: Scroll mai puțin
+            // Folosește window.scrollTo cu un offset în loc de scrollIntoView
+            window.scrollTo({
+                top: targetPackage.offsetTop - 10, // Ajustează această valoare după preferințe
+                behavior: 'smooth'
+            });
+        }
+    });
+});
             }
 
-            initExampleTabs() {
-                if (this.exampleButtons.length === 0 || this.exampleCards.length === 0) return;
 
-                // On mobile, show only first example card
-                if (window.innerWidth <= 768) {
-                    this.exampleCards.forEach((card, index) => {
-                        card.style.display = index === 0 ? 'block' : 'none';
-                    });
-                }
+            initExampleTabs() {
+                if (this.exampleButtons.length === 0 || this.exampleMobileCards.length === 0) return;
 
                 // Add click event to each button
                 this.exampleButtons.forEach(button => {
                     button.addEventListener('click', (e) => {
-                        // Remove active class from all buttons
-                        this.exampleButtons.forEach(btn => btn.classList.remove('active'));
-                        
-                        // Add active class to clicked button
-                        e.currentTarget.classList.add('active');
-                        
-                        const exampleType = e.currentTarget.getAttribute('data-example');
-                        
-                        // On mobile, show only selected example
-                        if (window.innerWidth <= 768) {
-                            this.exampleCards.forEach(card => {
-                                card.style.display = 'none';
-                            });
-                            
-                            const exampleIndex = this.getExampleIndex(exampleType);
-                            if (this.exampleCards[exampleIndex]) {
-                                this.exampleCards[exampleIndex].style.display = 'block';
-                                this.exampleCards[exampleIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                            }
-                        }
+                        this.switchExample(e.currentTarget);
                     });
                 });
             }
-
-            getExampleIndex(type) {
-                switch(type) {
-                    case 'basic': return 0;
-                    case 'standard': return 1;
-                    case 'premium': return 2;
-                    default: return 0;
+            
+            switchExample(button) {
+                // Remove active class from all buttons
+                this.exampleButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                const exampleType = button.getAttribute('data-example');
+                
+                // Hide all example mobile cards
+                this.exampleMobileCards.forEach(card => {
+                    card.style.display = 'none';
+                    card.classList.remove('active');
+                });
+                
+                // Show selected example card
+                const targetCard = document.querySelector(`.example-mobile-card.${exampleType}`);
+                if (targetCard) {
+                    targetCard.style.display = 'block';
+                    targetCard.classList.add('active');
+                    targetCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 }
             }
         }
@@ -3914,7 +4068,7 @@
             }
         }
 
-        // Enhanced Language System
+        // Enhanced Language System - FIXED
         class LanguageSystem {
             constructor() {
                 this.translations = {
@@ -3922,12 +4076,18 @@
                         "nav.home": "Acasă",
                         "nav.packages": "Pachete",
                         "nav.services": "Servicii",
+                        "nav.examples": "Exemple",
                         "nav.additional": "Adiționale",
                         "nav.process": "Proces",
                         "nav.faq": "Întrebări Frecvente",
                         "nav.contact": "Contact",
                         "mobile.tagline": "Soluții Web Profesionale",
-                        "additional.title": "Servicii Adiționale Populare",
+                        "additional.hosting": "Hosting (€4/lună)",
+                        "additional.simple_maintenance": "Mentenanță Simplă (€20/lună)",
+                        "additional.standard_maintenance": "Mentenanță Standard (€35/lună)",
+                        "additional.domain_com": "Domeniu .com (€12/an)",
+                        "additional.domain_eu": "Domeniu .eu (€5/an)",
+                        "additional.domain_ro": "Domeniu .ro (€8/an)",
                         "header.title": "Site-ul Tău Profesional În Doar Câteva Zile",
                         "header.subtitle": "Dezvoltăm site-uri web moderne, rapide și optimizate pentru conversii. Transformă vizita în clienți cu soluțiile noastre personalizate.",
                         "header.whatsapp": "Discută pe WhatsApp",
@@ -3996,9 +4156,9 @@
                         "faq.q4": "Ce se întâmplă după lansarea site-ului?",
                         "faq.a4": "Oferim 30 de zile de suport gratuit pentru orice probleme tehnice. După aceea, recomandăm alegerea unui plan de mentenanță pentru a menține site-ul securizat și actualizat.",
                         "faq.q5": "Oferiți servicii SEO?",
-                        "faq.a5": "Da, toate pachetele noastre includ optimizare SEO de bază. Pentru servicii SEO avansate, oferim pachete suplimentare începând de la €50/lună.",
+                        "faq.a5": "Da, toate pachetele noastre includ optimizare SEO de bază.",
                         "faq.q6": "Ce metode de plată acceptați?",
-                        "faq.a6": "Acceptăm transfer bancar, carduri de credit/debit și PayPal. Este necesară o avansă de 50% pentru a începe proiectul, cu restul datorat la finalizare.",
+                        "faq.a6": "Acceptăm transfer bancar și PayPal. Este necesară o avansă de 20% pentru a începe proiectul, cu restul datorat la finalizare.",
                         "faq.q7": "Pot să văd exemple de lucrări ale voastre?",
                         "faq.a7": "Da! Avem exemple de site-uri pentru fiecare tip de pachet. Verificați secțiunea de exemple deasupra fiecărui pachet pentru a vedea ce fel de site veți primi.",
                         "process.title": "Cum Funcționează",
@@ -4021,8 +4181,11 @@
                         "order.phone": "Număr de telefon *",
                         "order.service": "Tip pachet website *",
                         "order.select": "Selectează pachet",
+                        "order.addons": "Adaugă Servicii Suplimentare",
                         "order.maintenance": "Plan de mentenanță",
                         "order.notes": "Note suplimentare (Opțional)",
+                        "order.summary": "Sumar Comandă",
+                        "order.total": "Total:",
                         "order.submit": "Trimite Comanda",
                         "order.note": "Veți fi redirecționat către plată securizată după trimitere"
                     },
@@ -4030,12 +4193,18 @@
                         "nav.home": "Home",
                         "nav.packages": "Packages",
                         "nav.services": "Services",
+                        "nav.examples": "Examples",
                         "nav.additional": "Additional",
                         "nav.process": "Process",
                         "nav.faq": "FAQ",
                         "nav.contact": "Contact",
                         "mobile.tagline": "Professional Web Solutions",
-                        "additional.title": "Popular Add-ons",
+                        "additional.hosting": "Hosting (€4/month)",
+                        "additional.simple_maintenance": "Simple Maintenance (€20/month)",
+                        "additional.standard_maintenance": "Standard Maintenance (€35/month)",
+                        "additional.domain_com": ".com Domain (€12/year)",
+                        "additional.domain_eu": ".eu Domain (€5/year)",
+                        "additional.domain_ro": ".ro Domain (€8/year)",
                         "header.title": "Your Professional Website In Just A Few Days",
                         "header.subtitle": "We develop modern, fast and conversion-optimized websites. Turn visitors into customers with our customized solutions.",
                         "header.whatsapp": "Chat on WhatsApp",
@@ -4102,11 +4271,11 @@
                         "faq.q3": "Can I update my website content myself?",
                         "faq.a3": "No, website content can only be updated by our team. However, we offer maintenance plans where we handle all content updates for you. This ensures your website remains secure and professional.",
                         "faq.q4": "What happens after the website is launched?",
-                        "faq.a4": "We provide 30 days of free support for any technical issues. After that, we recommend choosing a maintenance plan to keep your website secure and updated.",
+                        "faq.a4": "We provide 30 days of support for any technical issues. After that, we recommend choosing a maintenance plan to keep your website secure and updated.",
                         "faq.q5": "Do you provide SEO services?",
-                        "faq.a5": "Yes, all our packages include basic SEO optimization. For advanced SEO services, we offer additional packages starting at €50/month.",
+                        "faq.a5": "Yes, all our packages include basic SEO optimization.",
                         "faq.q6": "What payment methods do you accept?",
-                        "faq.a6": "We accept bank transfers, credit/debit cards, and PayPal. A 50% deposit is required to start the project, with the balance due upon completion.",
+                        "faq.a6": "We accept bank transfers and PayPal. A 20% deposit is required to start the project, with the balance due upon completion.",
                         "faq.q7": "Can I see examples of your work?",
                         "faq.a7": "Yes! We have example websites for each package type. Check out the example section above each package to see what kind of website you'll get.",
                         "process.title": "How It Works",
@@ -4129,8 +4298,11 @@
                         "order.phone": "Phone Number *",
                         "order.service": "Website Package *",
                         "order.select": "Select package",
+                        "order.addons": "Add Additional Services",
                         "order.maintenance": "Maintenance Plan",
                         "order.notes": "Additional Notes (Optional)",
+                        "order.summary": "Order Summary",
+                        "order.total": "Total:",
                         "order.submit": "Submit Order",
                         "order.note": "You'll be redirected to secure payment after submitting"
                     },
@@ -4138,12 +4310,18 @@
                         "nav.home": "Главная",
                         "nav.packages": "Пакеты",
                         "nav.services": "Услуги",
+                        "nav.examples": "Примеры",
                         "nav.additional": "Дополнительно",
                         "nav.process": "Процесс",
                         "nav.faq": "Вопросы и Ответы",
                         "nav.contact": "Контакты",
                         "mobile.tagline": "Профессиональные Веб-Решения",
-                        "additional.title": "Популярные Дополнения",
+                        "additional.hosting": "Хостинг (€4/месяц)",
+                        "additional.simple_maintenance": "Простое Обслуживание (€20/месяц)",
+                        "additional.standard_maintenance": "Стандартное Обслуживание (€35/месяц)",
+                        "additional.domain_com": "Домен .com (€12/год)",
+                        "additional.domain_eu": "Домен .eu (€5/год)",
+                        "additional.domain_ro": "Домен .ro (€8/год)",
                         "header.title": "Ваш Профессиональный Сайт Всего За Несколько Дней",
                         "header.subtitle": "Мы разрабатываем современные, быстрые и оптимизированные для конверсии веб-сайты. Превращайте посетителей в клиентов с нашими индивидуальными решениями.",
                         "header.whatsapp": "Обсудить в WhatsApp",
@@ -4212,9 +4390,9 @@
                         "faq.q4": "Что происходит после запуска сайта?",
                         "faq.a4": "Мы предоставляем 30 дней бесплатной поддержки по любым техническим вопросам. После этого мы рекомендуем выбрать план обслуживания, чтобы ваш сайт оставался безопасным и обновленным.",
                         "faq.q5": "Предоставляете ли вы SEO-услуги?",
-                        "faq.a5": "Да, все наши пакеты включают базовую SEO-оптимизацию. Для продвинутых SEO-услуг мы предлагаем дополнительные пакеты от €50/месяц.",
+                        "faq.a5": "Да, все наши пакеты включают базовую SEO-оптимизацию.",
                         "faq.q6": "Какие методы оплаты вы принимаете?",
-                        "faq.a6": "Мы принимаем банковские переводы, кредитные/дебетовые карты и PayPal. Требуется предоплата 50% для начала проекта, остаток оплачивается по завершении.",
+                        "faq.a6": "Мы принимаем банковские переводы и PayPal. Требуется предоплата 20% для начала проекта, остаток оплачивается по завершении.",
                         "faq.q7": "Могу ли я увидеть примеры ваших работ?",
                         "faq.a7": "Да! У нас есть примеры сайтов для каждого типа пакета. Посмотрите раздел примеров над каждым пакетом, чтобы увидеть, какой сайт вы получите.",
                         "process.title": "Как Это Работает",
@@ -4237,8 +4415,11 @@
                         "order.phone": "Номер телефона *",
                         "order.service": "Пакет сайта *",
                         "order.select": "Выберите пакет",
+                        "order.addons": "Добавить Дополнительные Услуги",
                         "order.maintenance": "План обслуживания",
                         "order.notes": "Дополнительные заметки (Необязательно)",
+                        "order.summary": "Сводка Заказа",
+                        "order.total": "Всего:",
                         "order.submit": "Отправить Заказ",
                         "order.note": "Вы будете перенаправлены на безопасную оплату после отправки"
                     }
@@ -4288,22 +4469,38 @@
                 
                 this.currentLang = lang;
                 
+                // Translate all elements with data-i18n attribute
                 document.querySelectorAll('[data-i18n]').forEach(element => {
                     const key = element.getAttribute('data-i18n');
                     if (this.translations[lang][key]) {
-                        if (element.tagName === 'BUTTON' || element.tagName === 'A') {
+                        const translation = this.translations[lang][key];
+                        
+                        // Handle different element types
+                        if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                            element.placeholder = translation;
+                        } else if (element.tagName === 'BUTTON' || element.tagName === 'A') {
                             const icon = element.querySelector('i');
                             if (icon) {
-                                element.innerHTML = icon.outerHTML + ' ' + this.translations[lang][key];
+                                element.innerHTML = icon.outerHTML + ' ' + translation;
                             } else {
-                                element.textContent = this.translations[lang][key];
+                                element.textContent = translation;
                             }
+                        } else if (element.tagName === 'SELECT') {
+                            // Handle select options
+                            const options = element.querySelectorAll('option');
+                            options.forEach(option => {
+                                const optionKey = option.getAttribute('data-i18n');
+                                if (optionKey && this.translations[lang][optionKey]) {
+                                    option.textContent = this.translations[lang][optionKey];
+                                }
+                            });
                         } else {
-                            element.textContent = this.translations[lang][key];
+                            element.innerHTML = translation;
                         }
                     }
                 });
 
+                // Update language selector
                 document.querySelectorAll('.language-option-fixed').forEach(option => {
                     option.classList.remove('active');
                     if (option.getAttribute('data-lang') === lang) {
@@ -4313,6 +4510,24 @@
 
                 localStorage.setItem('preferred-language', lang);
                 document.documentElement.lang = lang;
+                
+                // Update mobile example buttons text
+                this.updateMobileExampleButtons(lang);
+            }
+            
+            updateMobileExampleButtons(lang) {
+                const buttons = document.querySelectorAll('.example-mobile-btn');
+                if (buttons.length === 3) {
+                    const translations = {
+                        'ro': ['Basic', 'Standard', 'Premium'],
+                        'en': ['Basic', 'Standard', 'Premium'],
+                        'ru': ['Базовый', 'Стандартный', 'Премиум']
+                    };
+                    
+                    buttons[0].textContent = translations[lang][0] || 'Basic';
+                    buttons[1].textContent = translations[lang][1] || 'Standard';
+                    buttons[2].textContent = translations[lang][2] || 'Premium';
+                }
             }
         }
 
@@ -4350,10 +4565,6 @@
                     
                     this.createParticles();
                     
-                    setTimeout(() => {
-                        this.showNotification();
-                    }, 3000);
-                    
                     initFAQ();
                 });
 
@@ -4383,29 +4594,6 @@
                     particle.style.animationDuration = `${Math.random() * 30 + 20}s`;
                     
                     particlesContainer.appendChild(particle);
-                }
-            }
-
-            showNotification() {
-                const notification = document.getElementById('notificationBanner');
-                if (!notification) return;
-                
-                notification.classList.add('show');
-                
-                setTimeout(() => {
-                    this.hideNotification();
-                }, 5000);
-                
-                const closeBtn = document.getElementById('notificationClose');
-                if (closeBtn) {
-                    closeBtn.addEventListener('click', () => this.hideNotification());
-                }
-            }
-
-            hideNotification() {
-                const notification = document.getElementById('notificationBanner');
-                if (notification) {
-                    notification.classList.remove('show');
                 }
             }
 
@@ -4451,11 +4639,11 @@
             }
         }
 
-        // IMPROVED Order Form System with Working Total Calculation
+        // IMPROVED Order Form System
         class OrderFormSystem {
             constructor() {
                 this.orderForm = document.getElementById('order-form');
-                this.orderButtons = document.querySelectorAll('.order-btn, .add-on-btn, .additional-service-btn');
+                this.orderButtons = document.querySelectorAll('.order-btn, .add-on-btn');
                 this.closeButton = document.getElementById('close-form');
                 this.submitForm = document.getElementById('order-form-content');
                 this.serviceSelect = document.getElementById('service-type');
@@ -4483,7 +4671,7 @@
                         if (packageType) {
                             this.openOrderForm(packageType, packagePrice);
                         } else if (serviceType) {
-                            this.openOrderFormWithAddOn(serviceType, packagePrice, e.currentTarget.textContent.trim());
+                            this.openOrderFormWithAddOn(serviceType, packagePrice);
                         }
                     });
                 });
@@ -4542,7 +4730,7 @@
                 document.body.style.overflow = 'hidden';
             }
             
-            openOrderFormWithAddOn(serviceType, price, serviceName) {
+            openOrderFormWithAddOn(serviceType, price) {
                 this.openOrderForm('basic', '80');
                 
                 let checkboxId = '';
@@ -4560,12 +4748,6 @@
                     case 'standard_maintenance': 
                         if (this.maintenanceSelect) {
                             this.maintenanceSelect.value = 'standard_maintenance';
-                            this.handleMaintenanceChange({ target: this.maintenanceSelect });
-                        }
-                        break;
-                    case 'premium_maintenance': 
-                        if (this.maintenanceSelect) {
-                            this.maintenanceSelect.value = 'premium_maintenance';
                             this.handleMaintenanceChange({ target: this.maintenanceSelect });
                         }
                         break;
@@ -4796,36 +4978,67 @@
                     });
                 }
                 
-                if (orderData.maintenance_plan) {
-                    switch(orderData.maintenance_plan) {
-                        case 'simple_maintenance': totalPrice += 20; break;
-                        case 'standard_maintenance': totalPrice += 35; break;
-                        case 'premium_maintenance': totalPrice += 100; break;
-                    }
-                }
-                
-                orderData.total_price = totalPrice;
-                
-                localStorage.setItem('webOrderData', JSON.stringify(orderData));
-                
-                const submitBtn = this.submitForm.querySelector('.submit-order');
-                const originalText = submitBtn.innerHTML;
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-                submitBtn.disabled = true;
-                
-                setTimeout(() => {
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
-                    
-                    this.closeOrderForm();
-                    
-                    // In a real implementation, you would redirect to a payment gateway
-                    // window.location.href = 'payment.html';
-                    
-                    alert('Thank you for your order! We will contact you shortly to discuss the details.');
-                }, 1500);
-                
-                return false;
+             if (orderData.maintenance_plan) {
+    switch(orderData.maintenance_plan) {
+        case 'simple_maintenance': totalPrice += 20; break;
+        case 'standard_maintenance': totalPrice += 35; break;
+        case 'premium_maintenance': totalPrice += 100; break;
+    }
+}
+
+orderData.total_price = totalPrice;
+
+// Save order data to localStorage
+localStorage.setItem('webOrderData', JSON.stringify(orderData));
+
+// Also save to sessionStorage for immediate access
+sessionStorage.setItem('currentOrder', JSON.stringify(orderData));
+
+const submitBtn = this.submitForm.querySelector('.submit-order');
+const originalText = submitBtn.innerHTML;
+submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+submitBtn.disabled = true;
+
+setTimeout(() => {
+    submitBtn.innerHTML = originalText;
+    submitBtn.disabled = false;
+    
+    this.closeOrderForm();
+    
+    // Show success message briefly
+    const successMessage = document.createElement('div');
+    successMessage.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: var(--shadow-xl);
+        text-align: center;
+        z-index: 9999;
+        border: 2px solid var(--albastru);
+        max-width: 300px;
+    `;
+    successMessage.innerHTML = `
+        <i class="fas fa-check-circle" style="color: #10b981; font-size: 3rem; margin-bottom: 15px;"></i>
+        <h3 style="margin-bottom: 10px; color: var(--text-dark);">Order Submitted!</h3>
+        <p style="color: var(--text-light); margin-bottom: 20px;">Redirecting to payment...</p>
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    `;
+    document.body.appendChild(successMessage);
+    
+    // Redirect to payment page after 1.5 seconds
+    setTimeout(() => {
+        window.location.href = 'payment.html';
+    }, 1500);
+    
+}, 1500);
+
+return false;
             }
         }
 
@@ -4839,6 +5052,9 @@
             const languageSystem = new LanguageSystem();
             const mobileTabs = new MobileTabsSystem();
             const orderFormSystem = new OrderFormSystem();
+            
+            // Initialize mobile tabs on load
+            mobileTabs.handleResize();
             
             // Smooth scrolling for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -4909,6 +5125,7 @@
         // Handle window resize for responsive behavior
         window.addEventListener('resize', function() {
             const mobileTabs = new MobileTabsSystem();
+            mobileTabs.handleResize();
         });
     </script>
 </body>
